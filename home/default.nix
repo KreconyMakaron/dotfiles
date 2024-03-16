@@ -10,12 +10,7 @@
 	];
 
 	home.packages = with pkgs; [
-		neovim
 		kitty
 		firefox-devedition-unwrapped
-
-		# move to neovim config
-		clang
-		nixd
 	];
 }
