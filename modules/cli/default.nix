@@ -1,17 +1,20 @@
 { 
-	pkgs, 
+	pkgs,
 	... 
 }: {
-	home.stateVersion = "22.11";
-
 	imports = [
-		./rice
-		./cli
+		./zsh
+		./tools.nix
+		./git.nix
+		./neovim.nix
 	];
 
 	home.packages = with pkgs; [
-		kitty
-		firefox-devedition-unwrapped
+		ripgrep
+		hyperfine
+		jq
+		unzip
+		qrcp
 		(writeShellScriptBin
 			"rebuild"
 			''
@@ -26,6 +29,6 @@
 				rm $genfile
 				popd &>/dev/null
 			''
-		)
+			)
 	];
 }

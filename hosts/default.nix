@@ -7,14 +7,15 @@
 	core = ../system/core;
 	wayland = ../system/wayland;
 	home-manager-module = inputs.home-manager.nixosModules.home-manager;
-	home-manager = {
+
+	home = path : {
 		useUserPackages = true;
 		useGlobalPkgs = true;
 		extraSpecialArgs = { 
 			inherit inputs; 
 			inherit self;
 		};
-		users.krecony.imports = [ ../home ];
+		users.krecony.imports = [ path ];
 	};
 in {
 	#Huawei Laptop
@@ -25,7 +26,7 @@ in {
 			./zephyr
 			core
 			wayland
-			home-manager-module {inherit home-manager;}
+			home-manager-module { home-manager = home ../home/zephyr.nix; }
 		];
 		specialArgs = {inherit inputs;};
 	};
