@@ -1,8 +1,8 @@
-{ ... }: {
-	imports = [
-		./system.nix
-		./nix.nix
-		./users.nix
-		./network.nix
-	];
+{...}: {
+  imports = [
+    ./system.nix
+    ./nix.nix
+    ./users.nix
+    ./network.nix
+  ];
 }

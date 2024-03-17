@@ -1,12 +1,9 @@
-{
-	inputs,
-	...
-}: {
-	imports = [ ./fonts.nix ];
-	hardware = {
-		opengl.enable = true;
-		pulseaudio.enable = false;
-	};
+{inputs, ...}: {
+  imports = [./fonts.nix];
+  hardware = {
+    opengl.enable = true;
+    pulseaudio.enable = false;
+  };
 
   services.pipewire = {
     enable = true;

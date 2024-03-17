@@ -1,17 +1,14 @@
-{ 
-	pkgs, 
-	... 
-}: {
-	home.stateVersion = "22.11";
+{pkgs, ...}: {
+  home.stateVersion = "22.11";
 
-	imports = [
-		../modules/cli
-		../modules/rice
-	];
+  imports = [
+    ../modules/cli
+    ../modules/rice
+  ];
 
-	home.packages = with pkgs; [
-		kitty
-		firefox-devedition-unwrapped
-		mpv
-	];
+  home.packages = with pkgs; [
+    kitty
+    firefox-devedition-unwrapped
+    mpv
+  ];
 }

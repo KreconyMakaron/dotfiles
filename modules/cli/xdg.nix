@@ -1,8 +1,4 @@
-{ 
-config,
-... 
-}: 
-let
+{config, ...}: let
   browser = ["firefox.desktop"];
 
   associations = {
@@ -18,7 +14,7 @@ let
     "application/xhtml+xml" = browser;
     "application/x-extension-xhtml" = browser;
     "application/x-extension-xht" = browser;
-		"application/json" = browser;
+    "application/json" = browser;
 
     "audio/*" = ["mpv.desktop"];
     "video/*" = ["mpv.dekstop"];
@@ -26,22 +22,21 @@ let
     #"application/pdf" = ["org.pwmt.zathura.desktop.desktop"];
   };
 in {
-	xdg = {
-		enable = true;
-		userDirs = {
-			enable = true;
-			documents = "$HOME/other";
-			download = "$HOME/download";
-			videos = "$HOME/vids";
-			music = "$HOME/music";
-			pictures = "$HOME/pics";
-			desktop = "$HOME/other";
-			publicShare = "$HOME/other";
-			templates = "$HOME/other";
-		};
-		mimeApps.enable = true;
-		mimeApps.associations.added = associations;
-		mimeApps.defaultApplications = associations;
+  xdg = {
+    enable = true;
+    userDirs = {
+      enable = true;
+      documents = "$HOME/other";
+      download = "$HOME/download";
+      videos = "$HOME/vids";
+      music = "$HOME/music";
+      pictures = "$HOME/pics";
+      desktop = "$HOME/other";
+      publicShare = "$HOME/other";
+      templates = "$HOME/other";
+    };
+    mimeApps.enable = true;
+    mimeApps.associations.added = associations;
+    mimeApps.defaultApplications = associations;
   };
-
 }

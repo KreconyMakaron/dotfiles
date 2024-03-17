@@ -1,33 +1,34 @@
 {
-	nixpkgs,
-	self,
-	...
+  nixpkgs,
+  self,
+  ...
 }: let
-	inherit (self) inputs;
-	core = ../system/core;
-	wayland = ../system/wayland;
-	home-manager-module = inputs.home-manager.nixosModules.home-manager;
+  inherit (self) inputs;
+  core = ../system/core;
+  wayland = ../system/wayland;
+  home-manager-module = inputs.home-manager.nixosModules.home-manager;
 
-	home = path : {
-		useUserPackages = true;
-		useGlobalPkgs = true;
-		extraSpecialArgs = { 
-			inherit inputs; 
-			inherit self;
-		};
-		users.krecony.imports = [ path ];
-	};
+  home = path: {
+    useUserPackages = true;
+    useGlobalPkgs = true;
+    extraSpecialArgs = {
+      inherit inputs;
+      inherit self;
+    };
+    users.krecony.imports = [path];
+  };
 in {
-	#Huawei Laptop
-	zephyr = nixpkgs.lib.nixosSystem {
-		system = "x86_64-linux";
-		modules = [
-			{networking.hostName = "zephyr";}
-			./zephyr
-			core
-			wayland
-			home-manager-module { home-manager = home ../home/zephyr.nix; }
-		];
-		specialArgs = {inherit inputs;};
-	};
+  #Huawei Laptop
+  zephyr = nixpkgs.lib.nixosSystem {
+    system = "x86_64-linux";
+    modules = [
+      {networking.hostName = "zephyr";}
+      ./zephyr
+      core
+      wayland
+      home-manager-module
+      {home-manager = home ../home/zephyr.nix;}
+    ];
+    specialArgs = {inherit inputs;};
+  };
 }

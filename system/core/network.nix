@@ -1,14 +1,14 @@
 {
-	pkgs,
-	config,
-	...
+  pkgs,
+  config,
+  ...
 }: {
-	environment.systemPackages = with pkgs; [
-		speedtest-cli
-	];
+  environment.systemPackages = with pkgs; [
+    speedtest-cli
+  ];
   networking = {
-		networkmanager = {
-			enable = true;
-		};
-	};
+    networkmanager = {
+      enable = true;
+    };
+  };
 }

@@ -1,18 +1,17 @@
-{ 
-	config, 
-	inputs,
-	pkgs,
-	...
+{
+  config,
+  inputs,
+  pkgs,
+  ...
 }: {
-  imports = [ ./config.nix ./binds.nix ];
+  imports = [./config.nix ./binds.nix];
 
-	home.packages = with pkgs; [
-		brightnessctl
-	];
+  home.packages = with pkgs; [
+    brightnessctl
+  ];
 
   wayland.windowManager.hyprland = {
     enable = true;
-		package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
   };
 }
-

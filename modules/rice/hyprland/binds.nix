@@ -1,34 +1,34 @@
-{ 
-	config, 
-	lib,
-	...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }: let
-	mod = "SUPER";
+  mod = "SUPER";
 in {
-	wayland.windowManager.hyprland.settings = {
-		bind = [
-			"${mod},RETURN,exec,kitty"
-			"${mod},P,exec,kitty"
-			"${mod},Q,killactive"
+  wayland.windowManager.hyprland.settings = {
+    bind = [
+      "${mod},RETURN,exec,kitty"
+      "${mod},P,exec,kitty"
+      "${mod},Q,killactive"
 
+      "${mod},H,movefocus,l"
+      "${mod},L,movefocus,r"
+      "${mod},K,movefocus,u"
+      "${mod},J,movefocus,d"
 
-			"${mod},H,movefocus,l"
-			"${mod},L,movefocus,r"
-			"${mod},K,movefocus,u"
-			"${mod},J,movefocus,d"
-
-			"${mod},D,exec,rofi -show drun"
-			"${mod},V,togglefloating,"
-			"${mod},F,fullscreen,"
-			"${mod},W,exec,$BROWSER"
-		];
-		bindm = [
-			"${mod},mouse:272,movewindow"
-			"${mod},mouse:273,resizewindow"
-		];
-		binde = [
-			",XF86MonBrightnessUp,exec,brightnessctl set +10%"
-			",XF86MonBrightnessDown,exec,brightnessctl set 10%-"
-		];
-	};
+      "${mod},D,exec,${pkgs.wofi} --show drun"
+      "${mod},V,togglefloating,"
+      "${mod},F,fullscreen,"
+      "${mod},W,exec,${pkgs.firefox-devedition-unwrapped}"
+    ];
+    bindm = [
+      "${mod},mouse:272,movewindow"
+      "${mod},mouse:273,resizewindow"
+    ];
+    binde = [
+      ",XF86MonBrightnessUp,exec,brightnessctl set +10%"
+      ",XF86MonBrightnessDown,exec,brightnessctl set 10%-"
+    ];
+  };
 }
