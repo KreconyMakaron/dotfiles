@@ -1,6 +1,5 @@
 {
   description = "hihi";
-
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     home-manager = {
