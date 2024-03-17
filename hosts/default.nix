@@ -15,7 +15,10 @@
       inherit inputs;
       inherit self;
     };
-    users.krecony.imports = [path];
+    users.krecony = {
+      imports = [path];
+      _module.args.theme = import ../theme;
+    };
   };
 in {
   #Huawei Laptop

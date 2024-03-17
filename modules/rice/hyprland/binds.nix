@@ -10,8 +10,7 @@ in {
   wayland.windowManager.hyprland.settings = {
     bind =
       [
-        "${mod},RETURN,exec,kitty"
-        "${mod},P,exec,kitty"
+        "${mod},RETURN,exec,${lib.getExe pkgs.foot}"
         "${mod},Q,killactive"
 
         "${mod},H,movefocus,l"
@@ -19,10 +18,10 @@ in {
         "${mod},K,movefocus,u"
         "${mod},J,movefocus,d"
 
-        "${mod},D,exec,${pkgs.wofi}/bin/wofi --show drun"
+        "${mod},D,exec,${lib.getExe pkgs.wofi} --show drun"
         "${mod},V,togglefloating,"
         "${mod},F,fullscreen,"
-        "${mod},W,exec,${pkgs.firefox-devedition-unwrapped}/bin/firefox"
+        "${mod},W,exec,${lib.getExe pkgs.firefox-devedition-unwrapped}"
       ]
       ++ (
         builtins.concatLists (builtins.genList (
@@ -44,8 +43,8 @@ in {
       "${mod},mouse:273,resizewindow"
     ];
     binde = [
-      ",XF86MonBrightnessUp,exec,brightnessctl set +10%"
-      ",XF86MonBrightnessDown,exec,brightnessctl set 10%-"
+      ",XF86MonBrightnessUp,exec,${lib.getExe pkgs.brightnessctl} set +10%"
+      ",XF86MonBrightnessDown,exec,${lib.getExe pkgs.brightnessctl} set 10%-"
     ];
   };
 }

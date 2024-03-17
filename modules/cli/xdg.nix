@@ -1,4 +1,8 @@
-{config, ...}: let
+{
+  config,
+  pkgs,
+  ...
+}: let
   browser = ["firefox.desktop"];
 
   associations = {
@@ -22,7 +26,17 @@
     #"application/pdf" = ["org.pwmt.zathura.desktop.desktop"];
   };
 in {
+  home.packages = with pkgs; [xdg-utils];
   xdg = {
+    portal = {
+      enable = true;
+      config.common.default = "*";
+      extraPortals = [
+        pkgs.xdg-desktop-portal-gtk
+        pkgs.xdg-desktop-portal-hyprland
+      ];
+    };
+
     enable = true;
     userDirs = {
       enable = true;

@@ -5,6 +5,7 @@
     ./git.nix
     ./neovim.nix
     ./xdg.nix
+    ./foot.nix
   ];
   home.packages = with pkgs; [
     ripgrep
@@ -14,6 +15,8 @@
     qrcp
     alejandra
     neofetch
+    mpv
+    killall
     (
       writeShellScriptBin
       "rebuild"
