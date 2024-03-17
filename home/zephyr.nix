@@ -12,5 +12,6 @@
 	home.packages = with pkgs; [
 		kitty
 		firefox-devedition-unwrapped
+		mpv
 	];
 }

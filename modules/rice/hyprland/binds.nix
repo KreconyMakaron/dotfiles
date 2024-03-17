@@ -20,6 +20,7 @@ in {
 			"${mod},D,exec,rofi -show drun"
 			"${mod},V,togglefloating,"
 			"${mod},F,fullscreen,"
+			"${mod},W,exec,$BROWSER"
 		];
 		bindm = [
 			"${mod},mouse:272,movewindow"

@@ -7,6 +7,7 @@
 		./tools.nix
 		./git.nix
 		./neovim.nix
+		./xdg.nix
 	];
 
 	home.packages = with pkgs; [
@@ -21,7 +22,7 @@
 				set -e
 				genfile=/tmp/nixos-generations
 				pushd ~/.dotfiles &>/dev/null
-				git diff -U0 *.nix
+				git add .
 				echo "NixOS Rebuilding..."
 				sudo nixos-rebuild switch --flake . &>nixos-switch.log || (cat nixos-switch.log | rg error && false)
 				nixos-rebuild list-generations &> $genfile
