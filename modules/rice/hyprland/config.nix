@@ -8,6 +8,9 @@
 }: {
   wayland.windowManager.hyprland = with theme.colors; {
     settings = {
+      exec-once = [
+        "alsa-fixes-script"
+      ];
       general = {
         gaps_in = 2;
         gaps_out = 6;

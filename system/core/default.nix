@@ -4,5 +4,6 @@
     ./nix.nix
     ./users.nix
     ./network.nix
+    ./sound.nix
   ];
 }

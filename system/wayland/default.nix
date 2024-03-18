@@ -4,10 +4,6 @@
   ...
 }: {
   imports = [./fonts.nix];
-  hardware = {
-    opengl.enable = true;
-    pulseaudio.support32Bit = true;
-  };
 
   environment = {
     variables = {
@@ -31,16 +27,5 @@
       SDL_VIDEODRIVER = "wayland";
       CLUTTER_BACKEND = "wayland";
     };
-  };
-
-  services.pipewire = {
-    enable = true;
-    alsa = {
-      enable = true;
-      support32Bit = true;
-    };
-    wireplumber.enable = true;
-    pulse.enable = true;
-    jack.enable = true;
   };
 }
