@@ -5,7 +5,7 @@
     autosuggestion.enable = true;
 
     shellAliases = import ./aliases.nix {inherit config;};
-    # configure oh-my-zsh
+    # ToDo: configure oh-my-zsh
     initExtra = ''
          setfoottitle () {
          	local split dir=''${PWD/#~\//\~/}

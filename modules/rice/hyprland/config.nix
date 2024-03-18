@@ -1,11 +1,4 @@
-{
-  config,
-  pkgs,
-  inputs,
-  lib,
-  theme,
-  ...
-}: {
+{theme, ...}: {
   wayland.windowManager.hyprland = with theme.colors; {
     settings = {
       exec-once = [

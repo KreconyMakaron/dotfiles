@@ -1,8 +1,4 @@
-{
-  pkgs,
-  lib,
-  ...
-}: {
+{pkgs, ...}: {
   time = {
     timeZone = "Europe/Warsaw";
     hardwareClockInLocalTime = false;

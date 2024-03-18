@@ -1,4 +1,4 @@
-{config, ...}: {
+{...}: {
   l = "eza -la --color=always";
   ll = "eza -la --color=always";
   ls = "eza --git --group-directories-first -s extension --color=always";

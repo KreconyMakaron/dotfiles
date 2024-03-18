@@ -14,7 +14,7 @@
     };
   };
 
-  outputs = {self, ...} @ inputs: {
+  outputs = {...} @ inputs: {
     nixosConfigurations = import ./hosts inputs;
   };
 }

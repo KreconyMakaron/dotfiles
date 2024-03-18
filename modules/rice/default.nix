@@ -3,5 +3,6 @@
     ./hyprland
     ./wofi.nix
     ./waybar.nix
+    ./foot.nix
   ];
 }

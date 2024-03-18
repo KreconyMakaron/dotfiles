@@ -22,6 +22,7 @@
 
     "audio/*" = ["mpv.desktop"];
     "video/*" = ["mpv.dekstop"];
+    #ToDo install pdf viewer and image viewer
     #"image/*" = ["imv.desktop"];
     #"application/pdf" = ["org.pwmt.zathura.desktop.desktop"];
   };
