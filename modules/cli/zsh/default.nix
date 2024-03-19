@@ -6,18 +6,14 @@
 
     shellAliases = import ./aliases.nix {inherit config;};
     # ToDo: configure oh-my-zsh
+
+    # sets the title of foot to the last executed command used in hyprland/rules
     initExtra = ''
          setfoottitle () {
-         	local split dir=''${PWD/#~\//\~/}
-         	case $dir in
-         	~) dir='~' ;;
-         	*) split=( "''${(@s:/:)dir}" )
-         		 dir=''${(j:/:M)split#?}''${split[-1]:1} ;;
-         	esac
-         	printf '\e]2;%s\e' $dir
+         	printf '\e]2;%s\e' $1
          }
 
-      add-zsh-hook -Uz chpwd setfoottitle
+      add-zsh-hook -Uz preexec setfoottitle
     '';
   };
 }

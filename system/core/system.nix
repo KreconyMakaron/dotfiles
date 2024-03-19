@@ -35,7 +35,7 @@
     ];
   };
 
-  #TODO configure appimages
+  # TODO configure appimages
 
   console.keyMap = "pl2";
 }

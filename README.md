@@ -1,8 +1,9 @@
 <h1 align="center">krecony's dotfiles (WIP) <br> </h1>
 
 ## To Do:
-- [ ] hyprland config (window rules, plugins, etc.)
-- [ ] waybar (make it look good)
+- [x] hyprland rice
+- [x] waybar (make it look good)
+- [ ] hyprland plugins (screenshots)
 - [ ] ricing wofi
 - [ ] ricing other things (gtk, nvim)
 - [ ] lockscreen (hyprlock?)

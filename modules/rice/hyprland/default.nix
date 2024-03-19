@@ -31,14 +31,16 @@ in {
     hyprpicker
     swaybg
     pavucontrol
-    (writeShellScriptBin
-      "startHyprland"
-      ''
-            cd ~
-            export XCURSOR_SIZE=20
-        hyprctl setcursor 20 HyprBibataModernClassicSVG
-            exec Hyprland
-      '')
+		wl-clipboard
+		wl-clip-persist
+	 (writeShellScriptBin
+		"startHyprland"
+		''
+			cd ~
+			export XCURSOR_SIZE=20
+			hyprctl setcursor 20 HyprBibataModernClassicSVG
+			exec Hyprland
+		'')
   ];
 
   home.pointerCursor = let

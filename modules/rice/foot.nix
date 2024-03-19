@@ -7,7 +7,7 @@
         font = "monospace:size=8";
         term = "xterm-256color";
         dpi-aware = "1";
-        pad = "10x5 center";
+        pad = "8x8 center";
       };
       colors = with theme.colors; {
         alpha = 0.75;
@@ -23,7 +23,9 @@
         regular6 = teal;
         regular7 = subtext1;
 
-        bright0 = surface0;
+        # zsh suggestions for some reason use bright0
+        # might switch to surface0 if problems arise
+        bright0 = subtext1;
         bright1 = red;
         bright2 = green;
         bright3 = yellow;
@@ -31,6 +33,9 @@
         bright5 = pink;
         bright6 = teal;
         bright7 = subtext0;
+
+        # fix for weird glitched lines on the right when scrolling
+        scrollback-indicator = "${base} ${base}";
       };
       mouse = {
         hide-when-typing = "yes";

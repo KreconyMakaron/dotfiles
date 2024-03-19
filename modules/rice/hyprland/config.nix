@@ -6,12 +6,12 @@
       ];
       general = {
         gaps_in = 2;
-        gaps_out = 6;
+        gaps_out = 5;
         border_size = 2;
         resize_on_border = 1;
 
         "col.active_border" = "rgb(${accent})";
-        "col.inactive_border" = "rgb(${surface0})";
+        "col.inactive_border" = "rgb(${base})";
       };
       monitor = [
         "eDP-1,1920x1080@60,0x0,1.25"
@@ -22,6 +22,13 @@
         follow_mouse = 1;
         repeat_delay = 400;
         touchpad.scroll_factor = 0.8;
+      };
+      decoration.blur = {
+        enabled = true;
+        size = 4;
+        passes = 2;
+        new_optimizations = true;
+        ignore_opacity = true;
       };
       gestures = {
         workspace_swipe = true;
@@ -37,8 +44,7 @@
 
         enable_swallow = true;
         swallow_regex = "^(foot)";
-      };
-      decoration = {
+        swallow_exception_regex = "^(pavucontrol)$";
       };
     };
   };

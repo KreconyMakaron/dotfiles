@@ -21,7 +21,7 @@
     };
   };
 in {
-  #Huawei Laptop
+  # huawei Laptop
   zephyr = nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     modules = [

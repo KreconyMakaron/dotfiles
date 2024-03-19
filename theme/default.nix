@@ -1,7 +1,4 @@
 {
-  # convert rrggbb hex to #rrggbb
-  pound = c: "#${c}";
-
   colors = rec {
     rosewater = "f2d5cf";
     flamingo = "eebebe";
@@ -37,13 +34,20 @@
     ice8 = "272931";
     ice9 = "131418";
 
+		nix-light = "7eb3df";
+		nix-dark = "486082";
+
     text = base0;
     base = ice8;
     subtext0 = ice0;
     subtext1 = ice1;
     surface0 = base5;
     surface1 = base6;
-    accent = ice0;
+
+		accent = ice0;
+		waybar-text = base4;
+		waybar-modules = base0;
+		waybar-selected-workspace = base1;
   };
 
   wallpaper = ./monochrome-city.png;

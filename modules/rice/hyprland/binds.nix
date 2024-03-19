@@ -21,6 +21,7 @@ in {
         "${mod},V,togglefloating,"
         "${mod},F,fullscreen,"
         "${mod},W,exec,${lib.getExe pkgs.firefox-devedition-unwrapped}"
+				"${mod},BACKSPACE,exec,wofi-powermenu"
       ]
       ++ (
         builtins.concatLists (builtins.genList (
