@@ -1,7 +1,7 @@
 {
-  theme,
-  lib,
-  pkgs,
+	theme,
+	lib,
+	pkgs,
 	...
 }: 
 with lib; let 
@@ -13,13 +13,13 @@ with lib; let
 	browser = "firefox";
 in
 {
-  programs.waybar = with theme.colors; {
-    enable = true;
-    systemd = {
-      enable = true;
-      target = "hyprland-session.target";
-    };
-    style = ''
+	programs.waybar = with theme.colors; {
+		enable = true;
+		systemd = {
+			enable = true;
+			target = "hyprland-session.target";
+		};
+		style = ''
 			window#waybar {
 				background-color: ${waybar-bg};
 				color: #${waybar-text} ;
@@ -93,46 +93,46 @@ in
 				background-position: center;
 				background-repeat: no-repeat;
 			}
-    '';
-    settings = {
-      mainBar = {
-        layer = "top";
-        position = "top";
-        height = 20;
-        output = [
-          "eDP-1"
-        ];
-        modules-left = ["custom/powermenu" "hyprland/workspaces"];
-        modules-center = ["clock"];
-        modules-right = ["hyprland/workspaces#windows" "wireplumber" "network" "battery"];
+		'';
+		settings = {
+			mainBar = {
+				layer = "top";
+				position = "top";
+				height = 20;
+				output = [
+					"eDP-1"
+				];
+				modules-left = ["custom/powermenu" "hyprland/workspaces"];
+				modules-center = ["clock"];
+				modules-right = ["hyprland/workspaces#windows" "wireplumber" "network" "battery"];
 				"custom/powermenu" = {
 					# lmao the image is only as wide as the amount of "text"
 					format = "              ";
 					on-click = "wofi-powermenu";
-          tooltip = false;
+					tooltip = false;
 				};
-        "hyprland/workspaces" = {
-          on-click = "activate";
-          format = "{icon}";
-          active-only = false;
-          format-icons = {
-            "1" = "Ⅰ";
-            "2" = "Ⅱ";
-            "3" = "Ⅲ";
-            "4" = "Ⅳ";
-            "5" = "Ⅴ";
-            "6" = "Ⅵ";
-            "7" = "Ⅶ";
-            "8" = "Ⅷ";
-            "9" = "Ⅸ";
-            "10" = "Ⅹ";
-          };
-        };
-        "hyprland/workspaces#windows" = {
-          format = "{windows}";
-          active-only = true;
-          window-rewrite-default = "";
-          window-rewrite = {
+				"hyprland/workspaces" = {
+					on-click = "activate";
+					format = "{icon}";
+					active-only = false;
+					format-icons = {
+						"1" = "Ⅰ";
+						"2" = "Ⅱ";
+						"3" = "Ⅲ";
+						"4" = "Ⅳ";
+						"5" = "Ⅴ";
+						"6" = "Ⅵ";
+						"7" = "Ⅶ";
+						"8" = "Ⅷ";
+						"9" = "Ⅸ";
+						"10" = "Ⅹ";
+					};
+				};
+				"hyprland/workspaces#windows" = {
+					format = "{windows}";
+					active-only = true;
+					window-rewrite-default = "";
+					window-rewrite = {
 						"foot" = "";
 						"class<foot> title<.*nvim.*>" = "";
 						"class<foot> title<.*lazygit.*>" = "󰊢";
@@ -145,60 +145,60 @@ in
 						"class<${browser}> title<.*reddit.*>" = "󰑍";
 						"class<${browser}> title<.*discord.*>" = "󰙯";
 						"class<${browser}> title<.*soundcloud.*>" = "󰓀";
-          };
-        };
-        battery = {
-          states = {
-            warning = 25;
-            critical = 10;
-          };
-          interval = 5;
-          format = "{icon} {capacity}%";
-          format-charging = "{icon} {capacity}%";
-          tooltip-format = "{timeTo}";
-          format-icons = ["󰂃" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
-        };
-        network = {
-          format-wifi = "󰖩  {signalStrength}%";
-          format-ethernet = "󰈀  {signalStrength}%";
-          format-disconnected = "󰖪  {signalStrength}%";
-          on-click = "foot --title nmtui nmtui";
-          tooltip-format = "{ipaddr} @ {essid}";
-        };
-        wireplumber = {
-          format = "{icon}  {volume}%";
-          format-muted = " 󰝟 ";
-          on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
-          on-click-right = "${lib.getExe pkgs.killall} pavucontrol || ${lib.getExe pkgs.pavucontrol}";
-          scroll-step = 5;
-          format-icons = ["󰕿" "󰖀" "󰕾"];
-        };
-        clock = {
-          format = "{:%H:%M}  ";
-          format-alt = "{:%A, %d.%m.%Y}  ";
-          tooltip-format = "<tt><small>{calendar}</small></tt>";
-          calendar = {
-            mode = "year";
-            mode-mon-col = 3;
-            weeks-pos = "right";
-            on-click-right = "mode";
-            format = {
-              months = "<span color='#${text}'><b>{}</b></span>";
+					};
+				};
+				battery = {
+					states = {
+						warning = 25;
+						critical = 10;
+					};
+					interval = 5;
+					format = "{icon} {capacity}%";
+					format-charging = "{icon} {capacity}%";
+					tooltip-format = "{timeTo}";
+					format-icons = ["󰂃" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
+				};
+				network = {
+					format-wifi = "󰖩  {signalStrength}%";
+					format-ethernet = "󰈀  {signalStrength}%";
+					format-disconnected = "󰖪  {signalStrength}%";
+					on-click = "foot --title nmtui nmtui";
+					tooltip-format = "{ipaddr} @ {essid}";
+				};
+				wireplumber = {
+					format = "{icon} {volume}%";
+					format-muted = " 󰝟 ";
+					on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+					on-click-right = "${lib.getExe pkgs.killall} pavucontrol || ${lib.getExe pkgs.pavucontrol}";
+					scroll-step = 5;
+					format-icons = ["󰕿" "󰖀" "󰕾"];
+				};
+				clock = {
+					format = "{:%H:%M}  ";
+					format-alt = "{:%A, %d.%m.%Y}  ";
+					tooltip-format = "<tt><small>{calendar}</small></tt>";
+					calendar = {
+						mode = "year";
+						mode-mon-col = 3;
+						weeks-pos = "right";
+						on-click-right = "mode";
+						format = {
+							months = "<span color='#${text}'><b>{}</b></span>";
 							weeks = "<span color='#${text}'><b>W{}</b></span>";
 							weekdays = "<span color='#${text}'><b>{}</b></span>";
-              days = "<span color='#${text}'>{}</span>";
-              today = "<span color='#${accent}'><b><u>{}</u></b></span>";
-            };
-          };
-          actions = {
-            on-click-right = "mode";
-            on-click-forward = "tz_up";
-            on-click-backward = "tz_down";
-            on-scroll-up = "shift_up";
-            on-scroll-down = "shift_down";
-          };
-        };
-      };
-    };
-  };
+							days = "<span color='#${text}'>{}</span>";
+							today = "<span color='#${accent}'><b><u>{}</u></b></span>";
+						};
+					};
+					actions = {
+						on-click-right = "mode";
+						on-click-forward = "tz_up";
+						on-click-backward = "tz_down";
+						on-scroll-up = "shift_up";
+						on-scroll-down = "shift_down";
+					};
+				};
+			};
+		};
+	};
 }
