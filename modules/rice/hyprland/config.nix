@@ -20,7 +20,7 @@
 			input = {
 				kb_layout = "pl";
 				follow_mouse = 1;
-				repeat_delay = 400;
+				repeat_delay = 300;
 				touchpad.scroll_factor = 0.8;
 			};
 			decoration.blur = {

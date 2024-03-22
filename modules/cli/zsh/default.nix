@@ -8,12 +8,12 @@
 		# ToDo: configure oh-my-zsh
 
 		# sets the title of foot to the last executed command used in hyprland/rules
-		initExtra = ''
-				 setfoottitle () {
-				 	printf '\e]2;%s\e' $1
-				 }
-
-			add-zsh-hook -Uz preexec setfoottitle
-		'';
+#		initExtra = ''
+#			setfoottitle () {
+#				printf '\e]2;%s\e' $1
+#			}
+#
+#			add-zsh-hook -Uz preexec setfoottitle
+#		'';
 	};
 }
