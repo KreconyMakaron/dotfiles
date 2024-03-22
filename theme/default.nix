@@ -1,6 +1,6 @@
 {
 	colors = rec {
-		# catppuccin colors
+		# catppuccin-frappe colors
 		rosewater = "f2d5cf";
 		flamingo = "eebebe";
 		pink = "f4b8e4";
@@ -34,9 +34,6 @@
 		ice7 = "3b3e49";
 		ice8 = "272931";
 		ice9 = "131418";
-
-		nix-light = "7eb3df";
-		nix-dark = "486082";
 
 		text = base0;
 		base = ice8;
