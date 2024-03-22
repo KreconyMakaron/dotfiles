@@ -19,8 +19,13 @@
 
 			"float,class:^(firefox)$,title:(Save As)"
 			"center,class:^(firefox)$,title:(Save As)"
-			"size 70% 70%,class:^(firefox),title:(Save As)$"
 			"dimaround,class:^(firefox),title:(Save As)$"
+			"size 70% 70%,class:^(firefox),title:(Save As)$"
+
+			"float,class:^(firefox)$,title:(File Upload)"
+			"center,class:^(firefox)$,title:(File Upload)"
+			"dimaround,class:^(firefox),title:(File Upload)$"
+			"size 70% 70%,class:^(firefox),title:(File Upload)$"
 		];
 		layerrule = [
 			"blur,waybar"

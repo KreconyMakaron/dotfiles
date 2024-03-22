@@ -6,11 +6,11 @@
 }: 
 with lib; let 
 	vertical-margin = "5px";
-	right-margin = "12px";
-	left-margin = "7px";
+	right-margin = "10px";
+	left-margin = "10px";
+	nix-workspace-margin = "7px";
 	border-radius = "10px";
 	waybar-bg = "rgba(42, 42, 42, 0.8)";
-	browser = "firefox";
 in
 {
 	programs.waybar = with theme.colors; {
@@ -34,7 +34,7 @@ in
 			#workspaces {
 				font-size: 12px;
 				background-color: #${waybar-modules};
-				margin: ${vertical-margin} 0 ${vertical-margin} 0;
+				margin: ${vertical-margin} 0;
 				border-radius: ${border-radius};
 				padding: 0 5px;
 			}
@@ -46,7 +46,6 @@ in
 			#workspaces button:hover {
 				/*fix extremely ugly hover effect https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect*/
 				box-shadow: inherit;
-				text-shadow: inherit;
 				background: #${waybar-selected-workspace} ;
 				padding: 0px 9px;
 			}
@@ -66,7 +65,7 @@ in
 			}
 			#clock {
 				border-radius: ${border-radius};
-				margin: ${vertical-margin} 5px;
+				margin: ${vertical-margin} 0;
 				padding: 0 7px;
 				background-color: #${waybar-modules};
 			}
@@ -86,12 +85,14 @@ in
 				border-radius: ${border-radius} 0 0 ${border-radius};
 			}
 			#custom-powermenu {
-				background-image: url("${./nix-snowflake.png}");
-				background-size: 90%;
-				margin-left: ${left-margin};
-				margin-right: 7px;
+				margin: ${vertical-margin} ${nix-workspace-margin} ${vertical-margin} ${left-margin};
+				border-radius: ${border-radius};
+				background-color: #${waybar-modules};
+				padding: 0 17px;
+				background-image: url("${theme.nix-snowflake}");
 				background-position: center;
 				background-repeat: no-repeat;
+				background-size: 80%;
 			}
 		'';
 		settings = {
@@ -106,10 +107,9 @@ in
 				modules-center = ["clock"];
 				modules-right = ["hyprland/workspaces#windows" "wireplumber" "network" "battery"];
 				"custom/powermenu" = {
-					# lmao the image is only as wide as the amount of "text"
-					format = "              ";
+					format = " ";
 					on-click = "wofi-powermenu";
-					tooltip = false;
+					tooltip = false;				
 				};
 				"hyprland/workspaces" = {
 					on-click = "activate";
@@ -140,11 +140,12 @@ in
 
 						"pavucontrol" = "";
 
-						"class<${browser}>" = "󰈹";
-						"class<${browser}> title<.*youtube.*>" = "";
-						"class<${browser}> title<.*reddit.*>" = "󰑍";
-						"class<${browser}> title<.*discord.*>" = "󰙯";
-						"class<${browser}> title<.*soundcloud.*>" = "󰓀";
+						"class<firefox>" = "󰈹";
+						"class<firefox> title<.*youtube.*>" = "";
+						"class<firefox> title<.*reddit.*>" = "󰑍";
+						"class<firefox> title<.*discord.*>" = "󰙯";
+						"class<firefox> title<.*soundcloud.*>" = "󰓀";
+						"class<firefox> title<.*github.*>" = "󰊢";
 					};
 				};
 				battery = {

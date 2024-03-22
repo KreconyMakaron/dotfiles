@@ -1,5 +1,6 @@
 {
 	colors = rec {
+		# catppuccin colors
 		rosewater = "f2d5cf";
 		flamingo = "eebebe";
 		pink = "f4b8e4";
@@ -45,10 +46,13 @@
 		surface1 = base6;
 
 		accent = ice0;
+
+		# waybar
 		waybar-text = base4;
 		waybar-modules = base0;
 		waybar-selected-workspace = base1;
 	};
 
 	wallpaper = ./monochrome-city.png;
+	nix-snowflake = ./nix-snowflake-dark.png;
 }
