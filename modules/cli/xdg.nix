@@ -41,8 +41,8 @@ in {
 		enable = true;
 		userDirs = {
 			enable = true;
-			documents = "$HOME/other";
 			download = "$HOME/download";
+			documents = "$HOME/docs";
 			videos = "$HOME/vids";
 			music = "$HOME/music";
 			pictures = "$HOME/pics";
