@@ -1,10 +1,9 @@
 {pkgs, ...}: {
 	imports = [
-		./zsh
+		./zsh.nix
 		./tools.nix
 		./git.nix
 		./neovim.nix
-		./xdg.nix
 	];
 	home.packages = with pkgs; [
 		ripgrep
@@ -12,7 +11,6 @@
 		jq
 		unzip
 		qrcp
-		alejandra
 		neofetch
 		mpv
 		killall

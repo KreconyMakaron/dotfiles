@@ -10,6 +10,8 @@
 - [ ] some [cool plymouth theme](https://raw.githubusercontent.com/adi1090x/files/master/plymouth-themes/previews/53.gif)
 - [ ] secret managment (sops?)
 - [ ] import obsidian notes + ofc rice obsidian
+- [ ] configure oh-my-zsh
+- [ ] find some cool img viewer and pdf viewer
 
 <br>
 

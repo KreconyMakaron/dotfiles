@@ -9,7 +9,6 @@
 	wayland.windowManager.hyprland = {
 		enable = true;
 		settings.exec-once = [
-			"alsa-fixes-script"
 			"${lib.getExe pkgs.wl-clip-persist} --clipboard both"
 			"${lib.getExe' pkgs.wl-clipboard "wl-paste"} --watch cliphist store"
 		];

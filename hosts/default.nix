@@ -30,7 +30,7 @@ in {
 			core
 			wayland
 			home-manager-module
-			{home-manager = home ../home/zephyr.nix;}
+			{home-manager = home ./zephyr/home.nix;}
 		];
 		specialArgs = {inherit inputs;};
 	};
