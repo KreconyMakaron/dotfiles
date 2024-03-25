@@ -4,7 +4,7 @@
 - [x] hyprland rice
 - [x] waybar (make it look good)
 - [x] hyprland plugins (screenshots)
-- [ ] find some cool img viewer and pdf viewer
+- [x] find some cool img viewer and pdf viewer
 - [ ] ricing wofi
 - [ ] ricing other things (gtk, nvim)
 - [ ] libnotify (brightness, volume, screenshots, battery, etc.)

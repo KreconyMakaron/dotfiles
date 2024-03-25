@@ -19,12 +19,11 @@
 		"application/x-extension-xhtml" = browser;
 		"application/x-extension-xht" = browser;
 		"application/json" = browser;
+		"application/pdf" = ["org.pwmt.zathura.desktop"];
 
 		"audio/*" = ["mpv.desktop"];
 		"video/*" = ["mpv.dekstop"];
-		#ToDo install pdf viewer and image viewer
-		#"image/*" = ["imv.desktop"];
-		#"application/pdf" = ["org.pwmt.zathura.desktop.desktop"];
+		"image/*" = ["imv.desktop"];
 	};
 in {
 	home.packages = with pkgs; [xdg-utils];

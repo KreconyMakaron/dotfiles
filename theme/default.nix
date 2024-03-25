@@ -42,12 +42,16 @@
 		surface0 = base5;
 		surface1 = base6;
 
+		base4alpha = "rgba(42, 42, 42, 0.8)";
+
 		accent = ice0;
 
-		# waybar
 		waybar-text = base4;
 		waybar-modules = base0;
 		waybar-selected-workspace = base1;
+
+		zathura-highlight-active = "rgba(98, 208, 245, 0.5)";
+		zathura-highlight = "rgba(158, 166, 196, 0.5)";
 	};
 
 	wallpaper = ./monochrome-city.png;

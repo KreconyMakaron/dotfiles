@@ -10,7 +10,6 @@ with lib; let
 	left-margin = "10px";
 	nix-workspace-margin = "7px";
 	border-radius = "10px";
-	waybar-bg = "rgba(42, 42, 42, 0.8)";
 in
 {
 	programs.waybar = with theme.colors; {
@@ -21,7 +20,7 @@ in
 		};
 		style = ''
 			window#waybar {
-				background-color: ${waybar-bg};
+				background-color: ${base4alpha};
 				color: #${waybar-text} ;
 				font-size: 12px;
 			}

@@ -12,7 +12,6 @@
 		unzip
 		qrcp
 		neofetch
-		mpv
 		killall
 		(writeShellScriptBin "rebuild"
 		''
