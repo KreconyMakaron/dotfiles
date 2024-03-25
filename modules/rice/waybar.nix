@@ -5,13 +5,18 @@
 	...
 }: 
 with lib; let 
-	vertical-margin = "5px";
-	right-margin = "10px";
-	left-margin = "10px";
-	nix-workspace-margin = "7px";
+	top-margin = "4px";
+	bottom-margin = "0";
+	right-margin = "6px";
+	left-margin = "6px";
+
+	power-margin = "5px";
+	volume-margin = "5px";
+
+	font-size = "12px";
 	border-radius = "10px";
-in
-{
+	border-width = "3px";
+in {
 	programs.waybar = with theme.colors; {
 		enable = true;
 		systemd = {
@@ -20,73 +25,64 @@ in
 		};
 		style = ''
 			window#waybar {
-				background-color: ${base4alpha};
-				color: #${waybar-text} ;
-				font-size: 12px;
+				background-color: transparent;
+				color: #${waybar-text};
+				font-size: ${font-size};
 			}
-			#battery.warning {
-				color: #${peach};
-			}
-			#battery.critical {
-				color: #${red}
-			}
-			#workspaces {
-				font-size: 12px;
+
+			#custom-powermenu, #workspaces, #clock, #battery, #wireplumber, #network {
+				border: ${border-width} solid #${base4};
 				background-color: #${waybar-modules};
-				margin: ${vertical-margin} 0;
 				border-radius: ${border-radius};
+				margin: ${top-margin} 0 ${bottom-margin} 0;
+			}
+
+			#battery.warning { color: #${peach}; }
+			#battery.critical { color: #${red} }
+
+			#workspaces {
+				font-size: ${font-size};
+				margin-left: ${left-margin};
 				padding: 0 5px;
 			}
+
 			#workspaces button {
-				background-color: #${waybar-modules};
 				box-shadow: inset 0 -3px transparent;
 				color: #${waybar-text};
 			}
+
 			#workspaces button:hover {
-				/*fix extremely ugly hover effect https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect*/
 				box-shadow: inherit;
-				background: #${waybar-selected-workspace} ;
+				background: #${waybar-selected-workspace};
 				padding: 0px 9px;
 			}
-			#workspaces button.active {
-				background-color: #${waybar-selected-workspace};
-			}
-			#workspaces button.urgent {
-				background-color: #${red};
-			}
-			#workspaces.windows {
-				background-color: transparent;
-				margin: ${vertical-margin} 0;
-			}
-			#workspaces.windows button {
-				background-color: transparent;
-				color: #${waybar-modules};
-			}
-			#clock {
-				border-radius: ${border-radius};
-				margin: ${vertical-margin} 0;
-				padding: 0 7px;
-				background-color: #${waybar-modules};
-			}
-			#battery, #wireplumber, #network {
-				padding: 0 10px;
-				background-color: #${waybar-modules};
-				margin: ${vertical-margin} 0;
-			}
-			#network {
-				padding: 0 15px;
-			}
-			#battery {
-				margin-right: ${right-margin};
-				border-radius: 0 ${border-radius} ${border-radius} 0;
-			}
+
+			#workspaces button.active { background-color: #${waybar-selected-workspace}; }
+			#workspaces button.urgent { background-color: #${red}; }
+
+			#clock { padding: 0 7px; }
+			#battery, #wireplumber, #network { padding: 0 10px; }
+
 			#wireplumber {
+				margin-left: ${volume-margin};
 				border-radius: ${border-radius} 0 0 ${border-radius};
+				border-width: ${border-width} 0 ${border-width} ${border-width};
 			}
+
+			#network {
+				padding: 0 10px;
+				border-width: ${border-width} 0;
+				border-radius: 0;
+			}
+
+			#battery {
+				border-radius: 0 ${border-radius} ${border-radius} 0;
+				border-width: ${border-width} ${border-width} ${border-width} 0;
+			}
+
 			#custom-powermenu {
-				margin: ${vertical-margin} ${nix-workspace-margin} ${vertical-margin} ${left-margin};
-				border-radius: ${border-radius};
-				background-color: #${waybar-modules};
+				margin-right: ${right-margin};
+				margin-left: ${power-margin};
 				padding: 0 17px;
 				background-image: url("${theme.nix-snowflake}");
 				background-position: center;
@@ -99,12 +95,10 @@ in
 				layer = "top";
 				position = "top";
 				height = 20;
-				output = [
-					"eDP-1"
-				];
-				modules-left = ["custom/powermenu" "hyprland/workspaces"];
-				modules-center = ["clock"];
-				modules-right = ["hyprland/workspaces#windows" "wireplumber" "network" "battery"];
+				output = [ "eDP-1" ];
+				modules-left = ["hyprland/workspaces"];
+				modules-center = [];
+				modules-right = ["clock" "wireplumber" "network" "battery" "custom/powermenu"];
 				"custom/powermenu" = {
 					format = " ";
 					on-click = "wofi-powermenu";
@@ -114,6 +108,7 @@ in
 					on-click = "activate";
 					format = "{icon}";
 					active-only = false;
+					all-outputs = true;
 					format-icons = {
 						"1" = "Ⅰ";
 						"2" = "Ⅱ";
@@ -125,26 +120,6 @@ in
 						"8" = "Ⅷ";
 						"9" = "Ⅸ";
 						"10" = "Ⅹ";
-					};
-				};
-				"hyprland/workspaces#windows" = {
-					format = "{windows}";
-					active-only = true;
-					window-rewrite-default = "";
-					window-rewrite = {
-						"foot" = "";
-						"class<foot> title<.*nvim.*>" = "";
-						"class<foot> title<.*lazygit.*>" = "󰊢";
-						"discord" = "󰙯";
-
-						"pavucontrol" = "";
-
-						"class<firefox>" = "󰈹";
-						"class<firefox> title<.*youtube.*>" = "";
-						"class<firefox> title<.*reddit.*>" = "󰑍";
-						"class<firefox> title<.*discord.*>" = "󰙯";
-						"class<firefox> title<.*soundcloud.*>" = "󰓀";
-						"class<firefox> title<.*github.*>" = "󰊢";
 					};
 				};
 				battery = {
@@ -177,8 +152,9 @@ in
 					format = "{:%H:%M}  ";
 					format-alt = "{:%A, %d.%m.%Y}  ";
 					tooltip-format = "<tt><small>{calendar}</small></tt>";
+					actions.on-click-right = "mode";
 					calendar = {
-						mode = "year";
+						mode = "month";
 						mode-mon-col = 3;
 						weeks-pos = "right";
 						on-click-right = "mode";
@@ -189,13 +165,6 @@ in
 							days = "<span color='#${text}'>{}</span>";
 							today = "<span color='#${accent}'><b><u>{}</u></b></span>";
 						};
-					};
-					actions = {
-						on-click-right = "mode";
-						on-click-forward = "tz_up";
-						on-click-backward = "tz_down";
-						on-scroll-up = "shift_up";
-						on-scroll-down = "shift_down";
 					};
 				};
 			};

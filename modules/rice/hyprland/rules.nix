@@ -27,8 +27,5 @@
 			"dimaround,class:^(firefox),title:(File Upload)$"
 			"size 70% 70%,class:^(firefox),title:(File Upload)$"
 		];
-		layerrule = [
-			"blur,waybar"
-		];
 	};
 }
