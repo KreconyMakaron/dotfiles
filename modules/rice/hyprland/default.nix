@@ -24,12 +24,18 @@
 
 	home.packages = with pkgs; with inputs.hyprcontrib.packages.${pkgs.system}; [
 		brightnessctl
-		hyprpicker
 		swaybg
 		pavucontrol
 		wl-clipboard
 		wl-clip-persist
 		cliphist
+
+		# dependencies of grimblast
+		grim
+		slurp
+		hyprpicker
+		grimblast
+
 		(writeShellScriptBin "startHyprland"
 		''
 			cd ~

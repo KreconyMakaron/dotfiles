@@ -3,7 +3,7 @@
 ## To Do:
 - [x] hyprland rice
 - [x] waybar (make it look good)
-- [ ] hyprland plugins (screenshots)
+- [x] hyprland plugins (screenshots)
 - [ ] ricing wofi
 - [ ] ricing other things (gtk, nvim)
 - [ ] lockscreen (hyprlock?)
