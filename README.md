@@ -4,14 +4,15 @@
 - [x] hyprland rice
 - [x] waybar (make it look good)
 - [x] hyprland plugins (screenshots)
+- [ ] find some cool img viewer and pdf viewer
 - [ ] ricing wofi
 - [ ] ricing other things (gtk, nvim)
+- [ ] libnotify (brightness, volume, screenshots, battery, etc.)
 - [ ] lockscreen (hyprlock?)
 - [ ] some [cool plymouth theme](https://raw.githubusercontent.com/adi1090x/files/master/plymouth-themes/previews/53.gif)
 - [ ] secret managment (sops?)
 - [ ] import obsidian notes + ofc rice obsidian
 - [ ] configure oh-my-zsh
-- [ ] find some cool img viewer and pdf viewer
 
 <br>
 
