@@ -7,17 +7,18 @@
 - [x] find some cool img viewer and pdf viewer
 - [ ] ricing wofi
 - [ ] ricing other things (gtk, nvim)
-- [ ] libnotify (brightness, volume, screenshots, battery, etc.)
+- [ ] libnotify/dunst (brightness, volume, screenshots, battery, etc.)
 - [ ] lockscreen (hyprlock?)
 - [ ] some [cool plymouth theme](https://raw.githubusercontent.com/adi1090x/files/master/plymouth-themes/previews/53.gif)
 - [ ] secret managment (sops?)
 - [ ] import obsidian notes + ofc rice obsidian
 - [ ] configure oh-my-zsh
+- [ ] switch all widgets to eww? (looks cool and doesnt have as many limitations as waybar)
 
 <br>
 
 ## Long Term
-- [ ] configure main computer (nvidia ;w;)
+- [ ] configure main computer (nvidia :<)
 - [ ] configure raspberry pi
 
 <br>
