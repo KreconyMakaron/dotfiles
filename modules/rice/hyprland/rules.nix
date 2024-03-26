@@ -7,6 +7,7 @@
 			"dimaround,^(pavucontrol)$"
 		];
 		windowrulev2 = [
+
 			"opacity 1.0 0.7,class:^(foot)$"
 
 			# makes nvim windows opaque no matter if they are focused or not
@@ -26,6 +27,8 @@
 			"center,class:^(firefox)$,title:(File Upload)"
 			"dimaround,class:^(firefox),title:(File Upload)$"
 			"size 70% 70%,class:^(firefox),title:(File Upload)$"
+
+			"size 70% 70%,title:^(.*)$,class:^(.*)$,floating:1"
 		];
 	};
 }

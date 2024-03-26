@@ -17,8 +17,8 @@
 		lavender = "babbf1";
 
 		base0 = "f0f0f0";
-		base1 = "e6e6e6";
-		base2 = "717172";
+		base1 = "c0c0c0";
+		base2 = "717171";
 		base3 = "404040";
 		base4 = "2a2a2a";
 		base5 = "212121";
@@ -36,22 +36,23 @@
 		ice9 = "131418";
 
 		text = base0;
-		base = ice8;
 		subtext0 = ice0;
 		subtext1 = ice1;
-		surface0 = base5;
-		surface1 = base6;
 
 		base4alpha = "rgba(42, 42, 42, 0.8)";
-
-		accent = ice0;
 
 		waybar-text = base4;
 		waybar-modules = base0;
 		waybar-selected-workspace = base1;
 
-		zathura-highlight-active = "rgba(98, 208, 245, 0.5)";
-		zathura-highlight = "rgba(158, 166, 196, 0.5)";
+		zathura-highlight-active = "rgba(48, 48, 48, 0.5)";
+		zathura-highlight = "rgba(192, 192, 192, 0.5)";
+
+		foot-bg = base4;
+		foot-zsh-suggestion = base1;
+
+		hypr-active-border = base0;
+		hypr-inactive-border = base4;
 	};
 
 	wallpaper = ./monochrome-city.png;

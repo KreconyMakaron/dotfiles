@@ -36,10 +36,6 @@ in {
 				border-radius: ${border-radius};
 				margin: ${top-margin} 0 ${bottom-margin} 0;
 			}
-
-			#battery.warning { color: #${peach}; }
-			#battery.critical { color: #${red} }
-
 			#workspaces {
 				font-size: ${font-size};
 				margin-left: ${left-margin};
@@ -163,7 +159,7 @@ in {
 							weeks = "<span color='#${text}'><b>W{}</b></span>";
 							weekdays = "<span color='#${text}'><b>{}</b></span>";
 							days = "<span color='#${text}'>{}</span>";
-							today = "<span color='#${accent}'><b><u>{}</u></b></span>";
+							today = "<span color='#${text}'><b><u>{}</u></b></span>";
 						};
 					};
 				};

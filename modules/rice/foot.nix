@@ -12,9 +12,9 @@
 			colors = with theme.colors; {
 				alpha = 0.75;
 				foreground = text;
-				background = base;
+				background = foot-bg;
 
-				regular0 = surface1;
+				regular0 = base6;
 				regular1 = red;
 				regular2 = green;
 				regular3 = yellow;
@@ -23,9 +23,7 @@
 				regular6 = teal;
 				regular7 = subtext1;
 
-				# zsh suggestions for some reason use bright0
-				# might switch to surface0 if problems arise
-				bright0 = subtext1;
+				bright0 = foot-zsh-suggestion;
 				bright1 = red;
 				bright2 = green;
 				bright3 = yellow;
@@ -35,7 +33,7 @@
 				bright7 = subtext0;
 
 				# fix for weird glitched lines on the right when scrolling
-				scrollback-indicator = "${base} ${base}";
+				scrollback-indicator = "${foot-bg} ${foot-bg}";
 			};
 			mouse = {
 				hide-when-typing = "yes";

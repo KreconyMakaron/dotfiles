@@ -2,6 +2,7 @@
 	home.packages = with pkgs; [
 		mpv
 		imv
+		obsidian
 	];
 
 	imports = [

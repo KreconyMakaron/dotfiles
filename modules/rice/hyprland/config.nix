@@ -7,8 +7,8 @@
 				border_size = 2;
 				resize_on_border = 1;
 
-				"col.active_border" = "rgb(${accent})";
-				"col.inactive_border" = "rgb(${base})";
+				"col.active_border" = "rgb(${hypr-active-border})";
+				"col.inactive_border" = "rgb(${hypr-inactive-border})";
 			};
 			monitor = [
 				"eDP-1,1920x1080@60,0x0,1.25"

@@ -12,8 +12,8 @@
 
 	nixpkgs = {
 		config = {
-			allowUnFree = true;
 			allowBroken = true;
+			allowUnfree = true;
 			permittedInsecurePackages = [
 				"nix-2.16.2"
 			];

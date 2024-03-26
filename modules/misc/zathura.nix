@@ -16,16 +16,22 @@
 			statusbar-bg = base4alpha;
 
 			index-fg = "#${base0}";
-			index-bg = "#${zathura-highlight-active}";
+			index-bg = zathura-highlight-active;
 
-			index-active-fg = base4alpha;
-			index-active-bg = zathura-highlight-active;
+			index-active-fg = "#${base0}";
+			index-active-bg = zathura-highlight;
 
 			highlight-color = zathura-highlight;
       highlight-active-color = zathura-highlight-active;
-			highlight-fg = base4alpha;
 
-			smooth-scroll = true;
+			completion-fg = "#${base0}";
+			completion-bg = zathura-highlight-active;
+
+			completion-group-fg = "#${base0}";
+			completion-group-bg = base4alpha;
+
+			completion-highlight-fg = "#${base0}";
+			completion-highlight-bg = zathura-highlight;
 		};
 	};
 }
