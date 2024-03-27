@@ -5,7 +5,7 @@
 - [x] waybar (make it look good)
 - [x] hyprland plugins (screenshots)
 - [x] find some cool img viewer and pdf viewer
-- [ ] ricing wofi
+- [x] ricing wofi
 - [ ] ricing other things (gtk, nvim)
 - [ ] libnotify/dunst (brightness, volume, screenshots, battery, etc.)
 - [ ] lockscreen (hyprlock?)
