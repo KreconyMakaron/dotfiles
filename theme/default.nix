@@ -39,12 +39,11 @@
 		subtext0 = ice0;
 		subtext1 = ice1;
 
-		base4alpha = "rgba(42, 42, 42, 0.8)";
-
 		waybar-text = base4;
 		waybar-modules = base0;
 		waybar-selected-workspace = base1;
 
+		zathura-bg = "rgba(42, 42, 42, 0.8)";
 		zathura-highlight-active = "rgba(48, 48, 48, 0.5)";
 		zathura-highlight = "rgba(192, 192, 192, 0.5)";
 
@@ -53,7 +52,14 @@
 
 		hypr-active-border = base0;
 		hypr-inactive-border = base4;
+
+		hyprlock-light = base0;
+		hyprlock-dark = base4;
+		hyprlock-check = base4;
+		hyprlock-fail = red;
 	};
+
+	hyprlock-font = "Hermit";
 
 	wallpaper = ./monochrome-city.png;
 	nix-snowflake = ./nix-snowflake-dark.png;

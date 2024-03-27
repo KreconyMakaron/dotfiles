@@ -4,16 +4,16 @@
 
 		options = with theme.colors; {
 			default-fg = "#${base0}";
-			default-bg = base4alpha;
+			default-bg = zathura-bg;
 
 			recolor-lightcolor = "rgba(0, 0, 0, 0)";
 			recolor-darkcolor = "#${base0}";
 
 			inputbar-fg = "#${base0}";
-			inputbar-bg = base4alpha;
+			inputbar-bg = zathura-bg;
 
 			statusbar-fg = "#${base0}";
-			statusbar-bg = base4alpha;
+			statusbar-bg = zathura-bg;
 
 			index-fg = "#${base0}";
 			index-bg = zathura-highlight-active;
@@ -28,7 +28,7 @@
 			completion-bg = zathura-highlight-active;
 
 			completion-group-fg = "#${base0}";
-			completion-group-bg = base4alpha;
+			completion-group-bg = zathura-bg;
 
 			completion-highlight-fg = "#${base0}";
 			completion-highlight-bg = zathura-highlight;

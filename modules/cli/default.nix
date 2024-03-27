@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+	pkgs, 
+	lib, 
+	...
+}: {
 	imports = [
 		./zsh.nix
 		./tools.nix
@@ -19,10 +23,10 @@
 			echo "Looking for redundant code..."
 			deadnix -e
 			set -e
-			git add .
+			${lib.getExe pkgs.git} add .
 			echo "NixOS Rebuilding..."
-			sudo nixos-rebuild switch --flake . &>nixos-switch.log || (cat nixos-switch.log | rg error && false)
-			git commit -am "Generation $(nixos-rebuild list-generations 2>/dev/null | rg current | awk '{ print $1 }')"
+			sudo nixos-rebuild switch --flake . &>nixos-switch.log || (${lib.getExe pkgs.bat} nixos-switch.log | ${lib.getExe ripgrep} error && false)
+			${lib.getExe pkgs.git} commit -am "Generation $(nixos-rebuild list-generations 2>/dev/null | ${lib.getExe ripgrep} current | awk '{ print $1 }')"
 			popd &>/dev/null
 		''
 		)

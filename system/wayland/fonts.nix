@@ -6,6 +6,7 @@
 			noto-fonts-cjk
 			noto-fonts-emoji
 			nerdfonts
+			hermit
 		];
 
 		fontconfig = {

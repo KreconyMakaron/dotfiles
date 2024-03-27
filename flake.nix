@@ -7,12 +7,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland.url = "github:hyprwm/Hyprland";
-    xdg-portal-hyprland.url = "github:hyprwm/xdg-desktop-portal-hyprland";
     hyprcontrib = {
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+		hyprlock = {
+      url = "github:hyprwm/hyprlock";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 		rose-pine-hyprcursor.url = "github:ndom91/rose-pine-hyprcursor";
+		xdg-portal-hyprland.url = "github:hyprwm/xdg-desktop-portal-hyprland";
   };
 
   outputs = {...} @ inputs: {

@@ -13,7 +13,7 @@
 								systemctl $op
 								;;
 				lock)
-								#lock
+								hyprlock
 								;;
 				logout)
 								hyprctl dispatch exit
@@ -24,6 +24,7 @@
 	programs.wofi = {
 		enable = true;
 		settings = {
+			sort_order = "alphabetical";
 			allow_images = true;
 			insensitive = true;
 			height = "40%";

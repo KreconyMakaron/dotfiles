@@ -35,13 +35,6 @@
 		slurp
 		hyprpicker
 		grimblast
-
-		(writeShellScriptBin "startHyprland"
-		''
-			cd ~
-			export XCURSOR_SIZE=20
-			exec Hyprland
-		'')
 	];
 
 	systemd.user.services = let

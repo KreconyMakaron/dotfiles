@@ -22,9 +22,12 @@ in {
 			"${mod},W,exec,${lib.getExe pkgs.firefox-devedition-unwrapped}"
 			"${mod},BACKSPACE,exec,wofi-powermenu"
 			"${mod},C,exec,${lib.getExe pkgs.cliphist} list | ${lib.getExe pkgs.wofi} --dmenu | ${lib.getExe pkgs.cliphist} decode | ${lib.getExe' pkgs.wl-clipboard "wl-paste"}"
+			"${mod},L,exec,${lib.getExe pkgs.hyprlock}"
+
 			",Print,exec,${lib.getExe pkgs.grimblast} --freeze copysave screen $XDG_PICTURES_DIR/$(date +ScreenShot-%F-%R:%S).png"
 			"${mod},Print,exec,${lib.getExe pkgs.grimblast} --freeze copysave area $XDG_PICTURES_DIR/$(date +ScreenShot-%F-%R:%S).png"
 			"${modshift},Print,exec,${lib.getExe pkgs.grimblast} --freeze copysave active $XDG_PICTURES_DIR/$(date +ScreenShot-%F-%R:%S).png"
+
 			",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
 		]
 		++ (

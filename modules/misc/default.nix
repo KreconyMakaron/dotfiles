@@ -8,5 +8,6 @@
 	imports = [
 		./xdg.nix
 		./zathura.nix
+		./lock.nix
 	];
 }

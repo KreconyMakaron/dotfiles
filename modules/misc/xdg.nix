@@ -53,4 +53,28 @@ in {
 		mimeApps.associations.added = associations;
 		mimeApps.defaultApplications = associations;
 	};
+
+	home.file.".local/share/applications/obsidian-diary.desktop".text = ''
+		[Desktop Entry]
+		Categories=Office
+		Comment=Daily Journaling
+		Exec=obsidian "obsidian://open?vault=diary"
+		Icon=obsidian
+		MimeType=x-scheme-handler/obsidian
+		Name=Obsidian Diary
+		Type=Application
+		Version=1.4
+	'';
+
+	home.file.".local/share/applications/obsidian-notes.desktop".text = ''
+		[Desktop Entry]
+		Categories=Office
+		Comment=School Notes
+		Exec=obsidian "obsidian://open?vault=TheAll"
+		Icon=obsidian
+		MimeType=x-scheme-handler/obsidian
+		Name=Obsidian Notes
+		Type=Application
+		Version=1.4
+	'';
 }
