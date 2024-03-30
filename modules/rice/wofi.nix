@@ -34,6 +34,7 @@
 			prompt = "Search...";
 			location = "bottom_right";
 			image_size = "20px";
+			key_expand = "Right";
 		};
 		style = with theme.colors; ''
 			#inner-box {

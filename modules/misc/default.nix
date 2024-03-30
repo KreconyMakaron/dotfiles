@@ -9,5 +9,6 @@
 		./xdg.nix
 		./zathura.nix
 		./lock.nix
+		./firefox.nix
 	];
 }

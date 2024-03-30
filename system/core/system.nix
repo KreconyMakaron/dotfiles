@@ -26,7 +26,7 @@
 	environment = {
 		variables = {
 			EDITOR = "nvim";
-			BROWSER = "firefox";
+			BROWSER = "firefox-devedition";
 		};
 
 		systemPackages = with pkgs; [

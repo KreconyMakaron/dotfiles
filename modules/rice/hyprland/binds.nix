@@ -19,7 +19,7 @@ in {
 			"${mod},D,exec,${lib.getExe pkgs.wofi} --show drun"
 			"${mod},V,togglefloating,"
 			"${mod},F,fullscreen,"
-			"${mod},W,exec,${lib.getExe pkgs.firefox-devedition-unwrapped}"
+			"${mod},W,exec,${lib.getExe pkgs.firefox-devedition}"
 			"${mod},BACKSPACE,exec,wofi-powermenu"
 			"${mod},C,exec,${lib.getExe pkgs.cliphist} list | ${lib.getExe pkgs.wofi} --dmenu | ${lib.getExe pkgs.cliphist} decode | ${lib.getExe' pkgs.wl-clipboard "wl-paste"}"
 			"${mod},L,exec,${lib.getExe pkgs.hyprlock}"
