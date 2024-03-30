@@ -6,12 +6,14 @@
 - [x] hyprland plugins (screenshots)
 - [x] find some cool img viewer and pdf viewer
 - [x] ricing wofi
+- [x] greeter (tuigreet for now ig)
+- [x] lockscreen (hyprlock?)
+- [x] import obsidian notes + ofc rice obsidian
+- [ ] hypridle
 - [ ] ricing other things (gtk, nvim)
-- [ ] libnotify/dunst (brightness, volume, screenshots, battery, etc.)
-- [ ] lockscreen (hyprlock?)
+- [ ] libnotify (brightness, volume, screenshots, battery, etc.)
 - [ ] some [cool plymouth theme](https://raw.githubusercontent.com/adi1090x/files/master/plymouth-themes/previews/53.gif)
 - [ ] secret managment (sops?)
-- [ ] import obsidian notes + ofc rice obsidian
 - [ ] configure oh-my-zsh
 - [ ] switch all widgets to eww? (looks cool and doesnt have as many limitations as waybar)
 
