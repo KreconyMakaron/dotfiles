@@ -5,5 +5,6 @@
 		./users.nix
 		./network.nix
 		./sound.nix
+		./boot.nix
 	];
 }

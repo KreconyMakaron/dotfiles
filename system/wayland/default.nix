@@ -1,6 +1,4 @@
 {
-	pkgs, 
-	lib,
 	...
 }: {
 	imports = [./fonts.nix];
@@ -29,19 +27,6 @@
 			XDG_SESSION_TYPE = "wayland";
 			SDL_VIDEODRIVER = "wayland";
 			CLUTTER_BACKEND = "wayland";
-		};
-		systemPackages = [ pkgs.greetd.tuigreet ];
-	};
-
-	services = {
-		greetd = {
-			enable = true;
-			settings = rec {
-				default_session = {
-					command = ''${lib.getExe pkgs.greetd.tuigreet} --greeting "siema mordo" --time --cmd ${lib.getExe' pkgs.hyprland "Hyprland"}'';
-					user = "greeter";
-				};
-			};
 		};
 	};
 }

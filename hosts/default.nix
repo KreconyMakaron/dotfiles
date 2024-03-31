@@ -6,6 +6,8 @@
 	inherit (self) inputs;
 	core = ../system/core;
 	wayland = ../system/wayland;
+	intel-graphics = ../system/intel;
+
 	home-manager-module = inputs.home-manager.nixosModules.home-manager;
 
 	home = path: {
@@ -28,6 +30,7 @@ in {
 			{networking.hostName = "zephyr";}
 			./zephyr
 			core
+			intel-graphics
 			wayland
 			home-manager-module
 			{home-manager = home ./zephyr/home.nix;}
