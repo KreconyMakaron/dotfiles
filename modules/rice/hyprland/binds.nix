@@ -21,8 +21,8 @@ in {
 			"${mod},F,fullscreen,"
 			"${mod},W,exec,${lib.getExe pkgs.firefox-devedition}"
 			"${mod},BACKSPACE,exec,wofi-powermenu"
-			"${mod},C,exec,${lib.getExe pkgs.cliphist} list | ${lib.getExe pkgs.wofi} --dmenu | ${lib.getExe pkgs.cliphist} decode | ${lib.getExe' pkgs.wl-clipboard "wl-paste"}"
-			"${mod},L,exec,${lib.getExe pkgs.hyprlock}"
+			"${mod},C,exec,${lib.getExe pkgs.cliphist} list | ${lib.getExe pkgs.wofi} --sort-order default --dmenu | ${lib.getExe pkgs.cliphist} decode | ${lib.getExe' pkgs.wl-clipboard "wl-copy"}"
+			"${modshift},L,exec,${lib.getExe pkgs.hyprlock}"
 
 			",Print,exec,${lib.getExe pkgs.grimblast} --freeze copysave screen $XDG_PICTURES_DIR/$(date +ScreenShot-%F-%R:%S).png"
 			"${mod},Print,exec,${lib.getExe pkgs.grimblast} --freeze copysave area $XDG_PICTURES_DIR/$(date +ScreenShot-%F-%R:%S).png"

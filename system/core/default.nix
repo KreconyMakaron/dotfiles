@@ -6,5 +6,6 @@
 		./network.nix
 		./sound.nix
 		./boot.nix
+		./steam.nix
 	];
 }

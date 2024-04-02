@@ -1,10 +1,10 @@
 {pkgs, ...}: {
-	home.packages = with pkgs; [
-		clang
-		nixd
-		lazygit
-	];
 	programs.neovim = {
 		enable = true;
+		extraPackages = [
+			pkgs.clang-tools
+			pkgs.pyright
+			pkgs.nixd
+		];
 	};
 }
