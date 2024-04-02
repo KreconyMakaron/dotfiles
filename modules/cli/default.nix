@@ -8,6 +8,7 @@
 		./tools.nix
 		./git.nix
 		./neovim.nix
+		./btop.nix
 	];
 	home.packages = with pkgs; [
 		ripgrep
