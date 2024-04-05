@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+	lib, 
+	pkgs, 
+	...
+}: {
 	time = {
 		timeZone = "Europe/Warsaw";
 		hardwareClockInLocalTime = false;
@@ -35,7 +39,12 @@
 		];
 	};
 
-	# TODO configure appimages
+	programs.nix-ld.enable = true;
+	boot.binfmt.registrations = lib.genAttrs ["appimage" "AppImage"] (ext: {
+    recognitionType = "extension";
+    magicOrExtension = ext;
+    interpreter = "${lib.getExe' pkgs.appimage-run "appimage-run"}";
+  });
 
 	console.keyMap = "pl2";
 }
