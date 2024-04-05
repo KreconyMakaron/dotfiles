@@ -3,6 +3,8 @@
 		mpv
 		imv
 		obsidian
+
+		osu-lazer-bin
 	];
 
 	imports = [
@@ -10,5 +12,6 @@
 		./zathura.nix
 		./lock.nix
 		./firefox.nix
+		./vesktop
 	];
 }
