@@ -47,4 +47,9 @@
   });
 
 	console.keyMap = "pl2";
+
+	programs.java = {
+		enable = true;
+		package = pkgs.jre;
+	};
 }

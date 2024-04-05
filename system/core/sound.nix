@@ -12,6 +12,7 @@
 	sound.enable = false;
 	hardware = {
 		opengl.enable = true;
+		opengl.driSupport32Bit = true;
 		pulseaudio.enable = false;
 	};
 
