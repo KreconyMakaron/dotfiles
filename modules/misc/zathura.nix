@@ -32,6 +32,8 @@
 
 			completion-highlight-fg = "#${base0}";
 			completion-highlight-bg = zathura-highlight;
+
+			selection-clipboard = "clipboard";
 		};
 	};
 }

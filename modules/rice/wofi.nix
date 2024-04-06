@@ -3,7 +3,7 @@
 		# https://gist.github.com/mxdevmanuel/a2229d427b39a9e40f2198979caa40c1
 		(writeShellScriptBin "wofi-powermenu"
 		''
-			op=$( echo -e " Poweroff\n󰑓 Reboot\n Suspend\n Lock\n Logout" | wofi -i --dmenu | awk '{print tolower($2)}' )
+			op=$( echo -e "  Poweroff\n󰑓  Reboot\n  Suspend\n  Lock\n  Logout" | wofi -i --dmenu | awk '{print tolower($2)}' )
 			case $op in 
 				poweroff)
 								;&
@@ -35,6 +35,7 @@
 			location = "bottom_right";
 			image_size = "20px";
 			key_expand = "Right";
+			pre_display_exec = true;
 		};
 		style = with theme.colors; ''
 			#inner-box {
