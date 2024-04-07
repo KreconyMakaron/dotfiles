@@ -18,7 +18,10 @@
 				kb_layout = "pl";
 				follow_mouse = 1;
 				repeat_delay = 300;
-				touchpad.scroll_factor = 0.8;
+				touchpad = {
+					scroll_factor = 0.5;
+					natural_scroll = true;
+				};
 			};
 			decoration.blur = {
 				enabled = true;

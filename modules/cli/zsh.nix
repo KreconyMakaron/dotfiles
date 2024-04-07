@@ -1,4 +1,8 @@
-{ ...}: {
+{
+	lib, 
+	pkgs, 
+	...
+}: {
 	programs.zsh = {
 		enable = true;
 		enableCompletion = true;
@@ -27,7 +31,11 @@
 			add-zsh-hook -Uz preexec setfoottitle
 
 			nix-search () {
-				xdg-open "https://search.nixos.org/packages?channel=unstable&from=0&size=50&sort=relevance&type=packages&query=$1"
+				${lib.getExe' pkgs.xdg-utils "xdg-open"} "https://search.nixos.org/packages?channel=unstable&from=0&size=50&sort=relevance&type=packages&query=$1"
+			}
+
+			cpfile () {
+				${lib.getExe pkgs.bat} -pp $1 | wl-copy
 			}
 		'';
 	};

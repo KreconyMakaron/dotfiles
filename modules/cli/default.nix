@@ -4,6 +4,7 @@
 	...
 }: {
 	imports = [
+		./fastfetch.nix
 		./zsh.nix
 		./tools.nix
 		./git.nix
@@ -16,7 +17,6 @@
 		jq
 		unzip
 		qrcp
-		neofetch
 		killall
 		lazygit
 		(writeShellScriptBin "rebuild"

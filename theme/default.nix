@@ -61,6 +61,7 @@
 
 	hyprlock-font = "Hermit";
 
-	wallpaper = ./monochrome-city.png;
+	wallpaper = ./cat.png;
 	nix-snowflake = ./nix-snowflake-dark.png;
+	asciiart = ./asciicat.txt;
 }
