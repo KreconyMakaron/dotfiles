@@ -6,6 +6,16 @@
 	networking = {
 		networkmanager = {
 			enable = true;
+
+			wifi = {
+				powersave = true;
+				macAddress = "random";
+			};
+		};
+
+		firewall = {
+			enable = true;
+			allowPing = true;
 		};
 	};
 }

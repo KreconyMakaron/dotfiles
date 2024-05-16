@@ -52,4 +52,6 @@
 		enable = true;
 		package = pkgs.jre;
 	};
+
+	services.upower.enable = true;
 }

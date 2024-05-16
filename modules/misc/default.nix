@@ -3,8 +3,6 @@
 		mpv
 		imv
 		obsidian
-
-		osu-lazer-bin
 	];
 
 	imports = [

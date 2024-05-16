@@ -5,9 +5,10 @@
 			clang-tools
 			pyright
 			nixd
-			nodePackages.vim-language-server
-			nodePackages.bash-language-server
-			nodePackages.vscode-json-languageserver-bin
+			nodePackages_latest.vim-language-server
+			nodePackages_latest.bash-language-server
+			nodePackages_latest.vscode-json-languageserver
+			nodePackages_latest.typescript-language-server
 		];
 	};
 }

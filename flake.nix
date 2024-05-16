@@ -6,7 +6,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland.url = "github:hyprwm/Hyprland";
+		hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1"; #https://github.com/hyprwm/Hyprland/issues/5891
     hyprcontrib = {
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,7 +15,6 @@
       url = "github:hyprwm/hyprlock";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-		rose-pine-hyprcursor.url = "github:ndom91/rose-pine-hyprcursor";
 		xdg-portal-hyprland.url = "github:hyprwm/xdg-desktop-portal-hyprland";
   };
 

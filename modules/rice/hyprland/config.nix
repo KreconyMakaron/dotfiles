@@ -19,6 +19,7 @@
 				follow_mouse = 1;
 				repeat_delay = 300;
 				touchpad = {
+					disable_while_typing = false;
 					scroll_factor = 0.5;
 					natural_scroll = true;
 				};
