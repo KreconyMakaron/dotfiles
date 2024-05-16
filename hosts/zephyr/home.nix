@@ -6,6 +6,5 @@
 		../../modules/rice
 		../../modules/misc
 		../../modules/fixes/alsa-fixes.nix
-		inputs.hyprlock.homeManagerModules.default
 	];
 }
