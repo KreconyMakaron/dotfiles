@@ -39,6 +39,12 @@
 		];
 	};
 
+	hardware = {
+		enableAllFirmware = true;
+		opengl.enable = true;
+		opengl.driSupport32Bit = true;
+	};
+
 	programs.nix-ld.enable = true;
 	boot.binfmt.registrations = lib.genAttrs ["appimage" "AppImage"] (ext: {
     recognitionType = "extension";
@@ -53,5 +59,14 @@
 		package = pkgs.jre;
 	};
 
-	services.upower.enable = true;
+	services = {
+		upower.enable = true;
+		mysql = {
+			enable = true;
+			package = pkgs.mariadb;
+		};
+		openssh.enable = true;
+	};
+
+	programs.dconf.enable = true;
 }

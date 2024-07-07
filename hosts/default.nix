@@ -10,16 +10,18 @@
 
 	home-manager-module = inputs.home-manager.nixosModules.home-manager;
 
-	home = path: {
+	home = {
 		useUserPackages = true;
 		useGlobalPkgs = true;
 		extraSpecialArgs = {
 			inherit inputs;
 			inherit self;
 		};
-		users.krecony = {
-			imports = [path];
-			_module.args.theme = import ../theme;
+		users = {
+			krecony = {
+				imports = [ ./zephyr/home.nix ];
+				_module.args.theme = import ../theme;
+			};
 		};
 	};
 in {
@@ -33,7 +35,7 @@ in {
 			intel-graphics
 			wayland
 			home-manager-module
-			{home-manager = home ./zephyr/home.nix;}
+			{home-manager = home;}
 		];
 		specialArgs = {inherit inputs;};
 	};

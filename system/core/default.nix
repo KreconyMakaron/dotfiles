@@ -7,5 +7,6 @@
 		./sound.nix
 		./boot.nix
 		./steam.nix
+		./bluetooth.nix
 	];
 }

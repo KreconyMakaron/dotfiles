@@ -6,16 +6,10 @@
 	boot = {
 		loader = {
 			systemd-boot = {
+				consoleMode = "auto";
 				enable = true;
-				configurationLimit = 10;
 			};
 			efi.canTouchEfiVariables = true;
-			timeout = 0;
-		};
-		plymouth = {
-			enable = true;
-			themePackages = with pkgs; [ (adi1090x-plymouth-themes.override {selected_themes = [ "lone" ]; }) ];
-      theme = "lone";
 		};
 		initrd = {
 			verbose = false;
@@ -37,9 +31,9 @@
 	environment.systemPackages = [ pkgs.greetd.tuigreet ];
 	services.greetd = {
 		enable = true;
-		settings = rec {
+		settings = {
 			default_session = {
-				command = ''${lib.getExe pkgs.greetd.tuigreet} --greeting "siema mordo" --time --cmd ${lib.getExe' pkgs.hyprland "Hyprland"}'';
+				command = ''${lib.getExe pkgs.greetd.tuigreet} --greeting "hejka" --time --cmd Hyprland'';
 				user = "greeter";
 			};
 		};
