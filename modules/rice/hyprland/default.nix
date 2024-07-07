@@ -37,25 +37,19 @@
 		grimblast
 	];
 
-	systemd.user.services = let
-		GraphicalService = {description, execstart, restart ? "no", type ? "simple"}: {
+	systemd.user.services = {
+		wallpaper-setter = {
 			Unit = {
 				After = ["graphical-session.target"];
 				PartOf = ["graphical-session.target"];
-				Description = description;
+				Description = "Sets the wallpaper";
 			};
 			Service = {
-				Type = type;
-				ExecStart = execstart;
-				Restart = restart;
+				Type = "simple";
+				ExecStart = "${lib.getExe pkgs.swaybg} -i ${theme.wallpaper}";
+				Restart = "always";
 			};
 			Install.WantedBy = ["graphical-session.target"];
-		};
-		in {
-		wallpaper-setter = GraphicalService {
-			description = "Sets the wallpaper";
-			execstart = "${lib.getExe pkgs.swaybg} -i ${theme.wallpaper}";
-			restart = "always";
 		};
 	};
 }

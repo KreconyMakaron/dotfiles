@@ -9,9 +9,6 @@
 		windowrulev2 = [
 			"opacity 1.0 0.7,class:^(foot)$"
 
-			# makes nvim windows opaque no matter if they are focused or not
-			"opaque,class:^(foot)$,title:(nvim)"
-
 			"float,class:^(foot)$,title:(nmtui)"
 			"center,class:^(foot)$,title:(nmtui)"
 			"dimaround,class:^(foot)$,title:(nmtui)"

@@ -7,21 +7,14 @@
 			noto-fonts-emoji
 			nerdfonts
 			hermit
+			dejavu_fonts
 		];
-
 		fontconfig = {
 			defaultFonts = {
-				monospace = [
-					"JetBrainsMono"
-				];
-				sansSerif = [
-				];
-				serif = [
-					"Noto Serif"
-				];
-				emoji = [
-					"Noto Color Emoji"
-				];
+				monospace = [ "JetBrainsMono" ];
+				sansSerif = [ "Dejavu Sans" ];
+				serif = [ "Dejavu Serif" ];
+				emoji = [ "Noto Color Emoji" ];
 			};
 		};
 	};

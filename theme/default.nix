@@ -50,7 +50,7 @@
 		foot-bg = base4;
 		foot-zsh-suggestion = base1;
 
-		hypr-active-border = base0;
+		hypr-active-border = base3;
 		hypr-inactive-border = base4;
 
 		hyprlock-light = base0;
@@ -61,7 +61,7 @@
 
 	hyprlock-font = "Hermit";
 
-	wallpaper = ./cat.png;
+	wallpaper = ./amanita.jpg;
 	nix-snowflake = ./nix-snowflake-dark.png;
 	asciiart = ./asciicat.txt;
 }

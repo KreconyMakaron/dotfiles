@@ -22,7 +22,7 @@
 			"....." = "cd ../../../..";
 		};
 
-		# sets the title of foot to the last executed command used in hyprland/rules
+		# sets the title of foot to the last executed command, used in hyprland/rules
 		initExtra = ''
 			setfoottitle () {
 				printf '\e]2;%s\e\' $1
@@ -37,6 +37,8 @@
 			cpfile () {
 				${lib.getExe pkgs.bat} -pp $1 | wl-copy
 			}
+
+			eval "$(direnv hook zsh)"
 		'';
 	};
 }

@@ -2,17 +2,18 @@
 	wayland.windowManager.hyprland = with theme.colors; {
 		settings = {
 			general = {
-				gaps_in = 2;
-				gaps_out = 5;
-				border_size = 2;
+				gaps_in = 0;
+				gaps_out = 0;
 				resize_on_border = 1;
-
-				"col.active_border" = "rgb(${hypr-active-border})";
-				"col.inactive_border" = "rgb(${hypr-inactive-border})";
+				border_size = 0;
 			};
 			monitor = [
 				"eDP-1,1920x1080@60,0x0,1.25"
+				"HDMI-A-1,1920x1080@60,0x0,1"
 			];
+			debug = {
+				disable_logs = false;
+			};
 			xwayland.force_zero_scaling = true;
 			input = {
 				kb_layout = "pl";

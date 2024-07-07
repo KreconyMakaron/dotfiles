@@ -3,7 +3,10 @@
 		mpv
 		imv
 		obsidian
+		spotify
 	];
+
+	programs.zathura.enable = true;
 
 	imports = [
 		./xdg.nix
