@@ -1,0 +1,144 @@
+window.bar {
+	background-color: rgba(42, 42, 42, 0.4);
+	font-size: 14px;
+	font-family: "JetBrains Mono";
+}
+
+window.statswindow {
+	background-color: rgba(42, 42, 42, 0.7);
+	font-size: 14px;
+	font-family: "JetBrains Mono";
+}
+
+label {
+	font-weight: bold;
+	text-shadow: none;
+	outline-width: 0px;
+}
+
+
+tooltip{
+	font-size: 12px;
+}
+
+.emptyworkspace {
+	color: gray;
+}
+
+.workspaces {
+	padding: 3px 0px 3px 10px;
+}
+
+button {
+    min-width: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+	box-shadow: none;
+	background-image: none;
+	border: 0;
+	background-color: transparent;
+}
+
+.iconbutton {
+	font-family: NotoSans Nerd Font; 
+	margin: 0px; 
+	color: white;
+	padding: 0px;
+}
+
+.workspaces button {
+	margin: 0 -2px;
+	padding: 5px;
+} 
+
+.memorybox, .batterybox, .cpubox {
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 70%;
+	background-image: url("./icons/circle-empty-gray.svg");
+	margin: 0px -5px;
+}
+
+.cpubox, .cpulabel { 
+	color: #83A598; 
+}
+.memorybox, .ramlabel { 
+	color: #FE8019; 
+}
+.batterybox, .batlabel { 
+	color: #B8BB26; 
+}
+
+.revealbox { 
+	margin: 5px 0; 
+	padding: 0px;
+}
+
+circular-progress {
+	margin: 16px;
+	font-size: 4px;
+}
+
+circular-progress label {
+	font-size: 9px;
+	margin-left: -2px;
+}
+
+circular-progress .big {
+	margin: 64px;
+	font-size: 12px;
+}
+
+.sliderbox { min-width: 90px; }
+
+slider {
+	min-height: 5px;
+	margin: 0px;
+	border: 0px;
+	min-width: 0px;
+}
+
+.top {
+	background-color: #ffffff;
+}
+
+highlight { border: 0px; }
+
+.networkbox { margin-right: 7px }
+.volumebox { margin-right: -5px; }
+.brightnessbox { margin-right: 7px; }
+.clockbox { margin-right: 20px; }
+
+.circularbox {
+	min-width: 150px;
+	min-height: 150px;
+	margin-right: 20px;
+	background-size: 80%;
+}
+
+circular-progress.big {
+	font-size: 10px;
+	margin: 0px;
+	min-width: 100px;
+	min-height: 100px;
+}
+
+.statstextbox {
+	min-width: 150px;
+	min-height: 150px;
+	margin-left: -30px;
+	padding-right: 10px;
+}
+
+.batlabel, .ramlabel, .cpulabel {
+	font-size: 20px;
+	text-decoration-line: underline;
+}
+
+.statlabel {
+	font-size: 13px;
+}
+
+.date {
+	color: #ffffff;
+}
