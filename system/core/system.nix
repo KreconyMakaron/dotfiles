@@ -41,8 +41,10 @@
 
 	hardware = {
 		enableAllFirmware = true;
-		opengl.enable = true;
-		opengl.driSupport32Bit = true;
+		graphics = {
+			enable = true;
+			enable32Bit = true;
+		};
 	};
 
 	boot.binfmt.registrations = lib.genAttrs ["appimage" "AppImage"] (ext: {

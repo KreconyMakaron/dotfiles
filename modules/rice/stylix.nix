@@ -2,6 +2,9 @@
 	imports = [ inputs.stylix.homeManagerModules.stylix ];
 
 	stylix = {
+		enable = true;
+		autoEnable = true;
+
 		image = theme.wallpaper;
 		base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
 		polarity = "dark";
@@ -24,7 +27,9 @@
 
 		targets = {
 			vim.enable = false;
-			vesktop.enable = true;
+			firefox.enable = false;
+			neovim.enable = false;
+			wofi.enable = false;
 		};
 	};
 }
