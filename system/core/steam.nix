@@ -1,8 +1,8 @@
-{ ...}: {
+{pkgs, ...}: {
 	programs.steam = {
-		enable = false;
+		enable = true;
 		remotePlay.openFirewall = true;
 		dedicatedServer.openFirewall = true;
-		gamescopeSession.enable = true;
 	};
+	environment.systemPackages = with pkgs; [ polymc ];
 }

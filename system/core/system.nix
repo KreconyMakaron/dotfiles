@@ -45,7 +45,6 @@
 		opengl.driSupport32Bit = true;
 	};
 
-	programs.nix-ld.enable = true;
 	boot.binfmt.registrations = lib.genAttrs ["appimage" "AppImage"] (ext: {
     recognitionType = "extension";
     magicOrExtension = ext;
@@ -54,9 +53,14 @@
 
 	console.keyMap = "pl2";
 
-	programs.java = {
-		enable = true;
-		package = pkgs.jre;
+	programs = {
+		nix-ld.enable = true;
+		dconf.enable = true;
+		xwayland.enable = true;
+		java = {
+			enable = true;
+			package = pkgs.jre;
+		};
 	};
 
 	services = {
@@ -67,6 +71,4 @@
 		};
 		openssh.enable = true;
 	};
-
-	programs.dconf.enable = true;
 }

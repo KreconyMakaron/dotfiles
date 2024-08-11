@@ -19,6 +19,7 @@
 		xdg-portal-hyprland.url = "github:hyprwm/xdg-desktop-portal-hyprland";
 		ags.url = "github:Aylur/ags";
 		stylix.url = "github:danth/stylix";
+		polymc.url = "github:PolyMC/PolyMC";
   };
 
   outputs = {...} @ inputs: {

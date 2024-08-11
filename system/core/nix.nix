@@ -1,5 +1,6 @@
 {
 	pkgs,
+	inputs,
 	...
 }: {
 	environment = {
@@ -17,6 +18,7 @@
 				"nix-2.16.2"
 			];
 		};
+		overlays = [ inputs.polymc.overlay ];
 	};
 
 	documentation = {
