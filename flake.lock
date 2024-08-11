@@ -135,6 +135,22 @@
     "flake-compat": {
       "flake": false,
       "locked": {
+        "lastModified": 1696426674,
+        "narHash": "sha256-kvjfFW7WAETZlt09AgDn1MrtKzP7t90Vf7vypd3OL1U=",
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "rev": "0f9255e01c2351cc7d116c072cb317785dd33b33",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
+    "flake-compat_2": {
+      "flake": false,
+      "locked": {
         "lastModified": 1673956053,
         "narHash": "sha256-4gtG9iQuiKITOjNQQeQIpoIB6b16fm+504Ch3sNKLd8=",
         "owner": "edolstra",
@@ -464,6 +480,22 @@
         "type": "github"
       }
     },
+    "libnbtplusplus": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1650031308,
+        "narHash": "sha256-TvVOjkUobYJD9itQYueELJX3wmecvEdCbJ0FinW2mL4=",
+        "owner": "PolyMC",
+        "repo": "libnbtplusplus",
+        "rev": "2203af7eeb48c45398139b583615134efd8d407f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "PolyMC",
+        "repo": "libnbtplusplus",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1708475490,
@@ -513,6 +545,22 @@
     },
     "nixpkgs_4": {
       "locked": {
+        "lastModified": 1712129508,
+        "narHash": "sha256-FBVpEX0eLiqX3jnSL3rmJHqHhbuCikJZyDyV3Cl3qAY=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "d03a4482228d4d6dbd2d4b425b6dfcd49ebe765f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_5": {
+      "locked": {
         "lastModified": 1714912032,
         "narHash": "sha256-clkcOIkg8G4xuJh+1onLG4HPMpbtzdLv4rHxFzgsH9c=",
         "owner": "NixOS",
@@ -527,7 +575,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_5": {
+    "nixpkgs_6": {
       "locked": {
         "lastModified": 1712963716,
         "narHash": "sha256-WKm9CvgCldeIVvRz87iOMi8CFVB1apJlkUT4GGvA0iM=",
@@ -543,6 +591,27 @@
         "type": "github"
       }
     },
+    "polymc": {
+      "inputs": {
+        "flake-compat": "flake-compat",
+        "libnbtplusplus": "libnbtplusplus",
+        "nixpkgs": "nixpkgs_4",
+        "tomlplusplus": "tomlplusplus"
+      },
+      "locked": {
+        "lastModified": 1720651328,
+        "narHash": "sha256-LNmpMASEoAkheE5G31QvyEDQwRIZSTgHvzQIylpuOQ8=",
+        "owner": "PolyMC",
+        "repo": "PolyMC",
+        "rev": "4f5422e06964b98e2a46c0201b0251b15a3491aa",
+        "type": "github"
+      },
+      "original": {
+        "owner": "PolyMC",
+        "repo": "PolyMC",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "ags": "ags",
@@ -551,6 +620,7 @@
         "hyprland": "hyprland",
         "hyprlock": "hyprlock",
         "nixpkgs": "nixpkgs_3",
+        "polymc": "polymc",
         "stylix": "stylix",
         "xdg-portal-hyprland": "xdg-portal-hyprland"
       }
@@ -564,10 +634,10 @@
         "base16-kitty": "base16-kitty",
         "base16-tmux": "base16-tmux",
         "base16-vim": "base16-vim",
-        "flake-compat": "flake-compat",
+        "flake-compat": "flake-compat_2",
         "gnome-shell": "gnome-shell",
         "home-manager": "home-manager_2",
-        "nixpkgs": "nixpkgs_4"
+        "nixpkgs": "nixpkgs_5"
       },
       "locked": {
         "lastModified": 1717212835,
@@ -658,11 +728,27 @@
         "type": "github"
       }
     },
+    "tomlplusplus": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1710824845,
+        "narHash": "sha256-A9XuCfVcLle/tMNaH7aqb1leM+t3wwC9ER5RIbMMovo=",
+        "owner": "marzer",
+        "repo": "tomlplusplus",
+        "rev": "1f7884e59165e517462f922e7b6de131bd9844f3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "marzer",
+        "repo": "tomlplusplus",
+        "type": "github"
+      }
+    },
     "xdg-portal-hyprland": {
       "inputs": {
         "hyprland-protocols": "hyprland-protocols_2",
         "hyprlang": "hyprlang_3",
-        "nixpkgs": "nixpkgs_5",
+        "nixpkgs": "nixpkgs_6",
         "systems": "systems_5"
       },
       "locked": {
