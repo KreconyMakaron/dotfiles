@@ -7,9 +7,10 @@ const getBatteryIcon = () => {
 	return icon("battery")
 }
 
-const StatsWindow = Widget.Window({
-	name: "statswindow",
+const StatsWindow = (monitor = 0) => Widget.Window({
+	name: `statswindow-${monitor}`,
 	class_name: "statswindow",
+	monitor: monitor,
 	margins: [44, 0, 0, 0],
 	anchor: ["top", "right"],
 	exclusivity: "ignore",
@@ -89,4 +90,4 @@ const StatsWindow = Widget.Window({
 	}),
 })
 
-export default StatsWindow;
+export {StatsWindow};

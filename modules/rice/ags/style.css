@@ -10,14 +10,47 @@ window.statswindow {
 	font-family: "JetBrains Mono";
 }
 
+window.launcher {
+	background-color: rgba(42, 42, 42, 0.7);
+	font-size: 14px;
+	font-family: "JetBrains Mono";
+}
+
+window.launcher box {
+	min-width: 500px;
+}
+
+window.launcher .top, window.launcher .bottom {
+	background-color: transparent;
+	background-image: none;
+}
+
+.launcherentrybox {
+	background-color: transparent;
+}
+
+.launcherbar {
+	padding: 5px;
+	background-color: rgba(60, 60, 60, 0.6);
+	border-radius: 15px;
+	margin: 5px 5px 0px 5px;
+}
+
+.launcherbar label {
+	margin-left: 10px;
+}
+
+.launcherbody {
+	min-height: 250px;
+}
+
 label {
 	font-weight: bold;
 	text-shadow: none;
 	outline-width: 0px;
 }
 
-
-tooltip{
+tooltip {
 	font-size: 12px;
 }
 

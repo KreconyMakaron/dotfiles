@@ -13,6 +13,7 @@
 			"${lib.getExe' pkgs.wl-clipboard "wl-paste"} --watch cliphist store"
 		];
 		package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+		xwayland.enable = true;
 		systemd = {
 			variables = ["--all"];
 			extraCommands = [

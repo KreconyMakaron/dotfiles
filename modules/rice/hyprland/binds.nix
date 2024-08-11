@@ -16,7 +16,7 @@ in {
 			"${mod},K,movefocus,u"
 			"${mod},J,movefocus,d"
 
-			"${mod},D,exec,${lib.getExe pkgs.wofi} --show drun"
+			"${mod},D,exec,${lib.getExe pkgs.ags} -t applauncher"
 			"${mod},V,togglefloating,"
 			"${mod},F,fullscreen,"
 			"${mod},W,exec,${lib.getExe pkgs.firefox-devedition}"
