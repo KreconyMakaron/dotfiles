@@ -9,7 +9,6 @@
 		pulse.enable = true;
 	};
 
-	sound.enable = false;
 	hardware = {
 		pulseaudio.enable = false;
 	};
