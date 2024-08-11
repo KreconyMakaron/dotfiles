@@ -3,6 +3,7 @@
 		enable = true;
 		extraPackages = with pkgs; [
 			clang-tools
+			gcc
 			pyright
 			nixd
 			nodePackages_latest.vim-language-server
