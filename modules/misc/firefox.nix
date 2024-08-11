@@ -18,11 +18,19 @@
 			};
 
 			userChrome = builtins.readFile (pkgs.fetchFromGitHub {
-				owner = "mimipile";
-				repo = "firefoxCSS";
-				rev = "2a0e6c2ccd424311e527cd6526b12e3acd2c43b5";
-				hash = "sha256-r17ykbZUs0xMb/x7gNvkVlBmeFur3CcvZDcNjSD9FDo=";
-			} + "/userChrome.css");
+				owner = "FirefoxCSSThemers";
+				repo = "GruvFox";
+				rev = "86d4493ef63907c72aecdf6b8d4c560d0b33937f";
+				hash = "sha256-6+h84ZxEnhDysGD6JQQisyJFqP0RRHptsVjrSw9UKps=";
+			} + "/chrome/userChrome.css");
+
+			userContent = builtins.readFile (pkgs.fetchFromGitHub {
+				owner = "FirefoxCSSThemers";
+				repo = "GruvFox";
+				rev = "86d4493ef63907c72aecdf6b8d4c560d0b33937f";
+				hash = "sha256-6+h84ZxEnhDysGD6JQQisyJFqP0RRHptsVjrSw9UKps=";
+			} + "/chrome/userContent.css");
+
 			settings = {
 				"browser.newtabpage.activity-stream.feeds.topsites" = false;
 
