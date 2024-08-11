@@ -10,9 +10,8 @@
 
 	imports = [
 		./xdg.nix
-		./zathura.nix
 		./lock.nix
 		./firefox.nix
-		./vesktop
+		./vesktop.nix
 	];
 }

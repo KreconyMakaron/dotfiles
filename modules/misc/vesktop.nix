@@ -1,5 +1,4 @@
 {pkgs, ...}: {
-	xdg.configFile."vesktop/themes/amoled.theme.css".source = ./theme.css;
 	home.packages = with pkgs; [ vesktop ];
 
 	xdg.configFile."vesktop/settings.json".text = builtins.toJSON {
@@ -25,7 +24,7 @@
 			settingsSyncVersion = -1362987007;
 			url = "https://api.vencord.dev/";
 		};
-		enabledThemes = [ "amoled.theme.css" ];
+		enabledThemes = [ "stylix.theme.css" ];
 		notifications = {
 			logLimit = 50;
 			position = "bottom-right";

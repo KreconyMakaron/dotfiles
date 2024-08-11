@@ -1,5 +1,5 @@
-{theme, ...}: {
-	wayland.windowManager.hyprland = with theme.colors; {
+{...}: {
+	wayland.windowManager.hyprland = {
 		settings = {
 			general = {
 				gaps_in = 0;

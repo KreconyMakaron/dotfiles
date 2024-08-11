@@ -11,7 +11,7 @@
 		};
 
 		cursor = {
-			size = 20;
+			size = 24;
 			name = "Bibata-Modern-Classic";
 			package = pkgs.runCommand "moveUp" {} ''
 				mkdir -p $out/share/icons
@@ -22,21 +22,9 @@
 			'';
 		};
 
-		targets.vim.enable = false;
-		targets.vesktop.enable = false;
+		targets = {
+			vim.enable = false;
+			vesktop.enable = true;
+		};
 	};
-
-	# home.pointerCursor = {
-	# 	gtk.enable = true;
-	# 	x11.enable = true;
-	# 	name = "Bibata-Modern-Classic";
-	# 	size = 20;
-	# 	package = pkgs.runCommand "moveUp" {} ''
-	# 		mkdir -p $out/share/icons
-	# 		ln -s ${pkgs.fetchzip {
-	# 			url = "https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.6/Bibata-Modern-Classic.tar.xz";
-	# 			hash = "sha256-jpEuovyLr9HBDsShJo1efRxd21Fxi7HIjXtPJmLQaCU=";
-	# 	}} $out/share/icons/Bibata-Modern-Classic
-	# 	'';
-	# };
 }
