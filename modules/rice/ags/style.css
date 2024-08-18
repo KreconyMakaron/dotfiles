@@ -16,8 +16,28 @@ window.launcher {
 	font-family: "JetBrains Mono";
 }
 
+window.clipboard {
+	background-color: rgba(42, 42, 42, 0.7);
+	font-size: 12px;
+	font-family: "JetBrains Mono";
+}
+
+window.clipboard box {
+	min-width: 700px;
+}
+
+.clipboardbody {
+	padding: 5px;
+	min-height: 400px;
+}
+
+window.clipboard .top, window.clipboard .bottom {
+	background-color: transparent;
+	background-image: none;
+}
+
 window.launcher box {
-	min-width: 500px;
+	min-width: 700px;
 }
 
 window.launcher .top, window.launcher .bottom {

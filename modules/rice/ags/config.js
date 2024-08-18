@@ -1,13 +1,13 @@
 import {Bar} from './bar.js'
 import {AppLauncher} from './applauncher.js'
-
-const bar1 = Bar(0)
+import {Clipboard} from './clipboard.js'
 
 App.config({
 	style: './style.css',
     windows: [
-		bar1,
-		AppLauncher
+		Bar(0),
+		AppLauncher,
+		Clipboard
 	],
 })
 

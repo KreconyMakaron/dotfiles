@@ -105,7 +105,7 @@ const launcher = () => {
 	})
 
 	return Widget.Box({
-		spacing: 0,
+		spacing: 5,
 		vertical: true,
 		children: [
 			bar,
@@ -122,11 +122,11 @@ const launcher = () => {
 }
 
 export const AppLauncher = Widget.Window({
-	name: `applauncher`,
+	name: "applauncher",
 	class_name: "launcher",
 	exclusivity: "exclusive",
-	margins: [100, 50],
 	keymode: "exclusive",
+	margins: [100, 50],
 	child: launcher(),
     visible: false,
 	setup: self => self.keybind("Escape", () => App.closeWindow("applauncher")),
