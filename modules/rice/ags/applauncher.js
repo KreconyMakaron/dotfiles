@@ -36,15 +36,15 @@ const launcher = () => {
 			App.closeWindow("applauncher")
 			app.launch()
 		},
+		class_names: ["nofocus", "focusleft"],
 		attribute: { app },
 		child: Widget.Box({
 			children: [
 				Widget.Icon({
 					icon: app.icon_name || "",
-					size: 30,
+					size: 28,
 				}),
 				Widget.Label({
-					class_name: "title",
 					label: app.name,
 					xalign: 0,
 					vpack: "center",
@@ -72,7 +72,7 @@ const launcher = () => {
 	const entry = Widget.Entry({
         hexpand: true,
 		placeholder_text: "search...",
-		class_name: "launcherentrybox",
+		class_names: ["launcherentrybox", "nofocus"],
 
         on_accept: () => {
 			const results = applications.filter((item) => item.visible);
@@ -90,25 +90,26 @@ const launcher = () => {
 		},
     })
 
-	const bar = Widget.CenterBox({
-		class_name: "launcherbar",
-		start_widget: Widget.Box({
-			children: [ entry ],
-		})
-	})
-
 	const apps = Widget.Scrollable({
-		class_name: "launcherbody",
+		class_name: "launcherscrollable",
 		hscroll: 'never',
 		vscroll: 'always',
 		child: list
 	})
 
 	return Widget.Box({
-		spacing: 5,
 		vertical: true,
+		class_name: "launcherbody",
 		children: [
-			bar,
+			Widget.Box({
+				children: [
+					Widget.Icon({
+						icon: icon("search"),
+						size: 10
+					}),
+					entry
+				]
+			}),
 			apps
 		],
 		setup: self => self.hook(App, (_, visible) => {
@@ -121,13 +122,44 @@ const launcher = () => {
 	})
 }
 
+const menu = () => {
+	const button = (icon_name, command) => Widget.Button({
+		child: Widget.Icon({
+			icon: icon(icon_name),
+			size: 10,
+		}),
+		class_names: ["menubutton", "nofocus", "focusright"],
+		on_clicked: () => Utils.exec(command)
+	})
+	
+	return Widget.Box({
+		vertical: true,
+		class_name: "menubox",
+		children: [
+			button("power", "systemctl poweroff"),
+			button("reboot", "systemctl reboot"),
+			button("lock", "hyprlock"),
+			button("sleep", "suspend"),
+			button("hibernate", "systemctl hibernate"),
+			button("log-out", "hyprctl dispatch exit 1")
+		]
+	})
+}
+
 export const AppLauncher = Widget.Window({
 	name: "applauncher",
 	class_name: "launcher",
 	exclusivity: "exclusive",
 	keymode: "exclusive",
 	margins: [100, 50],
-	child: launcher(),
+	child: Widget.Box({
+		spacing: 10,
+		css: "margin: 10px;",
+		children: [
+			launcher(),
+			menu()
+		]
+	}),
     visible: false,
 	setup: self => self.keybind("Escape", () => App.closeWindow("applauncher")),
 })

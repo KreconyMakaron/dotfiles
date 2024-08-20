@@ -20,7 +20,6 @@ in {
 			"${mod},V,togglefloating,"
 			"${mod},F,fullscreen,"
 			"${mod},W,exec,${lib.getExe pkgs.firefox-devedition}"
-			"${mod},BACKSPACE,exec,wofi-powermenu"
 			"${mod},C,exec,${lib.getExe pkgs.ags} -t clipboard"
 			"${modshift},L,exec,${lib.getExe pkgs.hyprlock}"
 

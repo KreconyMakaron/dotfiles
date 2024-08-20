@@ -1,85 +1,14 @@
-window.bar {
-	background-color: rgba(42, 42, 42, 0.4);
-	font-size: 14px;
-	font-family: "JetBrains Mono";
-}
-
-window.statswindow {
-	background-color: rgba(42, 42, 42, 0.7);
-	font-size: 14px;
-	font-family: "JetBrains Mono";
-}
-
-window.launcher {
-	background-color: rgba(42, 42, 42, 0.7);
-	font-size: 14px;
-	font-family: "JetBrains Mono";
-}
-
+window.bar,
+window.statswindow,
+window.launcher,
 window.clipboard {
-	background-color: rgba(42, 42, 42, 0.7);
-	font-size: 12px;
+	background-color: @window_bg_color;
+	font-size: 14px;
 	font-family: "JetBrains Mono";
 }
 
-window.clipboard box {
-	min-width: 700px;
-}
-
-.clipboardbody {
-	padding: 5px;
-	min-height: 400px;
-}
-
-window.clipboard .top, window.clipboard .bottom {
-	background-color: transparent;
-	background-image: none;
-}
-
-window.launcher box {
-	min-width: 700px;
-}
-
-window.launcher .top, window.launcher .bottom {
-	background-color: transparent;
-	background-image: none;
-}
-
-.launcherentrybox {
-	background-color: transparent;
-}
-
-.launcherbar {
-	padding: 5px;
-	background-color: rgba(60, 60, 60, 0.6);
-	border-radius: 15px;
-	margin: 5px 5px 0px 5px;
-}
-
-.launcherbar label {
-	margin-left: 10px;
-}
-
-.launcherbody {
-	min-height: 250px;
-}
-
-label {
-	font-weight: bold;
-	text-shadow: none;
-	outline-width: 0px;
-}
-
-tooltip {
-	font-size: 12px;
-}
-
-.emptyworkspace {
-	color: gray;
-}
-
-.workspaces {
-	padding: 3px 0px 3px 10px;
+window.bar {
+	background-color: rgba(40, 40, 40, 0.7);
 }
 
 button {
@@ -92,6 +21,55 @@ button {
 	background-color: transparent;
 }
 
+label {
+	font-weight: bold;
+	text-shadow: none;
+	outline-width: 0px;
+}
+
+tooltip {
+	font-size: 12px;
+}
+
+window.clipboard {
+	font-size: 12px;
+}
+
+window.clipboard box {
+	min-width: 700px;
+}
+
+.clipboardbody {
+	padding: 5px;
+	min-height: 400px;
+}
+
+window.clipboard .top, 
+window.clipboard .bottom,
+window.launcher .top, 
+window.launcher .bottom {
+	background-color: transparent;
+	background-image: none;
+}
+
+.launcherbody {
+	min-width: 600px;
+}
+
+.launcherentrybox {
+	background-color: transparent;
+	border-radius: 10px;
+	transition: none;
+}
+
+.launcherscrollable {
+	min-height: 250px;
+}
+
+.menubutton {
+	padding: 10px;
+}
+
 .iconbutton {
 	font-family: NotoSans Nerd Font; 
 	margin: 0px; 
@@ -99,12 +77,22 @@ button {
 	padding: 0px;
 }
 
+.emptyworkspace {
+	color: gray;
+}
+
+.workspaces {
+	padding: 3px 0px 3px 10px;
+}
+
 .workspaces button {
 	margin: 0 -2px;
 	padding: 5px;
 } 
 
-.memorybox, .batterybox, .cpubox {
+.memorybox, 
+.batterybox, 
+.cpubox {
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 70%;
@@ -112,14 +100,26 @@ button {
 	margin: 0px -5px;
 }
 
-.cpubox, .cpulabel { 
+.cpubox, 
+.cpulabel { 
 	color: #83A598; 
 }
-.memorybox, .ramlabel { 
+
+.memorybox, 
+.ramlabel { 
 	color: #FE8019; 
 }
-.batterybox, .batlabel { 
+
+.batterybox, 
+.batlabel { 
 	color: #B8BB26; 
+}
+
+.batlabel, 
+.ramlabel, 
+.cpulabel {
+	font-size: 20px;
+	text-decoration-line: underline;
 }
 
 .revealbox { 
@@ -137,12 +137,17 @@ circular-progress label {
 	margin-left: -2px;
 }
 
-circular-progress .big {
+circular-progress.big {
 	margin: 64px;
-	font-size: 12px;
+	font-size: 10px;
+	margin: 0px;
+	min-width: 100px;
+	min-height: 100px;
 }
 
-.sliderbox { min-width: 90px; }
+.sliderbox { 
+	min-width: 90px; 
+}
 
 slider {
 	min-height: 5px;
@@ -155,25 +160,31 @@ slider {
 	background-color: #ffffff;
 }
 
-highlight { border: 0px; }
+highlight { 
+	border: 0px; 
+}
 
-.networkbox { margin-right: 7px }
-.volumebox { margin-right: -5px; }
-.brightnessbox { margin-right: 7px; }
-.clockbox { margin-right: 20px; }
+.networkbox { 
+	margin-right: 7px 
+}
+
+.volumebox { 
+	margin-right: -5px; 
+}
+
+.brightnessbox { 
+	margin-right: 7px; 
+}
+
+.clockbox { 
+	margin-right: 20px; 
+}
 
 .circularbox {
 	min-width: 150px;
 	min-height: 150px;
 	margin-right: 20px;
 	background-size: 80%;
-}
-
-circular-progress.big {
-	font-size: 10px;
-	margin: 0px;
-	min-width: 100px;
-	min-height: 100px;
 }
 
 .statstextbox {
@@ -183,15 +194,30 @@ circular-progress.big {
 	padding-right: 10px;
 }
 
-.batlabel, .ramlabel, .cpulabel {
-	font-size: 20px;
-	text-decoration-line: underline;
-}
-
 .statlabel {
 	font-size: 13px;
 }
 
 .date {
 	color: #ffffff;
+}
+
+.nofocus:focus {
+	border: none;
+	box-shadow: none;
+	outline: none;
+}
+
+.focusleft.nofocus:focus {
+	border-left: 5px @accent_color solid;
+	border-radius: 0px;
+}
+
+.focusright.nofocus:focus {
+	border-right: 5px @accent_color solid;
+	border-radius: 0px;
+}
+
+.menubox {
+	min-width: 50px;
 }

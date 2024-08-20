@@ -3,11 +3,10 @@ const Pixbuf = imports.gi.GdkPixbuf.Pixbuf
 
 const script_path = '/home/krecony/.dotfiles/modules/rice/ags'
 const max_entry_count = 50
-let clipboard_visible = true
 
 const clipboard = () => {
 	const clipboard_text = (text, i) => Widget.Button({
-		class_name: "clipboarditem",
+		class_names: ["nofocus", "focusleft"],
 		on_clicked: () => {
 			Utils.exec(`bash -c "${script_path}/copy.sh ${i}"`)
 			App.closeWindow("clipboard")
@@ -28,7 +27,7 @@ const clipboard = () => {
 		img.set_from_pixbuf(pixbuf)
 
 		return Widget.Button({
-			class_name: "clipboarditem",
+			class_names: ["nofocus", "focusleft"],
 			on_clicked: () => {
 				Utils.exec(`bash -c "${script_path}/copy.sh ${i}"`)
 				App.closeWindow("clipboard")
@@ -47,14 +46,11 @@ const clipboard = () => {
 
 	const repopulate = () => {
 		const entry_count = Math.min(max_entry_count, Number(Utils.exec('bash -c "cliphist list | wc -l"')))
-		clipboard_visible = true
-		scrollable.grab_focus()
 
 		items = []
 		let i = 1
 
-		while(i < entry_count) {
-			print(i)
+		while(i <= entry_count) {
 			try {
 				items.push(clipboard_text(Utils.exec(`${script_path}/decode.sh ${i}`).toString(), i))
 			}
@@ -82,9 +78,8 @@ const clipboard = () => {
 
 	return Widget.Box({
 		child: scrollable,
-		setup: self => self.hook(App, (_) => {
-			if(!clipboard_visible) repopulate()
-			else clipboard_visible = false 
+		setup: self => self.hook(App, (_, windowName, visible) => {
+			if(windowName == "clipboard" && visible) repopulate()
 
 			// stupid ass error suppression
 			try { list.children.at(0).grab_focus() }
