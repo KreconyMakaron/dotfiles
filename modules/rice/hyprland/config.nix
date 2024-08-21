@@ -1,6 +1,26 @@
-{...}: {
+{
+lib, 
+pkgs, 
+inputs,
+...
+}: {
 	wayland.windowManager.hyprland = {
+		enable = true;
+		package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+		xwayland.enable = true;
+		systemd = {
+			variables = ["--all"];
+			extraCommands = [
+				"systemctl --user stop graphical-session.target"
+				"systemctl --user start hyprland-session.target"
+			];
+		};
 		settings = {
+			exec-once = [
+				"${lib.getExe pkgs.wl-clip-persist} --clipboard both"
+				"${lib.getExe' pkgs.wl-clipboard "wl-paste"} --watch cliphist store"
+			];
+
 			general = {
 				gaps_in = 0;
 				gaps_out = 0;

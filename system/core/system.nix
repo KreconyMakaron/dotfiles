@@ -27,6 +27,8 @@
 		};
 	};
 
+	console.keyMap = "pl2";
+
 	environment = {
 		variables = {
 			EDITOR = "nvim";
@@ -53,8 +55,6 @@
     interpreter = "${lib.getExe' pkgs.appimage-run "appimage-run"}";
   });
 
-	console.keyMap = "pl2";
-
 	programs = {
 		nix-ld.enable = true;
 		dconf.enable = true;
@@ -66,11 +66,11 @@
 	};
 
 	services = {
-		upower.enable = true;
+		upower.enable = true; # ags dependency for battery service
+		openssh.enable = true;
 		mysql = {
 			enable = true;
 			package = pkgs.mariadb;
 		};
-		openssh.enable = true;
 	};
 }

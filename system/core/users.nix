@@ -5,13 +5,12 @@
 		users = {
 			krecony = {
 				isNormalUser = true;
-				description = "krecony";
+				description = "the man the myth the legend";
 				extraGroups = [
 					"networkmanager"
 					"wheel"
 				];
 				shell = pkgs.zsh;
-				#hashedPasswordFile =
 			};
 		};
 	};

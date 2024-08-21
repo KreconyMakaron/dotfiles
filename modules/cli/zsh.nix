@@ -35,7 +35,7 @@
 			}
 
 			cpfile () {
-				${lib.getExe pkgs.bat} -pp $1 | wl-copy
+				${lib.getExe pkgs.bat} -pp $1 | ${lib.getExe' pkgs.wl-clipboard "wl-copy"}
 			}
 
 			eval "$(direnv hook zsh)"

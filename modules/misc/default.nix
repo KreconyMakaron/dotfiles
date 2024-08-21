@@ -1,12 +1,12 @@
 {pkgs, ...}: {
 	home.packages = with pkgs; [
-		mpv
-		imv
-		obsidian
-		spotify
+		mpv				# video viewing
+		imv				# image viewing
+		obsidian	# notetaking
+		spotify		# music
 	];
 
-	programs.zathura.enable = true;
+	programs.zathura.enable = true; # pdf viewer
 
 	imports = [
 		./xdg.nix

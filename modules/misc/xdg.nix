@@ -26,7 +26,10 @@
 	};
 in {
 	home.packages = with pkgs; [xdg-utils];
+
 	xdg = {
+		enable = true;
+
 		portal = {
 			enable = true;
 			config.common.default = "*";
@@ -36,7 +39,6 @@ in {
 			];
 		};
 
-		enable = true;
 		userDirs = {
 			enable = true;
 			download = "$HOME/download";
@@ -48,32 +50,33 @@ in {
 			publicShare = "$HOME/other";
 			templates = "$HOME/other";
 		};
-		mimeApps.enable = true;
-		mimeApps.associations.added = associations;
-		mimeApps.defaultApplications = associations;
+
+		mimeApps = {
+			enable = true;
+			associations.added = associations;
+			defaultApplications = associations;
+		};
+
+		desktopEntries = {
+			obsidian-diary = {
+				name = "Obsidian Diary";
+				type = "Application";
+				exec = "obsidian \"obsidian://open?vault=diary\"";
+				categories = ["Office"];
+				comment = "Daily Journaling";
+				icon = "obsidian";
+				mimeType = ["x-scheme-handler/obsidian"];
+			};
+
+			obsidian-notes = {
+				name = "Obsidian Notes";
+				type = "Application";
+				exec = "obsidian \"obsidian://open?vault=TheAll\"";
+				categories = ["Office"];
+				comment = "School Notes";
+				icon = "obsidian";
+				mimeType = ["x-scheme-handler/obsidian"];
+			};
+		};
 	};
-
-	home.file.".local/share/applications/obsidian-diary.desktop".text = ''
-		[Desktop Entry]
-		Categories=Office
-		Comment=Daily Journaling
-		Exec=obsidian "obsidian://open?vault=diary"
-		Icon=obsidian
-		MimeType=x-scheme-handler/obsidian
-		Name=Obsidian Diary
-		Type=Application
-		Version=1.4
-	'';
-
-	home.file.".local/share/applications/obsidian-notes.desktop".text = ''
-		[Desktop Entry]
-		Categories=Office
-		Comment=School Notes
-		Exec=obsidian "obsidian://open?vault=TheAll"
-		Icon=obsidian
-		MimeType=x-scheme-handler/obsidian
-		Name=Obsidian Notes
-		Type=Application
-		Version=1.4
-	'';
 }

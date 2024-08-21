@@ -129,7 +129,10 @@ const menu = () => {
 			size: 10,
 		}),
 		class_names: ["menubutton", "nofocus", "focusright"],
-		on_clicked: () => Utils.exec(command)
+		on_clicked: () => {
+			App.closeWindow("applauncher")
+			Utils.exec(command)
+		}
 	})
 	
 	return Widget.Box({

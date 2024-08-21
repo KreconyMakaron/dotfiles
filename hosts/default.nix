@@ -20,7 +20,6 @@
 		users = {
 			krecony = {
 				imports = [ ./zephyr/home.nix ];
-				_module.args.theme = import ../theme;
 			};
 		};
 	};

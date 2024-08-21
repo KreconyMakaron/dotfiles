@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{...}: {
 	imports = [
 		./fastfetch.nix
 		./zsh.nix
@@ -6,16 +6,5 @@
 		./git.nix
 		./neovim.nix
 		./starship.nix
-	];
-	home.packages = with pkgs; [
-		mangal
-		ripgrep
-		hyperfine
-		jq
-		unzip
-		qrcp
-		killall
-		lazygit
-		libqalculate
 	];
 }

@@ -1,6 +1,5 @@
 {
 	pkgs, 
-	theme,
 	...
 }: {
 	home.packages = with pkgs; [ fastfetch ];
@@ -9,7 +8,7 @@
     "$schema" = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
 		logo = {
 			type = "file-raw";
-			source = "${theme.asciiart}";
+			source = ../../assets/asciicat.txt;
 		};
 		display.separator = " ";
     modules = [
@@ -102,6 +101,6 @@
 				key = "╰─";
 				keyColor = "yellow";
 			}
-			];
-		};
+		];
+	};
 }

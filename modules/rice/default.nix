@@ -4,5 +4,6 @@
 		./foot.nix
 		./ags
 		./stylix.nix
+		./hyprlock.nix
 	];
 }

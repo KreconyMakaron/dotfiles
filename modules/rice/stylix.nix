@@ -1,11 +1,11 @@
-{inputs, theme, pkgs, ...}: {
+{inputs, pkgs, ...}: {
 	imports = [ inputs.stylix.homeManagerModules.stylix ];
 
 	stylix = {
 		enable = true;
 		autoEnable = true;
 
-		image = theme.wallpaper;
+		image = ../../assets/amanita.jpg;
 		base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
 		polarity = "dark";
 		
@@ -29,7 +29,6 @@
 			vim.enable = false;
 			firefox.enable = false;
 			neovim.enable = false;
-			wofi.enable = false;
 		};
 	};
 }

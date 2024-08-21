@@ -3,12 +3,7 @@
 	inputs,
 	...
 }: {
-	environment = {
-		systemPackages = with pkgs; [
-			git
-			deadnix
-		];
-	};
+	environment.systemPackages = with pkgs; [ git ];
 
 	nixpkgs = {
 		config = {
@@ -33,7 +28,7 @@
 		flake = "/home/krecony/.dotfiles";
     clean = {
 			enable = true;
-			extraArgs = "--keep-since 5d --keep 3";
+			extraArgs = "--keep-since 5d --keep 5";
 		};
   };
 
@@ -62,6 +57,8 @@
       ];
 		};
 	};
-	system.stateVersion = "24.05";
-	system.autoUpgrade.enable = false; #change later
+	system = {
+		stateVersion = "24.05";
+		autoUpgrade.enable = false; # maybe change later?
+	};
 }
