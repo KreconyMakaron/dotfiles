@@ -10,7 +10,6 @@
 
 	imports = [
 		./xdg.nix
-		./lock.nix
 		./firefox.nix
 		./vesktop.nix
 	];
