@@ -21,6 +21,10 @@ button {
 	background-color: transparent;
 }
 
+scale {
+	padding: 0px;
+}
+
 label {
 	font-weight: bold;
 	text-shadow: none;
@@ -41,7 +45,7 @@ window.clipboard box {
 
 .clipboardbody {
 	padding: 5px;
-	min-height: 400px;
+	min-height: 500px;
 }
 
 window.clipboard .top, 
@@ -146,7 +150,8 @@ circular-progress.big {
 }
 
 .sliderbox { 
-	min-width: 90px; 
+	min-width: 70px; 
+	margin-left: 7px;
 }
 
 slider {

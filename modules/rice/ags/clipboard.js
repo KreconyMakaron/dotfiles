@@ -12,11 +12,10 @@ const clipboard = () => {
 			App.closeWindow("clipboard")
 		},
 		child: Widget.Label({
-			class_name: "title",
 			label: text,
 			xalign: 0,
 			vpack: "center",
-			wrap: true
+			truncate: "end",
 		}),
 	})
 
@@ -79,11 +78,10 @@ const clipboard = () => {
 	return Widget.Box({
 		child: scrollable,
 		setup: self => self.hook(App, (_, windowName, visible) => {
-			if(windowName == "clipboard" && visible) repopulate()
-
-			// stupid ass error suppression
-			try { list.children.at(0).grab_focus() }
-			catch { }
+			if(windowName == "clipboard" && visible) {
+				repopulate()
+				list.children.at(0).grab_focus()
+			}
         }),
 	})
 }
