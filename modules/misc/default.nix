@@ -6,7 +6,14 @@
 		spotify		# music
 	];
 
-	programs.zathura.enable = true; # pdf viewer
+	# pdf viewer
+	programs.zathura = {
+		enable = true; 
+		options.selection-clipboard = "clipboard";
+	};
+
+	# bluetooth headset media buttons support
+	services.mpris-proxy.enable = true;
 
 	imports = [
 		./xdg.nix
