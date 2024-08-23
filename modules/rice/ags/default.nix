@@ -25,6 +25,7 @@
 			};
 			Service = {
 				Type = "simple";
+				Environment = "AGS_LOCATION=${./.}";
 				ExecStart = "${lib.getExe pkgs.ags}";
 				Restart = "always";
 			};

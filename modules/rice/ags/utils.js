@@ -3,7 +3,10 @@ const battery = await Service.import("battery")
 const audio = await Service.import('audio')
 const network = await Service.import('network')
 
-export {hyprland, battery, audio, network}
+const ags_location = Utils.exec("bash -c 'echo $AGS_LOCATION'")
+print(`ags location set to ${ags_location}`)
+
+export {hyprland, battery, audio, network, ags_location}
 
 const cpu_usage_poll = 2000;
 const cpu_frequency_poll = 2000;
@@ -103,7 +106,7 @@ class BrightnessService extends Service {
 
 const gigabytes = (/**@type{Number} */mem) => `${Math.floor(mem/10000)/100} GB`
 
-const icon = (/**@type{String} */name) => `/home/krecony/.dotfiles/modules/rice/ags/icons/${name}.svg`
+const icon = (/**@type{String} */name) => `${ags_location}/icons/${name}.svg`
 
 const circular = (val, tooltip) => Widget.CircularProgress({
 	child: Widget.Label(""),

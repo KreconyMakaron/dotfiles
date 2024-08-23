@@ -1,14 +1,15 @@
+import {ags_location} from './utils.js'
+
 const Image = Widget.subclass(imports.gi.Gtk.Image)
 const Pixbuf = imports.gi.GdkPixbuf.Pixbuf
 
-const script_path = '/home/krecony/.dotfiles/modules/rice/ags'
 const max_entry_count = 50
 
 const clipboard = () => {
 	const clipboard_text = (text, i) => Widget.Button({
 		class_names: ["nofocus", "focusleft"],
 		on_clicked: () => {
-			Utils.exec(`bash -c "${script_path}/copy.sh ${i}"`)
+			Utils.exec(`bash -c "${ags_location}/copy.sh ${i}"`)
 			App.closeWindow("clipboard")
 		},
 		child: Widget.Label({
@@ -20,7 +21,7 @@ const clipboard = () => {
 	})
 
 	const clipboard_image = (i) => {
-		Utils.exec(`bash -c "${script_path}/decode.sh ${i} image"`)
+		Utils.exec(`bash -c "${ags_location}/decode.sh ${i} image"`)
 		const img = Image({})
 		const pixbuf = Pixbuf.new_from_file_at_scale("/tmp/clipboard_ags_image", 700, 300, true)
 		img.set_from_pixbuf(pixbuf)
@@ -28,7 +29,7 @@ const clipboard = () => {
 		return Widget.Button({
 			class_names: ["nofocus", "focusleft"],
 			on_clicked: () => {
-				Utils.exec(`bash -c "${script_path}/copy.sh ${i}"`)
+				Utils.exec(`bash -c "${ags_location}/copy.sh ${i}"`)
 				App.closeWindow("clipboard")
 			},
 			child: img
@@ -51,7 +52,7 @@ const clipboard = () => {
 
 		while(i <= entry_count) {
 			try {
-				items.push(clipboard_text(Utils.exec(`${script_path}/decode.sh ${i}`).toString(), i))
+				items.push(clipboard_text(Utils.exec(`${ags_location}/decode.sh ${i}`).toString(), i))
 			}
 			catch {
 				try {
