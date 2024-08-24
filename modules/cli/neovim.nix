@@ -6,6 +6,7 @@
 			gcc
 			pyright
 			nixd
+			gopls
 			nodePackages_latest.vim-language-server
 			nodePackages_latest.bash-language-server
 			nodePackages_latest.vscode-json-languageserver

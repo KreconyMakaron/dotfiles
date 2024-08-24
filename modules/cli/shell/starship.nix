@@ -1,22 +1,22 @@
-{...}: {
+{config, ...}: {
 	programs.starship = {
 		enable = true;
 		settings = {
-			# https://starship.rs/presets/gruvbox-rainbow
+			# https://starship.rs/presets/gruvbox-rainbow but i added stylix support :3
 			format = "[](color_orange)$os$username[](bg:color_yellow fg:color_orange)$directory[](fg:color_yellow bg:color_aqua)$git_branch$git_status[](fg:color_aqua bg:color_blue)$c$rust$golang$nodejs$php$java$kotlin$haskell$python[](fg:color_blue bg:color_bg3)$docker_context$conda[](fg:color_bg3 bg:color_bg1)$time[ ](fg:color_bg1)$line_break$character";
 			palette = "gruvbox_dark";
-			palettes = {
+			palettes = with config.lib.stylix.colors.withHashtag; {
 				gruvbox_dark = {
-					color_fg0 = "#fbf1c7";
-					color_bg1 = "#3c3836";
-					color_bg3 = "#665c54";
-					color_blue = "#458588";
-					color_aqua = "#689d6a";
-					color_green = "#98971a";
-					color_orange = "#d65d0e";
-					color_purple = "#b16286";
-					color_red = "#cc241d";
-					color_yellow = "#d79921";
+					color_bg1 = base01;
+					color_bg3 = base03;
+					color_fg0 = base07;
+					color_red = base08;
+					color_yellow = base0A;
+					color_green = base0B;
+					color_aqua = base0C;
+					color_blue = base0D;
+					color_purple = base0E;
+					color_orange = base0F;
 				};
 			};
 			os = {
