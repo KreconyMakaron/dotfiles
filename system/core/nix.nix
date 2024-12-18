@@ -8,7 +8,7 @@
 	nixpkgs = {
 		config = {
 			allowBroken = true;
-			allowUnfree = true;
+			allowUnfree = true; # change to false and add unfreePredicate
 			permittedInsecurePackages = [
 				"nix-2.16.2"
 			];

@@ -3,7 +3,7 @@
 		enable = true;
 		settings = {
 			# https://starship.rs/presets/gruvbox-rainbow but i added stylix support :3
-			format = "[](color_orange)$os$username[](bg:color_yellow fg:color_orange)$directory[](fg:color_yellow bg:color_aqua)$git_branch$git_status[](fg:color_aqua bg:color_blue)$c$rust$golang$nodejs$php$java$kotlin$haskell$python[](fg:color_blue bg:color_bg3)$docker_context$conda[](fg:color_bg3 bg:color_bg1)$time[ ](fg:color_bg1)$line_break$character";
+			format = "[](color_orange)$username[](bg:color_yellow fg:color_orange)$directory[](bg:color_purple fg:color_yellow)$nix_shell[](fg:color_purple bg:color_aqua)$git_branch$git_status[](fg:color_aqua bg:color_blue)$c$rust$golang$nodejs$php$java$kotlin$haskell$python[](fg:color_blue bg:color_bg3)$docker_context$conda[](fg:color_bg3 bg:color_bg1)$time[ ](fg:color_bg1)$line_break$character";
 			palette = "gruvbox_dark";
 			palettes = with config.lib.stylix.colors.withHashtag; {
 				gruvbox_dark = {
@@ -19,30 +19,8 @@
 					color_orange = base0F;
 				};
 			};
-			os = {
-				disabled = false;
-				style = "bg:color_orange fg:color_fg0";
-				symbols = {
-					Windows = "󰍲";
-					Ubuntu = "󰕈";
-					SUSE = "";
-					Raspbian = "󰐿";
-					Mint = "󰣭";
-					Macos = "󰀵";
-					Manjaro = "";
-					Linux = "󰌽";
-					Gentoo = "󰣨";
-					Fedora = "󰣛";
-					Alpine = "";
-					Amazon = "";
-					Android = "";
-					Arch = "󰣇";
-					Artix = "󰣇";
-					CentOS = "";
-					Debian = "󰣚";
-					Redhat = "󱄛";
-					RedHatEnterprise = "󱄛";
-				};
+			nix_shell = {
+				format = "[ nix-shell ](bg:color_purple fg:color_fg0)";
 			};
 			username = {
 				show_always = true;

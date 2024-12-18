@@ -1,10 +1,10 @@
-{
-	...
-}: {
+{...}: {
 	imports = [./fonts.nix];
 	environment.etc."greetd/environments".text = ''
     Hyprland
 	'';
+
+	programs.hyprland.enable = true;
 
 	environment = {
 		variables = {

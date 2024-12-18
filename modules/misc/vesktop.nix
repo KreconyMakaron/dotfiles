@@ -12,9 +12,9 @@
   };
 
 	xdg.configFile."vesktop/settings/settings.json".text = builtins.toJSON {
-		notifyAboutUpdates = true;
 		autoUpdate = false;
-		autoUpdateNotification = true;
+		autoUpdateNotification = false;
+		notifyAboutUpdates = false;
 		disableMinSize = false;
 		enableReactDevtools = false;
 		frameless = false;

@@ -28,7 +28,8 @@
 	swapDevices = [
 		{device = "/dev/disk/by-uuid/c3a278ab-9f61-492f-b94b-96a4edef300c";}
 	];
-	networking.useDHCP = lib.mkDefault true;
 	nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 	hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+	powerManagement.enable = true;
 }

@@ -32,21 +32,13 @@
 	environment = {
 		variables = {
 			EDITOR = "nvim";
-			BROWSER = "firefox-devedition";
+			BROWSER = "brave";
 		};
 
 		systemPackages = with pkgs; [
 			git
 			appimage-run
 		];
-	};
-
-	hardware = {
-		enableAllFirmware = true;
-		graphics = {
-			enable = true;
-			enable32Bit = true;
-		};
 	};
 
 	boot.binfmt.registrations = lib.genAttrs ["appimage" "AppImage"] (ext: {

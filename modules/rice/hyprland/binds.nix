@@ -19,7 +19,7 @@ in {
 			"${mod},D,exec,${lib.getExe pkgs.ags} -t applauncher"
 			"${mod},V,togglefloating,"
 			"${mod},F,fullscreen,"
-			"${mod},W,exec,${lib.getExe pkgs.firefox-devedition}"
+			"${mod},W,exec,${lib.getExe pkgs.brave}"
 			"${mod},C,exec,${lib.getExe pkgs.ags} -t clipboard"
 			"${modshift},L,exec,${lib.getExe pkgs.hyprlock}"
 

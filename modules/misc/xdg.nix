@@ -2,7 +2,8 @@
 	pkgs,
 	...
 }: let
-	browser = ["firefox-devedition.desktop"];
+	# browser = ["firefox-devedition.desktop"];
+	browser = ["brave.desktop"];
 
 	associations = {
 		"text/html" = browser;
@@ -18,11 +19,11 @@
 		"application/x-extension-xhtml" = browser;
 		"application/x-extension-xht" = browser;
 		"application/json" = browser;
-		"application/pdf" = ["org.pwmt.zathura.desktop"];
+		"application/pdf" = "org.pwmt.zathura.desktop";
 
-		"audio/*" = ["mpv.desktop"];
-		"video/*" = ["mpv.dekstop"];
-		"image/*" = ["imv.desktop"];
+		"audio/*" = "mpv.desktop";
+		"video/*" = "mpv.dekstop";
+		"image/*" = "imv.desktop";
 	};
 in {
 	home.packages = with pkgs; [xdg-utils];

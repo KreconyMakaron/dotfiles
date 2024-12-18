@@ -4,5 +4,5 @@
 		remotePlay.openFirewall = true;
 		dedicatedServer.openFirewall = true;
 	};
-	environment.systemPackages = with pkgs; [ polymc ];
+	# environment.systemPackages = with pkgs; [ polymc ];
 }

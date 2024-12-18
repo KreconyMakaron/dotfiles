@@ -9,6 +9,7 @@
 				extraGroups = [
 					"networkmanager"
 					"wheel"
+					"bluetooth"
 				];
 				shell = pkgs.zsh;
 			};

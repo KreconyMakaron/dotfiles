@@ -142,7 +142,7 @@ const menu = () => {
 			button("power", "systemctl poweroff"),
 			button("reboot", "systemctl reboot"),
 			button("lock", "hyprlock"),
-			button("sleep", "suspend"),
+			button("sleep", "systemctl hybrid-sleep"),
 			button("hibernate", "systemctl hibernate"),
 			button("log-out", "hyprctl dispatch exit 1")
 		]

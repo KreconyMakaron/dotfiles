@@ -1,16 +1,19 @@
 {pkgs, ...}: {
-	environment.systemPackages = with pkgs; [
-		mesa
-		linux-firmware
-		intel-media-driver
-	];
+	environment.systemPackages = with pkgs; [ mesa ];
 
 	boot = {
 		kernelModules = [ "i915" ];
-		kernelParams = [ 
-			"i915.fastboot=1" 
-			"i915.enable_fbc=1"
-			"i915.enable_guc=3" #Gen 9.5+ card
+		kernelParams = [ "i915.fastboot=1" ];
+	};
+
+	hardware.opentabletdriver.enable = true;
+	hardware.graphics = {
+		enable = true;
+		enable32Bit = true;
+		extraPackages = with pkgs; [ 
+			intel-media-driver 
+			intel-ocl 
+			intel-vaapi-driver 
 		];
 	};
 }

@@ -36,6 +36,6 @@ in {
 			home-manager-module
 			{home-manager = home;}
 		];
-		specialArgs = {inherit inputs;};
+		specialArgs = { inherit inputs; };
 	};
 }

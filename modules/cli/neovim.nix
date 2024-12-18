@@ -1,16 +1,12 @@
 {pkgs, ...}: {
-	programs.neovim = {
-		enable = true;
-		extraPackages = with pkgs; [
-			clang-tools
+  programs.neovim = {
+    enable = true;
+    extraPackages = with pkgs; [
+      nixd
+      go
+      clang-tools
 			gcc
 			pyright
-			nixd
-			gopls
-			nodePackages_latest.vim-language-server
-			nodePackages_latest.bash-language-server
-			nodePackages_latest.vscode-json-languageserver
-			nodePackages_latest.typescript-language-server
-		];
-	};
+    ];
+  };
 }
