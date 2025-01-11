@@ -1,16 +1,16 @@
 <h1 align="center">NixOS dotfiles <br> </h1>
-my personal NixOS dotfiles on which i work on in my free time.
+my personal NixOS config on which i work on in my free time.
 
-cool widgets made using [ags v1](https://github.com/Aylur/ags)!!
+cool widgets made using [ags v1](https://github.com/Aylur/ags)
 
-<h3>screenshots</h3>
-![image](assets/image1)
-![image](assets/image2)
-![image](assets/image3)
+<h2>screenshots</h2>
 
+<img width="800" alt="screen1" src="assets/screen1.png">
+<img width="800" alt="screen2" src="assets/screen2.png">
+<img width="800" alt="screen3" src="assets/screen3.png">
 
-<h3>cool configs</h3>
+<h2>cool configs</h2>
+
 - [sioodmy](https://github.com/sioodmy/dotfiles)
 - [Lenny0939](https://github.com/Lenny0939/Nix-Config)
 - [Gerg](https://github.com/Gerg-L/nixos)
-
