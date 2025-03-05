@@ -34,10 +34,10 @@ in {
 		portal = {
 			enable = true;
 			config.common.default = "*";
-			extraPortals = [
-				pkgs.xdg-desktop-portal-gtk
-				pkgs.xdg-desktop-portal-hyprland
-			];
+			# extraPortals = [
+			# 	pkgs.xdg-desktop-portal-gtk
+			# 	pkgs.xdg-desktop-portal-hyprland
+			# ];
 		};
 
 		userDirs = {
@@ -58,26 +58,26 @@ in {
 			defaultApplications = associations;
 		};
 
-		desktopEntries = {
-			obsidian-diary = {
-				name = "Obsidian Diary";
-				type = "Application";
-				exec = "obsidian \"obsidian://open?vault=diary\"";
-				categories = ["Office"];
-				comment = "Daily Journaling";
-				icon = "obsidian";
-				mimeType = ["x-scheme-handler/obsidian"];
-			};
-
-			obsidian-notes = {
-				name = "Obsidian Notes";
-				type = "Application";
-				exec = "obsidian \"obsidian://open?vault=TheAll\"";
-				categories = ["Office"];
-				comment = "School Notes";
-				icon = "obsidian";
-				mimeType = ["x-scheme-handler/obsidian"];
-			};
-		};
+		# desktopEntries = {
+		# 	obsidian-diary = {
+		# 		name = "Obsidian Diary";
+		# 		type = "Application";
+		# 		exec = "obsidian \"obsidian://open?vault=diary\"";
+		# 		categories = ["Office"];
+		# 		comment = "Daily Journaling";
+		# 		icon = "obsidian";
+		# 		mimeType = ["x-scheme-handler/obsidian"];
+		# 	};
+		#
+		# 	obsidian-notes = {
+		# 		name = "Obsidian Notes";
+		# 		type = "Application";
+		# 		exec = "obsidian \"obsidian://open?vault=TheAll\"";
+		# 		categories = ["Office"];
+		# 		comment = "School Notes";
+		# 		icon = "obsidian";
+		# 		mimeType = ["x-scheme-handler/obsidian"];
+		# 	};
+		# };
 	};
 }

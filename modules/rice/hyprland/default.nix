@@ -9,7 +9,7 @@
 		./config.nix 
 		./binds.nix 
 		./rules.nix 
-		./cursor.nix 
+#		./cursor.nix 
 	];
 
 	home.packages = with pkgs; with inputs.hyprcontrib.packages.${pkgs.system}; [

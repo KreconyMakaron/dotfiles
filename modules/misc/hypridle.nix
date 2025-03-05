@@ -11,15 +11,16 @@ in {
 			};
 
 			listener = [
-				# lock after 5 minutes
+				# lock after 3 minutes
+				{
+					timeout = 180;
+					on-timeout = "${getExe' pkgs.systemd "loginctl"} lock-session";
+				}
+        # black out screen affter 5 minutes
 				{
 					timeout = 300;
-					on-timeout = "loginctl lock-session";
-				}
-				# hibernate after 15 minutes
-				{
-					timeout = 900;
-					on-timeout = "systemctl hybrid-sleep";
+					on-timeout = "${getExe pkgs.brightnessctl} -s set 0";
+					on-resume = "${getExe pkgs.brightnessctl} -r";
 				}
 			];
 		};

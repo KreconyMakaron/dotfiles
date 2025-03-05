@@ -1,6 +1,7 @@
 {
 	pkgs,
 	inputs,
+  lib,
 	...
 }: {
 	environment.systemPackages = with pkgs; [ git ];
@@ -12,6 +13,9 @@
 			permittedInsecurePackages = [
 				"nix-2.16.2"
 			];
+      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+        "osu-lazer-bin"
+      ];
 		};
 		overlays = [ inputs.polymc.overlay ];
 	};

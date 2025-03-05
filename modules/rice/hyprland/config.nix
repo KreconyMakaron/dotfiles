@@ -28,8 +28,9 @@ inputs,
 				border_size = 0;
 			};
 			monitor = [
-				"eDP-1,1920x1080@60,0x0,1.25"
-				",preferred,auto,1"
+				"eDP-1, 1920x1080@60, 0x0, 1.25"
+        "HDMI-1-A, 1920x1080@60, 0x-1080, 1"
+				# ",preferred,auto,1"
 			];
 			debug = {
 				disable_logs = false;

@@ -4,10 +4,12 @@
 		spotify		# music
 		brave
 		proton-pass
+    protonmail-desktop
 		protonvpn-gui
 		nautilus
 		nautilus-open-any-terminal
-		okular 		# pdf viewer
+    zathura
+    osu-lazer-bin
 	];
 
 	programs = {

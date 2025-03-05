@@ -29,6 +29,8 @@
 			vim.enable = false;
 			firefox.enable = false;
 			neovim.enable = false;
+      hyprlock.enable = false;
+      hyprland.enable = false;
 		};
 	};
 }

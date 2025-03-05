@@ -1,6 +1,7 @@
 {
 	lib, 
 	pkgs, 
+	inputs,
 	...
 }: {
 	time = {
@@ -38,6 +39,7 @@
 		systemPackages = with pkgs; [
 			git
 			appimage-run
+			inputs.nixvim.packages.${system}.default
 		];
 	};
 

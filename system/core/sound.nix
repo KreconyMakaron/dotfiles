@@ -11,6 +11,6 @@
 		};
 	};
 
-	hardware.pulseaudio.enable = false;
+	services.pulseaudio.enable = false;
 	environment.variables.PIPEWIRE_RUNTIME_DIR = "/run/user/1000";
 }

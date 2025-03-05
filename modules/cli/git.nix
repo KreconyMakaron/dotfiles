@@ -4,6 +4,6 @@
 	programs.git = {
 		enable = true;
 		userName = "KreconyMakaron";
-		userEmail = "github.driven504@passinbox.com";
+		userEmail = "55319736+KreconyMakaron@users.noreply.github.com";
 	};
 }

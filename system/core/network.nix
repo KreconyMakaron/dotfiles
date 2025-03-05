@@ -24,8 +24,8 @@
 				{
 					name = "poland";
 					autostart = true;
-					pubKey = "HKjdcdOwD434Dvj7wzN+j/TpchEVcwLm4mq0fuj1tT4=";
-					endpoint = "146.70.161.162:51820";
+					pubKey = "wpfRQRhJirL++QclFH6SDhc+TuJJB4UxbCABy7A1tS4=";
+					endpoint = "79.127.186.193:51820";
 				}
 				{
 					name = "czechia-p2p";

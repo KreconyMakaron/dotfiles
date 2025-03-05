@@ -5,10 +5,9 @@
 			noto-fonts
 			noto-fonts-cjk-sans
 			noto-fonts-emoji
-			nerdfonts
 			hermit
 			dejavu_fonts
-		];
+		] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 		fontconfig = {
 			defaultFonts = {
 				monospace = [ "JetBrainsMono" ];
