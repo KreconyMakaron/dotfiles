@@ -1,6 +1,6 @@
 {
 	pkgs,
-	inputs,
+	# inputs,
   lib,
 	...
 }: {
@@ -13,11 +13,11 @@
 			permittedInsecurePackages = [
 				"nix-2.16.2"
 			];
-      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-        "osu-lazer-bin"
-      ];
+      # allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+      #   "osu-lazer-bin"
+      # ];
 		};
-		overlays = [ inputs.polymc.overlay ];
+		# overlays = [ inputs.polymc.overlay ];
 	};
 
 	documentation = {

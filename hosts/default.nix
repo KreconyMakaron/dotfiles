@@ -1,5 +1,6 @@
 {
 	nixpkgs,
+  nixpkgs-latest,
 	self,
 	...
 }: let
@@ -10,11 +11,17 @@
 
 	home-manager-module = inputs.home-manager.nixosModules.home-manager;
 
+  pkgs-latest = import nixpkgs-latest {
+    system = "x86_64-linux";
+    config.allowUnfree = true;
+  };
+
 	home = {
 		useUserPackages = true;
 		useGlobalPkgs = true;
 		extraSpecialArgs = {
 			inherit inputs;
+      inherit pkgs-latest;
 			inherit self;
 		};
 		users = {
@@ -25,7 +32,7 @@
 	};
 in {
 	# huawei Laptop
-	zephyr = nixpkgs.lib.nixosSystem {
+	zephyr = nixpkgs.lib.nixosSystem rec {
 		system = "x86_64-linux";
 		modules = [
 			{networking.hostName = "zephyr";}

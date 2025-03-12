@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, pkgs-latest, ...}: {
 	home.packages = with pkgs; [
 		obsidian	# notetaking
 		spotify		# music
@@ -9,7 +9,7 @@
 		nautilus
 		nautilus-open-any-terminal
     zathura
-    osu-lazer-bin
+    pkgs-latest.osu-lazer-bin
 	];
 
 	programs = {
