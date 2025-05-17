@@ -31,7 +31,7 @@
 		fzf						# fuzzy searching
 		unzip					# well unzips stuff
 		killall				# useful when i fuck up
-		hyperfine			# program benchmark tool
+		# hyperfine			# program benchmark tool
 		qrcp					# cool file sharing through local network
 	];
 }

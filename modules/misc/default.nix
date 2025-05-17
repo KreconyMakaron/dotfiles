@@ -9,7 +9,10 @@
 		nautilus
 		nautilus-open-any-terminal
     zathura
+    libreoffice-qt
     pkgs-latest.osu-lazer-bin
+    opentabletdriver
+    jetbrains.pycharm-professional
 	];
 
 	programs = {

@@ -19,7 +19,7 @@
 		hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1"; #https://github.com/hyprwm/Hyprland/issues/5891
 
 		xdg-portal-hyprland.url = "github:hyprwm/xdg-desktop-portal-hyprland";
-		ags.url = "github:Aylur/ags";
+		ags.url = "github:KreconyMakaron/ags";
 		stylix.url = "github:danth/stylix";
 		polymc.url = "github:PolyMC/PolyMC";
   };

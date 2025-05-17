@@ -16,11 +16,11 @@ in {
 			"${mod},K,movefocus,u"
 			"${mod},J,movefocus,d"
 
-			"${mod},D,exec,${lib.getExe pkgs.ags} -t applauncher"
+			"${mod},D,exec,${lib.getExe pkgs.ags} toggle launcher"
 			"${mod},V,togglefloating,"
 			"${mod},F,fullscreen,"
 			"${mod},W,exec,${lib.getExe pkgs.brave}"
-			"${mod},C,exec,${lib.getExe pkgs.ags} -t clipboard"
+			# "${mod},C,exec,${lib.getExe pkgs.ags} -t clipboard"
 			"${modshift},L,exec,${lib.getExe pkgs.hyprlock}"
 
 			",Print,exec,${lib.getExe pkgs.grimblast} --freeze copysave screen $XDG_PICTURES_DIR/$(date +ScreenShot-%F-%R:%S).png"

@@ -5,8 +5,15 @@
 		enable = true;
 		autoEnable = true;
 
-		image = ../../assets/amanita.jpg;
-		base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
+		# image = ../../assets/amanita.jpg;
+    #base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
+
+    image = pkgs.fetchurl {
+      url = "https://github.com/Apeiros-46B/everforest-walls/blob/main/nature/fog_forest_alt_1.png?raw=true";
+      sha256 = "sha256-IeQzvScaS107R+639JzH/Jaxo4Vp0G+wpAm3ufoYHbY=";
+    };
+		base16Scheme = "${pkgs.base16-schemes}/share/themes/everforest-dark-hard.yaml";
+
 		polarity = "dark";
 		
 		opacity = {

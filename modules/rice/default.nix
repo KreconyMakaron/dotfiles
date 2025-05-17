@@ -2,8 +2,9 @@
 	imports = [
 		./hyprland
 		./foot.nix
-		# ./ags // need to port to ags v2
+		# ./ags
 		./stylix.nix
 		./hyprlock.nix
+    ./ags.nix
 	];
 }

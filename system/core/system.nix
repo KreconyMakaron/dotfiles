@@ -59,6 +59,8 @@
 		};
 	};
 
+  virtualisation.docker.enable = true;
+
 	services = {
 		upower.enable = true; # ags dependency for battery service
 		openssh.enable = true;

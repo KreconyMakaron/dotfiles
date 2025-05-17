@@ -26,7 +26,7 @@
 			Service = {
 				Type = "simple";
 				Environment = "AGS_LOCATION=${./.}";
-				ExecStart = "${lib.getExe pkgs.ags} run ${./config.js}";
+				ExecStart = "ags";
 				Restart = "always";
 			};
 			Install.WantedBy = ["graphical-session.target"];
