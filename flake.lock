@@ -6,11 +6,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1744892447,
-        "narHash": "sha256-QbnL3GiVoil/bWHUf3+hrGY3iKEztMtN+pqWBO75es8=",
+        "lastModified": 1751149001,
+        "narHash": "sha256-IPEuRcokMTprAoauUYLraJ4UPqofvCxwnaGNrAlkMmw=",
         "owner": "KreconyMakaron",
         "repo": "ags",
-        "rev": "e9b62e7029af0184e4cbc118c3a01a57055836ba",
+        "rev": "4ec4008f773fd90e026efd6460110cf53865dd9c",
         "type": "github"
       },
       "original": {

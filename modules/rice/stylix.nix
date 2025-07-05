@@ -38,6 +38,7 @@
 			neovim.enable = false;
       hyprlock.enable = false;
       hyprland.enable = false;
+      starship.enable = false;
 		};
 	};
 }

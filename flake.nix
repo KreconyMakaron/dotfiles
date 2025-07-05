@@ -24,7 +24,7 @@
 		polymc.url = "github:PolyMC/PolyMC";
   };
 
-  outputs = {...} @ inputs: {
+  outputs = inputs: {
     nixosConfigurations = import ./hosts inputs;
   };
 }

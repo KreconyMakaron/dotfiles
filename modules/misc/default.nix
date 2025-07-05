@@ -2,7 +2,8 @@
 	home.packages = with pkgs; [
 		obsidian	# notetaking
 		spotify		# music
-		brave
+		# brave
+    librewolf
 		proton-pass
     protonmail-desktop
 		protonvpn-gui
@@ -13,6 +14,7 @@
     pkgs-latest.osu-lazer-bin
     opentabletdriver
     jetbrains.pycharm-professional
+    vesktop
 	];
 
 	programs = {
@@ -36,7 +38,7 @@
 
 	imports = [
 		./xdg.nix
-		./vesktop.nix
+		# ./vesktop.nix
 		./hypridle.nix
 	# ./firefox.nix
 	];

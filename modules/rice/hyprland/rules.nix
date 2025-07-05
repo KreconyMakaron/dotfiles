@@ -1,17 +1,16 @@
 {...}: {
 	wayland.windowManager.hyprland.settings = {
-		windowrule = [
-			"float,^(pavucontrol)$"
-			"center,^(pavucontrol)$"
-			"size 50% 50%,^(pavucontrol)$"
-			"dimaround,^(pavucontrol)$"
-		];
 		windowrulev2 = [
+			"float,class:^(org.pulseaudio.pavucontrol)$"
+			"center,class:^(org.pulseaudio.pavucontrol)$"
+			"size 50% 50%,class:^(org.pulseaudio.pavucontrol)$"
+			"dimaround,class:^(org.pulseaudio.pavucontrol)$"
+
 			"opacity 1.0 0.7,class:^(foot)$"
 
-			"float,class:^(foot)$,title:(nmtui)"
-			"center,class:^(foot)$,title:(nmtui)"
-			"dimaround,class:^(foot)$,title:(nmtui)"
+			"float,class:^(foot)$,title:^(nmtui)$"
+			"center,class:^(foot)$,title:^(nmtui)$"
+			"dimaround,class:^(foot)$,title:^(nmtui)$"
 
 			"center,class:^(firefox)$,floating:1"
 
