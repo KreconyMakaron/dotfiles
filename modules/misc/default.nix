@@ -1,9 +1,8 @@
-{pkgs, pkgs-latest, ...}: {
+{pkgs, ...}: {
 	home.packages = with pkgs; [
 		obsidian	# notetaking
 		spotify		# music
 		# brave
-    librewolf
 		proton-pass
     protonmail-desktop
 		protonvpn-gui
@@ -11,7 +10,6 @@
 		nautilus-open-any-terminal
     zathura
     libreoffice-qt
-    pkgs-latest.osu-lazer-bin
     opentabletdriver
     jetbrains.pycharm-professional
     vesktop

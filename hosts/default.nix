@@ -1,27 +1,35 @@
 {
 	nixpkgs,
-  nixpkgs-latest,
 	self,
 	...
 }: let
 	inherit (self) inputs;
-	core = ../system/core;
-	wayland = ../system/wayland;
-	intel-graphics = ../system/intel;
+
+  mkHost = name: system: nixpkgs.lib.nixosSystem {
+    inherit system;
+		modules = [
+			{
+        networking.hostName = name;
+      }
+			./${name}
+
+			home-manager-module
+			{home-manager = home;}
+		] 
+    ++ builtins.attrValues self.nixosModules;
+
+		specialArgs = { 
+      inherit inputs; 
+    };
+	};
 
 	home-manager-module = inputs.home-manager.nixosModules.home-manager;
-
-  pkgs-latest = import nixpkgs-latest {
-    system = "x86_64-linux";
-    config.allowUnfree = true;
-  };
 
 	home = {
 		useUserPackages = true;
 		useGlobalPkgs = true;
 		extraSpecialArgs = {
 			inherit inputs;
-      inherit pkgs-latest;
 			inherit self;
 		};
 		users = {
@@ -32,17 +40,5 @@
 	};
 in {
 	# huawei Laptop
-	zephyr = nixpkgs.lib.nixosSystem rec {
-		system = "x86_64-linux";
-		modules = [
-			{networking.hostName = "zephyr";}
-			./zephyr
-			core
-			intel-graphics
-			wayland
-			home-manager-module
-			{home-manager = home;}
-		];
-		specialArgs = { inherit inputs; };
-	};
+  zephyr = mkHost "zephyr" "x86_64-linux";
 }
