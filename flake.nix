@@ -2,6 +2,7 @@
   outputs = inputs: {
     nixosModules = {
       system = import ./system;
+      ags = inputs.ags.nixosModules.default;
     }
     // import ./module;
 

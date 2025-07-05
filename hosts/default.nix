@@ -10,6 +10,7 @@
 		modules = [
 			{
         networking.hostName = name;
+        nixpkgs.hostPlatform = system;
       }
 			./${name}
 
