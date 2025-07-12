@@ -1,8 +1,8 @@
 {...}: {
-	imports = [
-		./hyprland
-		./foot.nix
-		./stylix.nix
-		./hyprlock.nix
-	];
+  imports = [
+    ./hyprland
+    ./foot.nix
+    ./stylix.nix
+    ./hyprlock.nix
+  ];
 }

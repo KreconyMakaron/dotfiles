@@ -1,54 +1,54 @@
 {
-	pkgs,
-	# inputs,
+  pkgs,
+  # inputs,
   lib,
-	...
+  ...
 }: {
-	environment.systemPackages = with pkgs; [ git ];
+  environment.systemPackages = with pkgs; [git];
 
-	nixpkgs = {
-		config = {
-			allowBroken = true;
-			allowUnfree = true; # change to false and add unfreePredicate
-			permittedInsecurePackages = [
-				"nix-2.16.2"
-			];
+  nixpkgs = {
+    config = {
+      allowBroken = true;
+      allowUnfree = true; # change to false and add unfreePredicate
+      permittedInsecurePackages = [
+        "nix-2.16.2"
+      ];
       # allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
       #   "osu-lazer-bin"
       # ];
-		};
-		# overlays = [ inputs.polymc.overlay ];
-	};
+    };
+    # overlays = [ inputs.polymc.overlay ];
+  };
 
-	documentation = {
-		enable = true;
-		doc.enable = false;
-		man.enable = true;
-		dev.enable = false;
-	};
+  documentation = {
+    enable = true;
+    doc.enable = false;
+    man.enable = true;
+    dev.enable = false;
+  };
 
   programs.nix-ld.enable = true;
 
-	programs.nh = {
+  programs.nh = {
     enable = true;
-		flake = "/home/krecony/.dotfiles";
+    flake = "/home/krecony/.dotfiles";
     clean = {
-			enable = true;
-			extraArgs = "--keep-since 5d --keep 5";
-		};
+      enable = true;
+      extraArgs = "--keep-since 5d --keep 5";
+    };
   };
 
-	nix = {
-		extraOptions = ''
-			experimental-features = nix-command flakes
-			keep-outputs = true
-			warn-dirty = false
-			keep-derivations = true
-		'';
+  nix = {
+    extraOptions = ''
+      experimental-features = nix-command flakes
+      keep-outputs = true
+      warn-dirty = false
+      keep-derivations = true
+    '';
 
-		settings = {
-			auto-optimise-store = true;
-			experimental-features = ["nix-command" "flakes"];
+    settings = {
+      auto-optimise-store = true;
+      experimental-features = ["nix-command" "flakes"];
 
       substituters = [
         "https://cache.nixos.org"
@@ -61,10 +61,10 @@
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
       ];
-		};
-	};
-	system = {
-		stateVersion = "24.05";
-		autoUpgrade.enable = false; # maybe change later?
-	};
+    };
+  };
+  system = {
+    stateVersion = "24.05";
+    autoUpgrade.enable = false; # maybe change later?
+  };
 }

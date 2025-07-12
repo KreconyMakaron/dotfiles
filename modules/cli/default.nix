@@ -1,8 +1,7 @@
 {...}: {
-	imports = [
-		./fastfetch.nix
-		./tools.nix
-		./git.nix
-		./shell
-	];
+  imports = [
+    ./tools.nix
+    ./git.nix
+    ./shell
+  ];
 }

@@ -7,17 +7,14 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1751736671,
-        "narHash": "sha256-2tBopDKfV5pLq6m5q8QtVgidtBiKTThhSSTg/yYl5C4=",
-        "owner": "KreconyMakaron",
-        "repo": "ags",
-        "rev": "ea503cd820b1989976d1c5fe6f9669dbae00abdb",
-        "type": "github"
+        "lastModified": 1752230441,
+        "narHash": "sha256-HTmHyTb8XkYaWR3E2tRK0UeMEuJuscMpgWtvKyUXJUQ=",
+        "path": "/home/krecony/code/ags",
+        "type": "path"
       },
       "original": {
-        "owner": "KreconyMakaron",
-        "repo": "ags",
-        "type": "github"
+        "path": "/home/krecony/code/ags",
+        "type": "path"
       }
     },
     "ags_2": {

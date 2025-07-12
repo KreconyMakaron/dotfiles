@@ -1,10 +1,17 @@
 {
-  outputs = inputs: {
-    nixosModules = {
-      system = import ./system;
-      ags = inputs.ags.nixosModules.default;
-    }
-    // import ./module;
+  outputs = inputs @ {
+    nixpkgs,
+    ags,
+    ...
+  }: {
+    formatter."x86_64-linux" = nixpkgs.legacyPackages."x86_64-linux".alejandra;
+
+    nixosModules =
+      {
+        system = import ./system;
+        ags = ags.nixosModules.default;
+      }
+      // import ./module;
 
     nixosConfigurations = import ./hosts inputs;
   };
@@ -24,20 +31,22 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-		hyprlock = {
+    hyprlock = {
       url = "github:hyprwm/hyprlock";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     #https://github.com/hyprwm/Hyprland/issues/5891
-		hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1"; 
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
 
-		xdg-portal-hyprland.url = "github:hyprwm/xdg-desktop-portal-hyprland";
+    xdg-portal-hyprland.url = "github:hyprwm/xdg-desktop-portal-hyprland";
 
-		ags.url = "github:KreconyMakaron/ags";
+    # ags.url = "github:KreconyMakaron/ags";
+    # change later
+    ags.url = "path:/home/krecony/code/ags";
 
-		stylix.url = "github:danth/stylix";
+    stylix.url = "github:danth/stylix";
 
-		polymc.url = "github:PolyMC/PolyMC";
+    polymc.url = "github:PolyMC/PolyMC";
   };
 }
