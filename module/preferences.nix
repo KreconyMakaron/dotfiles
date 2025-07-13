@@ -3,29 +3,30 @@
   pkgs,
   config,
   ...
-}: let
+}:
+with lib; let
   cfg = config.preferences;
 
   mkDefaultApp = pkg: desktop: {
-    package = lib.mkOption {
-      type = lib.types.package;
+    package = mkOption {
+      type = types.package;
       default = pkg;
     };
-    desktopFile = lib.mkOption {
-      type = lib.types.str;
+    desktopFile = mkOption {
+      type = types.str;
       default = desktop;
     };
   };
 
   mkDir = dir:
-    lib.mkOption {
-      type = lib.types.str;
+    mkOption {
+      type = types.str;
       default = dir;
     };
 in {
   options.preferences = {
-    editor.package = lib.mkOption {
-      type = lib.types.package;
+    editor.package = mkOption {
+      type = types.package;
       default = pkgs.neovim;
     };
 
@@ -67,8 +68,8 @@ in {
       ];
       variables =
         {
-          BROWSER = "${lib.getExe cfg.browser.package}";
-          EDITOR = "${lib.getExe cfg.editor.package}";
+          BROWSER = "${getExe cfg.browser.package}";
+          EDITOR = "${getExe cfg.editor.package}";
         }
         // rec {
           # https://specifications.freedesktop.org/basedir-spec/latest/
