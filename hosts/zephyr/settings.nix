@@ -21,7 +21,7 @@
   preferences = {
     browser = {
       package = pkgs.librewolf;
-      desktopFileName = "librewolf.desktop";
+      desktopFile = "librewolf.desktop";
     };
     editor.package = inputs.nixvim.packages.${system}.default;
   };
