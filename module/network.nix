@@ -1,10 +1,15 @@
-{ config, pkgs, lib, ...}:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 with lib; let
   cfg = config.preferences;
 
   vpnScript = ''
 
-    usage="usage: $0 [ connect | disconnect | interfaces ]" 
+    usage="usage: $0 [ connect | disconnect | interfaces ]"
 
     if [[ $# -lt 1 ]]; then
       echo "$usage"
@@ -33,7 +38,7 @@ with lib; let
           echo "usage: vpn connect <interface>"
           exit 1
         fi
-        
+
         if [[ $current_interface != "" ]]; then
           systemctl stop wg-quick-"''${current_interface}"
         fi
@@ -62,8 +67,7 @@ with lib; let
     esac
   '';
 
-  serverOpts = { ... }:
-  {
+  serverOpts = {...}: {
     options = {
       publicKey = mkOption {
         type = types.str;
@@ -81,7 +85,6 @@ with lib; let
     };
   };
 in {
-
   options.preferences = {
     vpn = {
       enable = mkEnableOption "vpn";
@@ -100,13 +103,13 @@ in {
       };
       address = mkOption {
         type = types.listOf types.str;
-        default = [ "1.1.1.1" ];
+        default = ["1.1.1.1"];
       };
       servers = mkOption {
         type = types.attrsOf (types.submodule serverOpts);
         default = {};
         example = {
-          server1 = { 
+          server1 = {
             autostart = true;
             pubKey = "11111111111111111111111111111111111111111111";
             endpoint = "255.255.255.255:12345";
@@ -154,25 +157,28 @@ in {
         mkIP = keyword: ip: "ip route ${keyword} ${ip} via ${cfg.vpn.defaultGateway.address}";
 
         mkInterface = name: values:
-        nameValuePair name {
-          inherit (values) autostart;
-          inherit (cfg.vpn) dns address;
-          privateKeyFile = "${cfg.vpn.privateKeyDir}/${name}";
-          listenPort = 51820;
-          mtu = 1280;
+          nameValuePair name {
+            inherit (values) autostart;
+            inherit (cfg.vpn) dns address;
+            privateKeyFile = "${cfg.vpn.privateKeyDir}/${name}";
+            listenPort = 51820;
+            mtu = 1280;
 
-          peers = [
-            {
-              inherit (values) publicKey endpoint;
-              allowedIPs = [ "0.0.0.0/0" "::/0" ];
-              persistentKeepalive = 25; # remove
-            }
-          ];
+            peers = [
+              {
+                inherit (values) publicKey endpoint;
+                allowedIPs = ["0.0.0.0/0" "::/0"];
+                persistentKeepalive = 25; # remove
+              }
+            ];
 
-          postUp = concatMapStringsSep "; " (mkIP "add") cfg.vpn.disabledIPs;
-          postDown = concatMapStringsSep "; " (mkIP "del") cfg.vpn.disabledIPs;
-        };
-      in if cfg.vpn.enable then attrsets.mapAttrs' mkInterface cfg.vpn.servers else {};
+            postUp = concatMapStringsSep "; " (mkIP "add") cfg.vpn.disabledIPs;
+            postDown = concatMapStringsSep "; " (mkIP "del") cfg.vpn.disabledIPs;
+          };
+      in
+        if cfg.vpn.enable
+        then attrsets.mapAttrs' mkInterface cfg.vpn.servers
+        else {};
     };
   };
 }

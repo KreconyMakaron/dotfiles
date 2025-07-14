@@ -33,8 +33,8 @@
         "104.26.14.206"
         "104.26.15.206"
       ];
-      dns = [ "10.2.0.1" ];
-      address = [ "10.2.0.2/32" ];
+      dns = ["10.2.0.1"];
+      address = ["10.2.0.2/32"];
       defaultGateway = {
         interface = "wlp0s20f3";
         address = "192.168.0.1";
@@ -53,6 +53,4 @@
   environment.systemPackages = [
     pkgs.microfetch
   ];
-
-
 }
