@@ -37,8 +37,10 @@
               };
             };
           })
-        ]
-        ++ builtins.attrValues self.nixosModules;
+
+          ../system
+          ../module
+        ];
 
       specialArgs = {
         inherit inputs;

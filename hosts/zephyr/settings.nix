@@ -13,6 +13,10 @@
 
   powerManagement.enable = true;
 
+  core = {
+    user = "krecony";
+  };
+
   preferences = {
     editor.package = inputs.nixvim.packages.${system}.default;
 

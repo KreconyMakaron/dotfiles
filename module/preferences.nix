@@ -2,6 +2,7 @@
   lib,
   pkgs,
   config,
+user,
   ...
 }:
 with lib; let
@@ -46,7 +47,6 @@ in {
       publicShare = mkDir "$HOME/other";
       templates = mkDir "$HOME/other";
     };
-
     mimeApps.enable = mkOption {
       type = types.bool;
       default = true;
@@ -68,54 +68,56 @@ in {
       };
     };
 
-    home-manager.users.krecony.home.packages = [
-      cfg.browser.package
-      cfg.pdf.package
-      cfg.image.package
-      cfg.audio.package
-      cfg.video.package
-    ];
+    home-manager.users.${user} = {
+      home.packages = [
+        cfg.browser.package
+        cfg.pdf.package
+        cfg.image.package
+        cfg.audio.package
+        cfg.video.package
+      ];
 
-    home-manager.users.krecony.xdg = {
-      portal = {
-        enable = true;
-        extraPortals = [
-          pkgs.xdg-desktop-portal-gtk
-        ];
-      };
-
-      userDirs =
-        {
-          inherit (cfg.userDirs) enable;
-          createDirectories = false;
-        }
-        // cfg.userDirs;
-
-      mimeApps = let
-        associations = {
-          "text/html" = cfg.browser.desktopFile;
-          "x-scheme-handler/http" = cfg.browser.desktopFile;
-          "x-scheme-handler/https" = cfg.browser.desktopFile;
-          "x-scheme-handler/ftp" = cfg.browser.desktopFile;
-          "x-scheme-handler/about" = cfg.browser.desktopFile;
-          "x-scheme-handler/unknown" = cfg.browser.desktopFile;
-          "application/x-extension-htm" = cfg.browser.desktopFile;
-          "application/x-extension-html" = cfg.browser.desktopFile;
-          "application/x-extension-shtml" = cfg.browser.desktopFile;
-          "application/xhtml+xml" = cfg.browser.desktopFile;
-          "application/x-extension-xhtml" = cfg.browser.desktopFile;
-          "application/x-extension-xht" = cfg.browser.desktopFile;
-          "application/json" = cfg.browser.desktopFile;
-          "application/pdf" = cfg.pdf.desktopFile;
-
-          "audio/*" = cfg.audio.desktopFile;
-          "video/*" = cfg.video.desktopFile;
-          "image/*" = cfg.image.desktopFile;
+      xdg = {
+        portal = {
+          enable = true;
+          extraPortals = [
+            pkgs.xdg-desktop-portal-gtk
+          ];
         };
-      in {
-        inherit (cfg.mimeApps) enable;
-        defaultApplications = associations;
-        associations.added = associations;
+
+        userDirs =
+          {
+            inherit (cfg.userDirs) enable;
+            createDirectories = false;
+          }
+          // cfg.userDirs;
+
+        mimeApps = let
+          associations = {
+            "text/html" = cfg.browser.desktopFile;
+            "x-scheme-handler/http" = cfg.browser.desktopFile;
+            "x-scheme-handler/https" = cfg.browser.desktopFile;
+            "x-scheme-handler/ftp" = cfg.browser.desktopFile;
+            "x-scheme-handler/about" = cfg.browser.desktopFile;
+            "x-scheme-handler/unknown" = cfg.browser.desktopFile;
+            "application/x-extension-htm" = cfg.browser.desktopFile;
+            "application/x-extension-html" = cfg.browser.desktopFile;
+            "application/x-extension-shtml" = cfg.browser.desktopFile;
+            "application/xhtml+xml" = cfg.browser.desktopFile;
+            "application/x-extension-xhtml" = cfg.browser.desktopFile;
+            "application/x-extension-xht" = cfg.browser.desktopFile;
+            "application/json" = cfg.browser.desktopFile;
+            "application/pdf" = cfg.pdf.desktopFile;
+
+            "audio/*" = cfg.audio.desktopFile;
+            "video/*" = cfg.video.desktopFile;
+            "image/*" = cfg.image.desktopFile;
+          };
+        in {
+          inherit (cfg.mimeApps) enable;
+          defaultApplications = associations;
+          associations.added = associations;
+        };
       };
     };
   };
