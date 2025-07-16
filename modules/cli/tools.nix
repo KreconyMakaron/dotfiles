@@ -8,7 +8,7 @@
     # better ls
     eza = {
       enable = true;
-      icons = true;
+      icons = "auto";
     };
 
     direnv = {
