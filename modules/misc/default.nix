@@ -1,20 +1,4 @@
-{pkgs, ...}: {
-  home.packages = with pkgs; [
-    obsidian # notetaking
-    spotify # music
-    # brave
-    proton-pass
-    protonmail-desktop
-    protonvpn-gui
-    nautilus
-    nautilus-open-any-terminal
-    # zathura
-    libreoffice-qt
-    opentabletdriver
-    jetbrains.pycharm-professional
-    vesktop
-  ];
-
+{...}: {
   # programs = {
   # 	# image viewing
   # 	imv.enable = true;

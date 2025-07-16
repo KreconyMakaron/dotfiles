@@ -31,7 +31,7 @@ in {
       "....." = "cd ../../../..";
     };
 
-    initExtra = let
+    initContent = let
       zsh-sudo =
         pkgs.fetchFromGitHub {
           owner = "hcgraf";
@@ -40,23 +40,44 @@ in {
           hash = "sha256-I17u8qmYttsodD58PqtTxtVZauyYcNw1orFLPngo9bY=";
         }
         + "/sudo.plugin.zsh";
-    in ''
-      cpfile () {
-      	${getExe pkgs.bat} -pp $1 | ${getExe' pkgs.wl-clipboard "wl-copy"}
-      }
+    in
+      /*
+      bash
+      */
+      ''
+        cpfile () {
+        	${getExe pkgs.bat} -pp $1 | ${getExe' pkgs.wl-clipboard "wl-copy"}
+        }
 
-      eval "$(${getExe pkgs.direnv} hook zsh)"
+        eval "$(${getExe pkgs.direnv} hook zsh)"
 
-      source ${pkgs.zsh-defer}/share/zsh-defer/zsh-defer.plugin.zsh
-      source ${./config.zsh}
+        source ${pkgs.zsh-defer}/share/zsh-defer/zsh-defer.plugin.zsh
+        export ZSH_AUTOSUGGEST_STRATEGY=history
+        eval "$(fzf --zsh)"
 
-      zsh-defer source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh
-      zsh-defer source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-      zsh-defer source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
-      zsh-defer source ${pkgs.zsh-autopair}/share/zsh/zsh-autopair/autopair.zsh
-      zsh-defer source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-      zsh-defer source ${pkgs.zsh-nix-shell}/share/zsh-nix-shell/nix-shell.plugin.zsh
-      zsh-defer source ${zsh-sudo}
-    '';
+        # sets the title of foot to the last executed command, used in hyprland/rules
+        setfoottitle () {
+          printf '\e]2;%s\e\' $1
+        }
+
+        add-zsh-hook -Uz preexec setfoottitle
+
+        zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
+
+        # vi mode
+        bindkey -v
+        export KEYTIMEOUT=1
+
+        # https://nixos.wiki/wiki/Zsh#Zsh-autocomplete_not_working
+        bindkey "''${key[Up]}" up-line-or-search
+
+        zsh-defer source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh
+        zsh-defer source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+        zsh-defer source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
+        zsh-defer source ${pkgs.zsh-autopair}/share/zsh/zsh-autopair/autopair.zsh
+        zsh-defer source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+        zsh-defer source ${pkgs.zsh-nix-shell}/share/zsh-nix-shell/nix-shell.plugin.zsh
+        zsh-defer source ${zsh-sudo}
+      '';
   };
 }

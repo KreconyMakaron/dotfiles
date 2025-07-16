@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  inputs,
   ...
 }: {
   time = {
@@ -29,6 +28,8 @@
   };
 
   console.keyMap = "pl2";
+
+  services.upower.enable = true;
 
   environment = {
     systemPackages = with pkgs; [

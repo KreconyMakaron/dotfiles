@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  nixosConfig,
   ...
 }: let
   mod = "SUPER";
@@ -20,7 +21,7 @@ in {
         "${mod},D,exec,${lib.getExe pkgs.ags} toggle launcher"
         "${mod},V,togglefloating,"
         "${mod},F,fullscreen,"
-        "${mod},W,exec,${lib.getExe pkgs.brave}"
+        "${mod},W,exec,${lib.getExe nixosConfig.preferences.browser.package}"
         # "${mod},C,exec,${lib.getExe pkgs.ags} -t clipboard"
         "${modshift},L,exec,${lib.getExe pkgs.hyprlock}"
 

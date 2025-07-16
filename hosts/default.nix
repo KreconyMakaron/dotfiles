@@ -16,8 +16,27 @@
           }
           ./${name}
 
-          home-manager-module
-          {home-manager = home;}
+          inputs.home-manager.nixosModules.home-manager
+
+          ({config, ...}: {
+            home-manager = {
+              useUserPackages = true;
+              useGlobalPkgs = true;
+              extraSpecialArgs = {
+                inherit inputs self;
+                nixosConfig = config;
+              };
+              users = {
+                krecony = {
+                  imports =
+                    [
+                      ./${name}/home.nix
+                    ]
+                    ++ builtins.attrValues self.homeManagerModules;
+                };
+              };
+            };
+          })
         ]
         ++ builtins.attrValues self.nixosModules;
 
@@ -26,22 +45,6 @@
         inherit system;
       };
     };
-
-  home-manager-module = inputs.home-manager.nixosModules.home-manager;
-
-  home = {
-    useUserPackages = true;
-    useGlobalPkgs = true;
-    extraSpecialArgs = {
-      inherit inputs;
-      inherit self;
-    };
-    users = {
-      krecony = {
-        imports = [./zephyr/home.nix];
-      };
-    };
-  };
 in {
   # huawei Laptop
   zephyr = mkHost "zephyr" "x86_64-linux";

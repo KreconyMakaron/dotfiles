@@ -13,16 +13,7 @@
 
   powerManagement.enable = true;
 
-  programs.ags = {
-    enable = true;
-    autostart = true;
-  };
-
   preferences = {
-    browser = {
-      package = pkgs.librewolf;
-      desktopFile = "librewolf.desktop";
-    };
     editor.package = inputs.nixvim.packages.${system}.default;
 
     vpn = {
@@ -50,7 +41,34 @@
     };
   };
 
-  environment.systemPackages = [
-    pkgs.microfetch
+  home-manager.users.krecony.services.ags = {
+    enable = true;
+    autostart = true;
+  };
+
+  environment.systemPackages = with pkgs; [
+    microfetch
+    mangal # real cool manga reader
+    libqalculate # best calculator
+
+    tldr # manpages but short
+    fzf # fuzzy searching
+    unzip # well unzips stuff
+    killall # useful when i fuck up
+    # hyperfine			# program benchmark tool
+    qrcp # cool file sharing through local network
+    obsidian # notetaking
+    spotify # music
+    # brave
+    proton-pass
+    protonmail-desktop
+    protonvpn-gui
+    nautilus
+    nautilus-open-any-terminal
+    # zathura
+    libreoffice-qt
+    opentabletdriver
+    jetbrains.pycharm-professional
+    vesktop
   ];
 }

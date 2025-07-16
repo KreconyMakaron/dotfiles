@@ -47,12 +47,13 @@ in {
       templates = mkDir "$HOME/other";
     };
 
-    baseDirs = {
-      data = mkDir "$HOME/.local/share";
-      config = mkDir "$HOME/.config";
-      state = mkDir "$HOME/.local/state";
-      cache = mkDir "$HOME/.cache";
-      bin = mkDir "$HOME/.local/bin";
+    mimeApps.enable = mkOption {
+      type = types.bool;
+      default = true;
+    };
+    userDirs.enable = mkOption {
+      type = types.bool;
+      default = true;
     };
   };
 
@@ -60,41 +61,22 @@ in {
     environment = {
       systemPackages = [
         cfg.editor.package
-        cfg.browser.package
-        cfg.pdf.package
-        cfg.image.package
-        cfg.audio.package
-        cfg.video.package
       ];
-      variables =
-        {
-          BROWSER = "${getExe cfg.browser.package}";
-          EDITOR = "${getExe cfg.editor.package}";
-        }
-        // rec {
-          # https://specifications.freedesktop.org/basedir-spec/latest/
-          XDG_DESKTOP_DIR = cfg.userDirs.desktop;
-          XDG_DOCUMENTS_DIR = cfg.userDirs.documents;
-          XDG_DOWNLOAD_DIR = cfg.userDirs.download;
-          XDG_MUSIC_DIR = cfg.userDirs.music;
-          XDG_PICTURES_DIR = cfg.userDirs.pictures;
-          XDG_PUBLICSHARE_DIR = cfg.userDirs.publicShare;
-          XDG_TEMPLATES_DIR = cfg.userDirs.templates;
-          XDG_VIDEOS_DIR = cfg.userDirs.videos;
-
-          XDG_DATA_HOME = cfg.baseDirs.data;
-          XDG_CONFIG_HOME = cfg.baseDirs.config;
-          XDG_STATE_HOME = cfg.baseDirs.state;
-          XDG_CACHE_HOME = cfg.baseDirs.cache;
-          XDG_BIN_HOME = cfg.baseDirs.bin;
-
-          PATH = [
-            "${XDG_BIN_HOME}"
-          ];
-        };
+      sessionVariables = {
+        BROWSER = "${getExe cfg.browser.package}";
+        EDITOR = "${getExe cfg.editor.package}";
+      };
     };
 
-    xdg = {
+    home-manager.users.krecony.home.packages = [
+      cfg.browser.package
+      cfg.pdf.package
+      cfg.image.package
+      cfg.audio.package
+      cfg.video.package
+    ];
+
+    home-manager.users.krecony.xdg = {
       portal = {
         enable = true;
         extraPortals = [
@@ -102,7 +84,14 @@ in {
         ];
       };
 
-      mime = let
+      userDirs =
+        {
+          inherit (cfg.userDirs) enable;
+          createDirectories = false;
+        }
+        // cfg.userDirs;
+
+      mimeApps = let
         associations = {
           "text/html" = cfg.browser.desktopFile;
           "x-scheme-handler/http" = cfg.browser.desktopFile;
@@ -124,9 +113,9 @@ in {
           "image/*" = cfg.image.desktopFile;
         };
       in {
-        enable = true;
-        addedAssociations = associations;
+        inherit (cfg.mimeApps) enable;
         defaultApplications = associations;
+        associations.added = associations;
       };
     };
   };
