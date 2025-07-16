@@ -40,7 +40,8 @@
 
           ../system
           ../module
-        ];
+        ]
+        ++ builtins.attrValues self.nixosModules;
 
       specialArgs = {
         inherit inputs;

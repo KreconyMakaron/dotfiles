@@ -1,13 +1,22 @@
-{config, lib, pkgs, ...}: let
-  importWithUser = path: import path {
-    inherit config lib pkgs;
-    inherit (config.core) user;
-  };
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  importWithStuff = path:
+    import path {
+      inherit config lib pkgs;
+      inherit (config.core) user;
+      inherit (config.lib.stylix) colors;
+    };
 in {
-  imports = builtins.map importWithUser [
+  imports = builtins.map importWithStuff [
     ./core.nix
     ./preferences.nix
     ./git.nix
     ./network.nix
+    ./style.nix
+    ./shell.nix
   ];
 }

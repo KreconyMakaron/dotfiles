@@ -1,4 +1,9 @@
-{lib, config, ...}: with lib; let
+{
+  lib,
+  config,
+  ...
+}:
+with lib; let
   cfg = config.core;
 in {
   options.core = {
@@ -19,8 +24,10 @@ in {
 
   config = {
     assertions = [
-      { assertion = cfg.user != "";
-        message = "A username must be set";}
+      {
+        assertion = cfg.user != "";
+        message = "A username must be set";
+      }
     ];
   };
 }

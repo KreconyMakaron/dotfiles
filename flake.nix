@@ -6,6 +6,10 @@
       ags = inputs.ags.homeManagerModules.default;
     };
 
+    nixosModules = {
+      inherit (inputs.stylix.nixosModules) stylix;
+    };
+
     nixosConfigurations = import ./hosts inputs;
   };
 

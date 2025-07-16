@@ -45,6 +45,10 @@
     };
   };
 
+  style = {
+    theme = "everforest";
+  };
+
   home-manager.users.krecony.services.ags = {
     enable = true;
     autostart = true;
