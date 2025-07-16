@@ -1,17 +1,16 @@
 {
-  outputs = inputs @ {
-    nixpkgs,
-    ags,
-    ...
-  }: {
+  outputs = inputs @ {nixpkgs, ...}: {
     formatter."x86_64-linux" = nixpkgs.legacyPackages."x86_64-linux".alejandra;
 
     nixosModules =
       {
         system = import ./system;
-        ags = ags.nixosModules.default;
       }
       // import ./module;
+
+    homeManagerModules = {
+      ags = inputs.ags.homeManagerModules.default;
+    };
 
     nixosConfigurations = import ./hosts inputs;
   };

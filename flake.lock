@@ -4,11 +4,12 @@
       "inputs": {
         "ags": "ags_2",
         "flake-utils": "flake-utils",
+        "home-manager": "home-manager",
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1752230441,
-        "narHash": "sha256-HTmHyTb8XkYaWR3E2tRK0UeMEuJuscMpgWtvKyUXJUQ=",
+        "lastModified": 1752692907,
+        "narHash": "sha256-f5+Ru2m0OfKmAhypF+CESqvfpZddbhYKeJoyKxjLQg4=",
         "path": "/home/krecony/code/ags",
         "type": "path"
       },
@@ -427,6 +428,27 @@
     "home-manager": {
       "inputs": {
         "nixpkgs": [
+          "ags",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1752603129,
+        "narHash": "sha256-S+wmHhwNQ5Ru689L2Gu8n1OD6s9eU9n9mD827JNR+kw=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "e8c19a3cec2814c754f031ab3ae7316b64da085b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "home-manager_2": {
+      "inputs": {
+        "nixpkgs": [
           "nixpkgs"
         ]
       },
@@ -444,7 +466,7 @@
         "type": "github"
       }
     },
-    "home-manager_2": {
+    "home-manager_3": {
       "inputs": {
         "nixpkgs": [
           "stylix",
@@ -1291,7 +1313,7 @@
     "root": {
       "inputs": {
         "ags": "ags",
-        "home-manager": "home-manager",
+        "home-manager": "home-manager_2",
         "hyprcontrib": "hyprcontrib",
         "hyprland": "hyprland",
         "hyprlock": "hyprlock",
@@ -1313,7 +1335,7 @@
         "flake-parts": "flake-parts_2",
         "git-hooks": "git-hooks",
         "gnome-shell": "gnome-shell",
-        "home-manager": "home-manager_2",
+        "home-manager": "home-manager_3",
         "nixpkgs": "nixpkgs_7",
         "nur": "nur",
         "systems": "systems_6",
