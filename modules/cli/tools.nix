@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{...}: {
   programs = {
     ripgrep.enable = true; # better grep
     bat.enable = true; # better cat

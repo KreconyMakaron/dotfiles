@@ -2,7 +2,7 @@
   lib,
   pkgs,
   config,
-user,
+  user,
   ...
 }:
 with lib; let

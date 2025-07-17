@@ -1,4 +1,8 @@
-{pkgs, user, ...}: {
+{
+  pkgs,
+  user,
+  ...
+}: {
   environment.systemPackages = with pkgs; [git];
 
   home-manager.users.${user}.programs.git = {
