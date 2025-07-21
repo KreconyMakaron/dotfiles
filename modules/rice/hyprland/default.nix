@@ -9,7 +9,6 @@
     ./config.nix
     ./binds.nix
     ./rules.nix
-    #		./cursor.nix
   ];
 
   home.packages = with pkgs;

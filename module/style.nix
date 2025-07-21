@@ -124,6 +124,8 @@ in {
 
         inherit (cfg.settings) polarity;
 
+        cursor = cfg.settings.cursor.normal;
+
         opacity = {
           terminal = 0.75;
         };
@@ -131,7 +133,18 @@ in {
         targets = mkTargets cfg.settings.targets.nix;
       };
 
-      home-manager.users.${user}.stylix.targets = mkTargets cfg.settings.targets.hm;
+      home-manager.users.${user} = let
+          hyprcursor = cfg.settings.cursor.hypr;
+        in {
+        stylix.targets = mkTargets cfg.settings.targets.hm;
+
+        home.file.".local/share/icons/${hyprcursor.name}".source = hyprcursor.package;
+
+        wayland.windowManager.hyprland.settings.env = [
+          "HYPRCURSOR_THEME,${hyprcursor.name}"
+          "HYPRCURSOR_SIZE,${builtins.toString hyprcursor.size}"
+        ];
+      };
     }
   ];
 }

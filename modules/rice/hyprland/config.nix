@@ -8,13 +8,7 @@
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     xwayland.enable = true;
-    systemd = {
-      variables = ["--all"];
-      extraCommands = [
-        "systemctl --user stop graphical-session.target"
-        "systemctl --user start hyprland-session.target"
-      ];
-    };
+    systemd.variables = ["--all"];
     settings = {
       exec-once = [
         "${lib.getExe pkgs.wl-clip-persist} --clipboard both"
@@ -32,9 +26,7 @@
         "HDMI-1-A, 1920x1080@60, 0x-1080, 1"
         ",preferred,auto,1"
       ];
-      debug = {
-        disable_logs = false;
-      };
+      debug.disable_logs = false;
       xwayland.force_zero_scaling = true;
       input = {
         kb_layout = "pl";

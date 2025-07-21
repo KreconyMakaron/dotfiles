@@ -18,7 +18,6 @@ in {
         "${mod},K,movefocus,u"
         "${mod},J,movefocus,d"
 
-        "${mod},D,exec,${lib.getExe pkgs.ags} toggle launcher"
         "${mod},V,togglefloating,"
         "${mod},F,fullscreen,"
         "${mod},W,exec,${lib.getExe nixosConfig.preferences.browser.package}"

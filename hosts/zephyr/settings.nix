@@ -51,7 +51,11 @@
 
   home-manager.users.krecony.services.ags = {
     enable = true;
-    autostart = true;
+    hyprlandIntegration = {
+      enable = true;
+      autostart.enable = true;
+      keybinds.enable = true;
+    };
   };
 
   environment.systemPackages = with pkgs; [
