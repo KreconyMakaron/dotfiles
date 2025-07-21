@@ -13,10 +13,11 @@
 in {
   imports = builtins.map importWithStuff [
     ./core.nix
+    ./shell.nix
     ./preferences.nix
     ./git.nix
     ./network.nix
     ./style.nix
-    ./shell.nix
+    ./zsh.nix
   ];
 }

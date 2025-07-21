@@ -1,20 +1,26 @@
-{pkgs, ...}: let
-  inherit (pkgs.lib) getExe getExe';
+{
+  pkgs,
+  lib,
+  user,
+  ...
+}:
+with lib; let
+  histFile = "$HOME/.cache/.zsh_history";
+  histSize = 100000000;
 in {
-  imports = [./starship.nix];
-
-  programs.zsh = {
+  programs.zsh.enable = true;
+  home-manager.users.${user}.programs.zsh =  {
     enable = true;
     enableCompletion = true;
 
     dotDir = ".config/zsh";
 
     history = {
-      size = 100000000;
-      save = 100000000;
+      size = histSize;
+      save = histSize;
       ignoreAllDups = true;
       ignoreDups = true;
-      path = "$HOME/.cache/.zsh_history";
+      path = histFile;
     };
 
     shellAliases = {
@@ -30,7 +36,6 @@ in {
       "...." = "cd ../../..";
       "....." = "cd ../../../..";
     };
-
     initContent = let
       zsh-sudo =
         pkgs.fetchFromGitHub {
@@ -46,7 +51,7 @@ in {
       */
       ''
         cpfile () {
-        	${getExe pkgs.bat} -pp $1 | ${getExe' pkgs.wl-clipboard "wl-copy"}
+          ${getExe pkgs.bat} -pp $1 | ${getExe' pkgs.wl-clipboard "wl-copy"}
         }
 
         eval "$(${getExe pkgs.direnv} hook zsh)"
