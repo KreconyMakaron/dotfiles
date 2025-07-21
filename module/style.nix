@@ -134,8 +134,8 @@ in {
       };
 
       home-manager.users.${user} = let
-          hyprcursor = cfg.settings.cursor.hypr;
-        in {
+        hyprcursor = cfg.settings.cursor.hypr;
+      in {
         stylix.targets = mkTargets cfg.settings.targets.hm;
 
         home.file.".local/share/icons/${hyprcursor.name}".source = hyprcursor.package;

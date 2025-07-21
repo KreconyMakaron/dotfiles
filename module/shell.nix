@@ -1,8 +1,4 @@
-{
-  colors,
-  user,
-  ...
-}: {
+{colors, ...}: {
   programs.starship = {
     enable = true;
     settings = {

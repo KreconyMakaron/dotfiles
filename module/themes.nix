@@ -26,7 +26,7 @@ pkgs: {
         # things go wrong so we change the manifest file :)
         package = pkgs.stdenv.mkDerivation {
           name = "${name}-patched";
-          nativeBuildInputs = [ pkgs.coreutils ];
+          nativeBuildInputs = [pkgs.coreutils];
 
           src = pkgs.fetchzip {
             url = "https://github.com/LOSEARDES77/Bibata-Cursor-hyprcursor/releases/download/1.0/hypr_Bibata-Modern-Classic.tar.gz";

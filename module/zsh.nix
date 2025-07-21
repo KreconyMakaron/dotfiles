@@ -9,7 +9,7 @@ with lib; let
   histSize = 100000000;
 in {
   programs.zsh.enable = true;
-  home-manager.users.${user}.programs.zsh =  {
+  home-manager.users.${user}.programs.zsh = {
     enable = true;
     enableCompletion = true;
 
