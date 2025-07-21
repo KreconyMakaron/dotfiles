@@ -27,10 +27,19 @@
                 nixosConfig = config;
               };
               users = {
-                krecony = {
+                ${config.core.user} = {
+                  home = {
+                    username = config.core.user;
+                    homeDirectory = "/home/${config.core.user}";
+                    stateVersion = "22.11";
+                  };
                   imports =
                     [
-                      ./${name}/home.nix
+                      # TODO REMOVE
+                      ../modules/cli
+                      ../modules/rice
+                      ../modules/misc
+                      ../modules/fixes/alsa-fixes.nix # huawei laptop goes brrr
                     ]
                     ++ builtins.attrValues self.homeManagerModules;
                 };

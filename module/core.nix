@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }:
 with lib; let
@@ -20,14 +21,42 @@ in {
       default = "/etc/nixos";
       description = "path to your nixos config";
     };
+    shell = mkOption {
+      type = types.enum [
+        "zsh"
+      ];
+      default = "zsh";
+      description = "system shell";
+    };
   };
 
-  config = {
+  config = let
+    shellPackage =
+      if cfg.shell == "zsh"
+      then pkgs.zsh
+      else pkgs.bash;
+  in {
     assertions = [
       {
         assertion = cfg.user != "";
         message = "A username must be set";
       }
     ];
+
+    users = {
+      defaultUserShell = shellPackage;
+      users = {
+        ${cfg.user} = {
+          isNormalUser = true;
+          useDefaultShell = true;
+          extraGroups = [
+            "networkmanager"
+            "wheel"
+            "bluetooth"
+          ];
+        };
+      };
+    };
+
   };
 }

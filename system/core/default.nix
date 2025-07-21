@@ -2,7 +2,6 @@
   imports = [
     ./system.nix
     ./nix.nix
-    ./users.nix
     ./sound.nix
     ./boot.nix
     ./steam.nix
