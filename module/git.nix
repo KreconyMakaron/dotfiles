@@ -3,7 +3,10 @@
   user,
   ...
 }: {
-  environment.systemPackages = with pkgs; [git];
+  environment.systemPackages = with pkgs; [
+    git
+    lazygit
+  ];
 
   home-manager.users.${user}.programs.git = {
     enable = true;

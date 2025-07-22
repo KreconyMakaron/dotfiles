@@ -23,13 +23,16 @@ in {
       path = histFile;
     };
 
-    shellAliases = {
-      l = "${getExe pkgs.eza} -la --color=always";
-      ll = "${getExe pkgs.eza} -la --color=always";
-      ls = "${getExe pkgs.eza} --git --group-directories-first -s extension --color=always";
-      la = "${getExe pkgs.eza} -lah --tree --group-directories-first --color=always";
-      lt = "${getExe pkgs.eza} --icons --tree --group-directories-first --color=always";
-      cat = "${getExe pkgs.bat} -pp";
+    shellAliases = let
+      eza = getExe pkgs.eza;
+      bat = getExe pkgs.bat;
+    in {
+      l = "${eza} -la --color=always";
+      ll = "${eza} -la --color=always";
+      ls = "${eza} --git --group-directories-first -s extension --color=always";
+      la = "${eza} -lah --tree --group-directories-first --color=always";
+      lt = "${eza} --icons --tree --group-directories-first --color=always";
+      cat = "${bat} -pp";
       kys = "shutdown now";
       ".." = "cd ..";
       "..." = "cd ../..";
