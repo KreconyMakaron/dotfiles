@@ -36,6 +36,11 @@
     #https://github.com/hyprwm/Hyprland/issues/5891
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
 
+    hyprspace = {
+      url = "github:KZDKM/Hyprspace";
+      inputs.hyprland.follows = "hyprland";
+    };
+
     xdg-portal-hyprland.url = "github:hyprwm/xdg-desktop-portal-hyprland";
 
     # ags.url = "github:KreconyMakaron/ags";
