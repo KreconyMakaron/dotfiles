@@ -1,32 +1,33 @@
 {
   lib,
   pkgs,
-  nixosConfig,
+  config,
+  user,
   ...
 }: let
   mod = "SUPER";
   modshift = "SUPER SHIFT";
 in {
-  wayland.windowManager.hyprland.settings = {
+  home-manager.users.${user}.wayland.windowManager.hyprland.settings = {
     bind =
       [
-        "${mod},RETURN,exec,${lib.getExe pkgs.foot}"
+        "${mod},RETURN,exec,${lib.getExe config.preferences.terminal.package}"
         "${mod},Q,killactive"
 
         "${mod},H,movefocus,l"
         "${mod},L,movefocus,r"
         "${mod},K,movefocus,u"
         "${mod},J,movefocus,d"
+        "${mod},P,exec,${lib.getExe pkgs.pavucontrol}"
 
         "${mod},V,togglefloating,"
         "${mod},F,fullscreen,"
-        "${mod},W,exec,${lib.getExe nixosConfig.preferences.browser.package}"
-        # "${mod},C,exec,${lib.getExe pkgs.ags} -t clipboard"
+        "${mod},W,exec,${lib.getExe config.preferences.browser.package}"
         "${modshift},L,exec,${lib.getExe pkgs.hyprlock}"
 
-        ",Print,exec,${lib.getExe pkgs.grimblast} --freeze copysave screen $XDG_PICTURES_DIR/$(date +ScreenShot-%F-%R:%S).png"
-        "${mod},Print,exec,${lib.getExe pkgs.grimblast} --freeze copysave area $XDG_PICTURES_DIR/$(date +ScreenShot-%F-%R:%S).png"
-        "${modshift},Print,exec,${lib.getExe pkgs.grimblast} --freeze copysave active $XDG_PICTURES_DIR/$(date +ScreenShot-%F-%R:%S).png"
+        ",Print,exec,${lib.getExe pkgs.grimblast} --freeze copysave screen ${config.preferences.userDirs.pictures}/$(date +ScreenShot-%F-%R:%S).png"
+        "${mod},Print,exec,${lib.getExe pkgs.grimblast} --freeze copysave area ${config.preferences.userDirs.pictures}/$(date +ScreenShot-%F-%R:%S).png"
+        "${modshift},Print,exec,${lib.getExe pkgs.grimblast} --freeze copysave active ${config.preferences.userDirs.pictures}/$(date +ScreenShot-%F-%R:%S).png"
 
         ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
       ]
