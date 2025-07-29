@@ -38,7 +38,6 @@
                       # TODO REMOVE
                       ../modules/rice
                       ../modules/misc
-                      ../modules/fixes/alsa-fixes.nix # huawei laptop goes brrr
                     ]
                     ++ builtins.attrValues self.homeManagerModules;
                 };

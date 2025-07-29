@@ -49,29 +49,52 @@
     theme = "everforest";
   };
 
-  home-manager.users.krecony.services.ags = {
-    enable = true;
-    hyprlandIntegration = {
+  environment.systemPackages = with pkgs; [
+    sof-firmware
+    alsa-utils
+  ];
+
+  home-manager.users.krecony = {
+    services.ags = {
       enable = true;
-      autostart.enable = true;
-      keybinds.enable = true;
+      hyprlandIntegration = {
+        enable = true;
+        autostart.enable = true;
+        keybinds.enable = true;
+      };
+    };
+
+    home.packages = with pkgs; [
+      mangal # real cool manga reader
+
+      obsidian # notetaking
+      spotify # music
+      proton-pass
+      protonmail-desktop
+      protonvpn-gui
+      nautilus
+      nautilus-open-any-terminal
+      # zathura
+      libreoffice-qt
+      opentabletdriver
+      jetbrains.pycharm-professional
+      vesktop
+    ];
+
+    # huawei laptop go brrrr
+    systemd.user.services.alsa-fixes = {
+      Unit.Description = "Enable Speakers";
+      Service = {
+        RemainAfterExit = true;
+        Type = "oneshot";
+        ExecStart = [
+          "${lib.getExe' pkgs.alsa-utils "amixer"} -c 0 cset 'numid=69' 1"
+          "${lib.getExe' pkgs.alsa-utils "amixer"} -c 0 cset 'numid=70' 1"
+          "${lib.getExe' pkgs.alsa-utils "amixer"} -c 0 cset 'numid=71' 1"
+          "${lib.getExe' pkgs.alsa-utils "amixer"} -c 0 cset 'numid=72' 1"
+        ];
+      };
+      Install.WantedBy = ["default.target"];
     };
   };
-
-  home-manager.users.krecony.home.packages = with pkgs; [
-    mangal # real cool manga reader
-
-    obsidian # notetaking
-    spotify # music
-    proton-pass
-    protonmail-desktop
-    protonvpn-gui
-    nautilus
-    nautilus-open-any-terminal
-    # zathura
-    libreoffice-qt
-    opentabletdriver
-    jetbrains.pycharm-professional
-    vesktop
-  ];
 }
