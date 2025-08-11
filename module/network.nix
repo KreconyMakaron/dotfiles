@@ -140,9 +140,20 @@ in {
       (pkgs.writeShellScriptBin "vpn" vpnScript)
     ];
 
+    systemd.services.wpa_supplicant.environment.OPENSSL_CONF = pkgs.writeText "openssl.cnf" ''
+      openssl_conf = openssl_init
+      [openssl_init]
+      ssl_conf = ssl_sect
+      [ssl_sect]
+      system_default = system_default_sect
+      [system_default_sect]
+      CipherString = DEFAULT@SECLEVEL=0
+    '';
+
     networking = {
       useDHCP = false;
       dhcpcd.enable = false;
+
       networkmanager = {
         enable = true;
         dns = "none";
@@ -154,7 +165,7 @@ in {
       nameservers = ["1.1.1.1"];
 
       wg-quick.interfaces = let
-        mkIP = keyword: ip: "ip route ${keyword} ${ip} via ${cfg.vpn.defaultGateway.address}";
+        mkIP = keyword: ip: "ip route ${keyword} ${ip} via ${cfg.vpn.defaultGateway.address} dev ${cfg.vpn.defaultGateway.interface}";
 
         mkInterface = name: values:
           nameValuePair name {
@@ -168,7 +179,6 @@ in {
               {
                 inherit (values) publicKey endpoint;
                 allowedIPs = ["0.0.0.0/0" "::/0"];
-                persistentKeepalive = 25; # remove
               }
             ];
 
