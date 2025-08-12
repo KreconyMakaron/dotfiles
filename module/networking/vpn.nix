@@ -74,6 +74,7 @@ in {
     networking = {
       wg-quick.interfaces = let
         IPs = concatStringsSep " " cfg.vpn.disabledIPs;
+        tableID = "200";
 
         mkInterface = name: values:
           nameValuePair name {
@@ -90,44 +91,41 @@ in {
               }
             ];
 
-            preUp = /* bash */ ''
+            preUp = ''
               set -euo pipefail
 
-              # save gateway and device to /run so PostUp can read them
               gw=$(ip -4 route show default | ${getExe' pkgs.gawk "awk"} '/default/ {print $3; exit}') || gw=""
               dev=$(ip -4 route show default | ${getExe' pkgs.gawk "awk"} '/default/ {print $5; exit}') || dev=""
 
               if [ -n "$gw" ] && [ -n "$dev" ]; then
-                echo "$gw $dev" > /run/wg0-gw
+                ip route flush table ${tableID} || true
+                ip route add default via "$gw" dev "$dev" table ${tableID}
               else
-                # no default route found — handle as needed
-                echo "NO_GW" > /run/wg0-gw
+                echo "Error: no IPv4 default gateway found before VPN — cannot set exclusion table" >&2
+                exit 1
               fi
             '';
 
-            postUp = /* bash */ ''
+            postUp = ''
               set -euo pipefail
-              read gw dev < /run/wg0-gw
-              [ "$gw" = "NO_GW" ] && exit 1
 
               for ip in ${IPs}; do
-                ip route add "''${ip}/32" via "$gw" dev "$dev" || true
+                ip rule add to "$ip"/32 lookup ${tableID} priority 100 || true
               done
             '';
 
-            postDown = /* bash */ ''
+            postDown = ''
               set -euo pipefail
-              read gw dev < /run/wg0-gw
-              [ "$gw" = "NO_GW" ] && exit 0
 
               for ip in ${IPs}; do
-                ip route del "''${ip}/32" via "$gw" dev "$dev" || true
+                ip rule del to "$ip"/32 lookup ${tableID} priority 100 || true
               done
 
-              rm -f /run/wg0-gw
+              ip route flush table ${tableID} || true
             '';
           };
-      in attrsets.mapAttrs' mkInterface cfg.vpn.servers;
+      in
+        attrsets.mapAttrs' mkInterface cfg.vpn.servers;
     };
   };
 }
