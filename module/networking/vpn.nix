@@ -65,7 +65,7 @@ in {
   };
 
   config = mkIf cfg.vpn.enable {
-    systemd.services.NetworkManager-wait-online.enable = false;
+    systemd.services.NetworkManager-wait-online.enable = true;
 
     environment.systemPackages = [
       (pkgs.writeShellScriptBin "vpn" vpnScript)
