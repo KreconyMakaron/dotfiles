@@ -2,11 +2,13 @@
   config,
   lib,
   pkgs,
+  inputs,
+  system,
   ...
 }: let
   importWithStuff = path:
     import path {
-      inherit config lib pkgs;
+      inherit config lib pkgs inputs system importWithStuff;
       inherit (config.core) user;
       inherit (config.lib.stylix) colors;
     };
@@ -16,8 +18,9 @@ in {
     ./shell.nix
     ./preferences.nix
     ./git.nix
-    ./network.nix
-    ./style.nix
     ./zsh.nix
+
+    ./styling
+    ./networking
   ];
 }

@@ -30,10 +30,6 @@
       ];
       dns = ["10.2.0.1"];
       address = ["10.2.0.2/32"];
-      defaultGateway = {
-        interface = "wlp0s20f3";
-        address = "172.20.92.1";
-      };
       privateKeyDir = "/root/protonvpn-keys";
       servers = {
         poland = {
