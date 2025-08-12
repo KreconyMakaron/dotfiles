@@ -22,5 +22,6 @@ in {
 
     ./styling
     ./networking
+    ./system
   ];
 }
