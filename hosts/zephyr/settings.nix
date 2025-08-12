@@ -43,6 +43,9 @@
 
   style = {
     theme = "everforest";
+    desktopEnvironment.Hyprland.enable = true;
+    displayServer.wayland.enable = true;
+    widgets.ags.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
