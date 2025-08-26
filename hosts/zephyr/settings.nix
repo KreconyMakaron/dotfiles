@@ -47,9 +47,9 @@
 
   style = {
     theme = "everforest";
-    desktopEnvironment.Hyprland.enable = true;
+    desktopEnvironment.gnome.enable = true;
     displayServer.wayland.enable = true;
-    widgets.ags.enable = true;
+    widgets.ags.enable = false;
   };
 
   environment.systemPackages = with pkgs; [
@@ -58,7 +58,6 @@
   ];
 
   home-manager.users.krecony = {
-
     home.packages = with pkgs; [
       mangal # real cool manga reader
 
