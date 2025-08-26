@@ -11,6 +11,7 @@ in {
     ./compositor.nix
     ./binds.nix
     ./style.nix
+    ./gnome.nix
   ];
 
   options.style = {
@@ -30,6 +31,10 @@ in {
         enable = mkEnableOption "enables Hyprland";
         default = true;
       };
+      gnome = {
+        enable = mkEnableOption "enables the gnome desktop environment";
+        default = false;
+      };
     };
 
     widgets = {
@@ -40,6 +45,15 @@ in {
   };
 
   config = {
+    home-manager.users.${user}.services.ags = {
+      inherit (cfg.widgets.ags) enable;
+      hyprlandIntegration = {
+        inherit (cfg.desktop.Hyprland) enable;
+        autostart.enable = true;
+        keybinds.enable = true;
+      };
+    };
+
     assertions = let
       workOnWayland = list: let
         mkAssertion = attr: opt: {
@@ -53,6 +67,10 @@ in {
         {
           assertion = !(cfg.displayServer.wayland.enable && cfg.displayServer.x11.enable);
           message = "wayland and x11 are mutually exclusive";
+        }
+        {
+          assertion = !(cfg.desktopEnvironment.Hyprland.enable && cfg.desktopEnvironment.gnome.enable);
+          message = "only one desktop environment can be enabled at a time";
         }
       ]
       ++ (workOnWayland [

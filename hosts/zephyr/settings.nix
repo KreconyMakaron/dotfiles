@@ -58,14 +58,6 @@
   ];
 
   home-manager.users.krecony = {
-    services.ags = {
-      enable = true;
-      hyprlandIntegration = {
-        enable = true;
-        autostart.enable = true;
-        keybinds.enable = true;
-      };
-    };
 
     home.packages = with pkgs; [
       mangal # real cool manga reader
