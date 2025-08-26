@@ -46,21 +46,13 @@
 
   programs = {
     nix-ld.enable = true;
-    dconf.enable = true;
-    xwayland.enable = true;
     java = {
       enable = true;
       package = pkgs.jre;
     };
   };
 
-  virtualisation.docker.enable = true;
-
   services = {
     openssh.enable = true;
-    mysql = {
-      enable = true;
-      package = pkgs.mariadb;
-    };
   };
 }

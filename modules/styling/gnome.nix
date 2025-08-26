@@ -1,4 +1,11 @@
-{ config, lib, pkgs, ... }: with lib; let
+{
+  user,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
   cfg = config.style.desktopEnvironment.gnome;
 in {
   config = mkIf cfg.enable {
@@ -15,13 +22,13 @@ in {
       };
     };
 
-    environment.gnome.excludePackages = with pkgs; [ gnome-tour gnome-user-docs ];
+    environment.gnome.excludePackages = with pkgs; [gnome-tour gnome-user-docs];
 
-    environent.systemPackages = with pkgs; [
+    environment.systemPackages = with pkgs; [
       gnomeExtensions.user-themes
     ];
 
-    stylix.targets.gnome.useWallpaper = true;
+    preferences.terminal.package = pkgs.gnome-console;
 
     programs.dconf.enable = true;
   };

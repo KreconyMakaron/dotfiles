@@ -36,6 +36,16 @@ in {
     image = mkDefaultApp pkgs.imv "imv.desktop";
     audio = mkDefaultApp pkgs.mpv "mpv.desktop";
     video = mkDefaultApp pkgs.mpv "mpv.desktop";
+    terminal = {
+      package = mkOption {
+        type = types.package;
+        default = pkgs.foot;
+      };
+      swallowClassRegex = mkOption {
+        type = types.str;
+        default = "^(foot)";
+      };
+    };
 
     userDirs = {
       download = mkDir "$HOME/download";
@@ -75,6 +85,7 @@ in {
         cfg.image.package
         cfg.audio.package
         cfg.video.package
+        cfg.terminal.package
       ];
 
       xdg = {

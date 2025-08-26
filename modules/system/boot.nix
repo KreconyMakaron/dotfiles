@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }: {
   boot = {
@@ -30,7 +31,7 @@
 
   environment.systemPackages = [pkgs.greetd.tuigreet];
   services.greetd = {
-    enable = true;
+    enable = !config.services.xserver.displayManager.gdm.enable;
     settings = {
       default_session = {
         command = ''${lib.getExe pkgs.greetd.tuigreet} --time --cmd Hyprland'';

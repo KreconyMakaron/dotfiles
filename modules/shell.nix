@@ -1,4 +1,8 @@
-{pkgs, colors, ...}: {
+{
+  pkgs,
+  colors,
+  ...
+}: {
   environment.systemPackages = with pkgs; [
     ripgrep
     bat

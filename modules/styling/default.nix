@@ -55,6 +55,8 @@ in {
       };
     };
 
+    programs.xwayland.enable = cfg.displayServer.wayland.enable;
+
     assertions = let
       workOnWayland = list: let
         mkAssertion = attr: opt: {

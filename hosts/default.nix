@@ -33,20 +33,14 @@
                     homeDirectory = "/home/${config.core.user}";
                     stateVersion = "22.11";
                   };
-                  imports =
-                    [
-                      # TODO REMOVE
-                      ../modules/rice
-                      ../modules/misc
-                    ]
-                    ++ builtins.attrValues self.homeManagerModules;
+                  imports = builtins.attrValues self.homeManagerModules;
                 };
               };
             };
           })
 
           ../system
-          ../module
+          ../modules
         ]
         ++ builtins.attrValues self.nixosModules;
 
