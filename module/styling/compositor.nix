@@ -10,6 +10,12 @@ with lib; let
   cfg = config.style.desktopEnvironment.Hyprland;
 in {
   config = mkIf cfg.enable {
+    environment.etc."greetd/environments".text = ''
+      Hyprland
+    '';
+
+    programs.hyprland.enable = true;
+
     home-manager.users.${user} = {
       home.packages = with pkgs; [
         brightnessctl

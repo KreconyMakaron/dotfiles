@@ -2,6 +2,7 @@
   importWithStuff,
   config,
   lib,
+  user,
   ...
 }:
 with lib; let
