@@ -19,6 +19,7 @@ in {
     ./preferences.nix
     ./git.nix
     ./zsh.nix
+    ./firefly.nix
 
     ./styling
     ./networking

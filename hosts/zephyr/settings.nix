@@ -32,10 +32,14 @@
       address = ["10.2.0.2/32"];
       privateKeyDir = "/root/protonvpn-keys";
       servers = {
-        poland = {
-          autostart = true;
+        warsaw = {
           publicKey = "wpfRQRhJirL++QclFH6SDhc+TuJJB4UxbCABy7A1tS4=";
           endpoint = "79.127.186.193:51820";
+        };
+        amsterdam = {
+          autostart = true;
+          publicKey = "afmlPt2O8Y+u4ykaOpMoO6q1JkbArZsaoFcpNXudXCg=";
+          endpoint = "46.29.25.3:51820";
         };
       };
     };
@@ -95,5 +99,12 @@
       };
       Install.WantedBy = ["default.target"];
     };
+  };
+
+  firefly-iii = {
+    enable = true;
+    enableDataImporter = true;
+    databasePasswordFile = "/var/secrets/firefly-db-key";
+    appKeyFile = "/var/secrets/firefly-app-key";
   };
 }
