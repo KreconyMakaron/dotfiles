@@ -1,10 +1,10 @@
 {
   config,
   lib,
-  style,
+  user,
   ...
 }: {
-  programs.hyprlock = with config.lib.stylix.colors; let
+  home-manager.users.${user}.programs.hyprlock = with config.lib.stylix.colors; let
     hex-to-rgb = with lib.strings;
       x: let
         hex-to-dec = x: let
@@ -17,7 +17,7 @@
         s = map hex-to-dec (stringToCharacters (toLower x));
       in "rgb(${merge-hex s 0}, ${merge-hex s 2}, ${merge-hex s 4})";
   in {
-    inherit (style.desktopEnvironment.Hyprland) enable;
+    inherit (config.style.desktopEnvironment.Hyprland) enable;
 
     settings = {
       general = {

@@ -1,6 +1,11 @@
-{...}: {
-  programs.foot = {
-    enable = true;
+{
+  config,
+  user,
+  pkgs,
+  ...
+}: {
+  home-manager.users.${user}.programs.foot = {
+    enable = config.preferences.terminal.package == pkgs.foot;
     server.enable = false;
     settings = {
       main.pad = "8x8 center";

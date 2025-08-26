@@ -1,8 +1,13 @@
-{pkgs, ...}: let
+{
+  config,
+  user,
+  pkgs,
+  ...
+}: let
   inherit (pkgs.lib) getExe getExe';
 in {
-  services.hypridle = {
-    enable = true;
+  home-manager.users.${user}.services.hypridle = {
+    inherit (config.style.desktopEnvironment.Hyprland) enable;
     settings = {
       general = {
         lock_cmd = "pidof ${getExe pkgs.hyprlock} || ${getExe pkgs.hyprlock}";

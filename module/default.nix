@@ -20,6 +20,9 @@ in {
     ./git.nix
     ./zsh.nix
     ./firefly.nix
+    ./hyprlock.nix
+    ./hypridle.nix
+    ./foot.nix
 
     ./styling
     ./networking
