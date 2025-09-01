@@ -15,6 +15,7 @@
 
   core = {
     user = "krecony";
+    flakePath = "/home/krecony/dotfiles/";
   };
 
   preferences = {

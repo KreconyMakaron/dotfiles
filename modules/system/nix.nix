@@ -1,22 +1,15 @@
 {
-  pkgs,
-  # inputs,
+  config,
   ...
 }: {
-  environment.systemPackages = with pkgs; [git];
-
   nixpkgs = {
     config = {
       allowBroken = true;
-      allowUnfree = true; # change to false and add unfreePredicate
+      allowUnfree = false;
       permittedInsecurePackages = [
         "nix-2.16.2"
       ];
-      # allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-      #   "osu-lazer-bin"
-      # ];
     };
-    # overlays = [ inputs.polymc.overlay ];
   };
 
   documentation = {
@@ -30,7 +23,7 @@
 
   programs.nh = {
     enable = true;
-    flake = "/home/krecony/.dotfiles";
+    flake = config.core.flakePath;
     clean = {
       enable = true;
       extraArgs = "--keep-since 5d --keep 5";
@@ -39,7 +32,6 @@
 
   nix = {
     extraOptions = ''
-      experimental-features = nix-command flakes
       keep-outputs = true
       warn-dirty = false
       keep-derivations = true
