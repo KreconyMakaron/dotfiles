@@ -60,17 +60,11 @@
   home-manager.users.krecony = {
     home.packages = with pkgs; [
       mangal # real cool manga reader
-
       obsidian # notetaking
       spotify # music
-      proton-pass
-      protonmail-desktop
-      protonvpn-gui
       nautilus
       nautilus-open-any-terminal
-      # zathura
       libreoffice-qt
-      opentabletdriver
       jetbrains.pycharm-professional
       vesktop
     ];
