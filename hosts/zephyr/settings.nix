@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   inputs,
   pkgs,
@@ -7,7 +6,7 @@
   ...
 }: {
   hardware = {
-    cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    cpu.intel.updateMicrocode = true;
     enableAllFirmware = true;
   };
 
@@ -20,6 +19,10 @@
 
   preferences = {
     editor.package = inputs.nixvim.packages.${system}.default;
+    pdf = {
+      package = pkgs.evince;
+      desktopFile = "org.gnome.Evince.desktop";
+    };
 
     vpn = {
       enable = true;
@@ -60,14 +63,16 @@
 
   home-manager.users.krecony = {
     home.packages = with pkgs; [
-      mangal # real cool manga reader
-      obsidian # notetaking
-      spotify # music
-      nautilus
-      nautilus-open-any-terminal
+      mangal
+      obsidian
+      anki
+      spotify
       libreoffice-qt
       jetbrains.pycharm-professional
+      jetbrains.idea-ultimate
       vesktop
+      xournalpp
+      texliveFull
     ];
 
     # huawei laptop go brrrr

@@ -5,7 +5,7 @@
   nixpkgs = {
     config = {
       allowBroken = true;
-      allowUnfree = false;
+      allowUnfree = true;
       permittedInsecurePackages = [
         "nix-2.16.2"
       ];
@@ -25,7 +25,7 @@
     enable = true;
     flake = config.core.flakePath;
     clean = {
-      enable = true;
+      enable = false;
       extraArgs = "--keep-since 5d --keep 5";
     };
   };

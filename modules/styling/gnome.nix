@@ -19,17 +19,38 @@ in {
         core-apps.enable = false;
         core-developer-tools.enable = false;
         games.enable = false;
+        localsearch.enable = true;
       };
     };
 
     environment.gnome.excludePackages = with pkgs; [gnome-tour gnome-user-docs];
 
     environment.systemPackages = with pkgs; [
+      pkgs.nautilus
       gnomeExtensions.user-themes
+      gnome-clocks
+      cheese
     ];
+
+    xdg.portal = {
+      enable = true;
+      extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
+    };
 
     preferences.terminal.package = pkgs.gnome-console;
 
-    programs.dconf.enable = true;
+    home-manager.users.${user}.dconf = {
+      enable = true;
+      settings = {
+        "org/gnome/shell" = {
+          enabled-extensions = [
+            pkgs.gnomeExtensions.user-themes.extensionUuid
+          ];
+        };
+        "org/gnome/desktop/search-providers" = {
+          disabled = [];
+        };
+      };
+    };
   };
 }

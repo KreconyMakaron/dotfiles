@@ -16,6 +16,7 @@
     killall
     qrcp
     libqalculate
+    gcc
   ];
 
   programs.direnv = {
