@@ -131,6 +131,11 @@ in {
         };
 
         targets = mkTargets cfg.settings.targets.nix;
+
+        homeManagerIntegration = {
+          followSystem = true;
+          autoImport = true;
+        };
       };
 
       home-manager.users.${user} = let

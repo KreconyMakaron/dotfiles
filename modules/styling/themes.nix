@@ -1,7 +1,7 @@
 pkgs: {
   everforest = {
     wallpaper = pkgs.fetchurl {
-      url = "https://github.com/Apeiros-46B/everforest-walls/blob/main/nature/fog_forest_alt_1.png?raw=true";
+      url = "https://raw.githubusercontent.com/Apeiros-46B/everforest-walls/refs/heads/main/nature/fog_forest_alt_1.png";
       sha256 = "sha256-IeQzvScaS107R+639JzH/Jaxo4Vp0G+wpAm3ufoYHbY=";
     };
     scheme = "${pkgs.base16-schemes}/share/themes/everforest-dark-hard.yaml";
