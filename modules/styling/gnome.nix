@@ -10,12 +10,10 @@ with lib; let
 in {
   config = mkIf cfg.enable {
     services = {
-      xserver = {
-        enable = true;
-        displayManager.gdm.enable = true;
-        desktopManager.gnome.enable = true;
-      };
+      displayManager.gdm.enable = true;
+      desktopManager.gnome.enable = true;
       gnome = {
+        core-os-services.enable = true;
         core-apps.enable = false;
         core-developer-tools.enable = false;
         games.enable = false;
@@ -23,19 +21,21 @@ in {
       };
     };
 
-    environment.gnome.excludePackages = with pkgs; [gnome-tour gnome-user-docs];
+    environment = {
+      gnome.excludePackages = with pkgs; [gnome-tour gnome-user-docs];
+      systemPackages = with pkgs; [
+        pkgs.nautilus
+        gnome-clocks
+        cheese
 
-    environment.systemPackages = with pkgs; [
-      pkgs.nautilus
-      gnomeExtensions.user-themes
-      gnome-clocks
-      cheese
-    ];
-
-    xdg.portal = {
-      enable = true;
-      extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
+        gnomeExtensions.appindicator
+        gnomeExtensions.blur-my-shell
+        gnomeExtensions.pano
+        gnomeExtensions.media-controls
+      ];
     };
+
+    services.udev.packages = [pkgs.gnome-settings-daemon];
 
     preferences.terminal.package = pkgs.gnome-console;
 
@@ -43,13 +43,22 @@ in {
       enable = true;
       settings = {
         "org/gnome/shell" = {
-          enabled-extensions = [
-            pkgs.gnomeExtensions.user-themes.extensionUuid
+          disable-user-extensions = false;
+          enabled-extensions = with pkgs.gnomeExtensions; [
+            appindicator.extensionUuid
+            blur-my-shell.extensionUuid
+            pano.extensionUuid
+            media-controls.extensionUuid
           ];
         };
         "org/gnome/desktop/search-providers" = {
           disabled = [];
         };
+        "org/gnome/shell/extensions/blur/blur-my-shell" = {
+          brightness = 0.75;
+          noise-amount = 0;
+        };
+        "org/gnome/desktop/interface".color-scheme = "prefer-dark";
       };
     };
   };

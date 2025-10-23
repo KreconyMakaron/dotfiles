@@ -20,8 +20,18 @@
   preferences = {
     editor.package = inputs.nixvim.packages.${system}.default;
     pdf = {
-      package = pkgs.evince;
-      desktopFile = "org.gnome.Evince.desktop";
+      package = pkgs.papers;
+      desktopFile = "org.gnome.Papers.desktop";
+    };
+
+    video = {
+      package = pkgs.showtime;
+      desktopFile = "org.gnome.Showtime.desktop";
+    };
+
+    image = {
+      package = pkgs.loupe;
+      desktopFile = "org.gnome.Loupe.desktop";
     };
 
     vpn = {
@@ -63,16 +73,25 @@
 
   home-manager.users.krecony = {
     home.packages = with pkgs; [
-      mangal
+      libreoffice-qt
       obsidian
       anki
       spotify
-      libreoffice-qt
+      vesktop # discord client
+
       jetbrains.pycharm-professional
       jetbrains.idea-ultimate
-      vesktop
+
+      # pdf edditing with math
       xournalpp
       texliveFull
+
+      # nice gnome apps
+      baobab
+      gnome-logs
+      komikku
+      resources
+      wike
     ];
 
     # huawei laptop go brrrr
