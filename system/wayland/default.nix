@@ -8,7 +8,6 @@
       __GL_VRR_ALLOWED = "0";
       _JAVA_AWT_WM_NONEREPARENTING = "1";
       DISABLE_QT5_COMPAT = "0";
-      GDK_BACKEND = "wayland,x11";
       ANKI_WAYLAND = "1";
       DIRENV_LOG_FORMAT = "";
       WLR_DRM_NO_ATOMIC = "1";
