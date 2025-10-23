@@ -29,9 +29,9 @@
     consoleLogLevel = 3;
   };
 
-  environment.systemPackages = [pkgs.greetd.tuigreet];
+  environment.systemPackages = [pkgs.tuigreet];
   services.greetd = {
-    enable = !config.services.xserver.displayManager.gdm.enable;
+    enable = !config.services.displayManager.gdm.enable;
     settings = {
       default_session = {
         command = ''${lib.getExe pkgs.greetd.tuigreet} --time --cmd Hyprland'';

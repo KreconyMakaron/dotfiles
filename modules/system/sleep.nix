@@ -1,9 +1,13 @@
 {...}: {
   services.logind = {
-    lidSwitch = "hybrid-sleep";
-    lidSwitchDocked = "ignore";
-    lidSwitchExternalPower = "lock";
-    powerKey = "hybrid-sleep";
-    powerKeyLongPress = "reboot";
+    settings = {
+      Login = {
+        HandleLidSwitchDocked = "ignore";
+        HandleLidSwitch = "hybrid-sleep";
+        HandleLidSwitchExternalPower = "lock";
+        HandlePowerKey = "hybrid-sleep";
+        HandlePowerKeyLongPress = "reboot";
+      };
+    };
   };
 }

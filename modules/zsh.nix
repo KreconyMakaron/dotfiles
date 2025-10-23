@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  config,
   user,
   ...
 }:
@@ -13,7 +14,7 @@ in {
     enable = true;
     enableCompletion = true;
 
-    dotDir = ".config/zsh";
+    dotDir = config.home-manager.users.${user}.xdg.configHome + "/zsh";
 
     history = {
       size = histSize;
