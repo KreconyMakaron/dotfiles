@@ -92,6 +92,10 @@
       komikku
       resources
       wike
+      gnome-calendar
+
+      # nice latex alternative
+      typst
     ];
 
     # huawei laptop go brrrr
@@ -116,5 +120,14 @@
     enableDataImporter = true;
     databasePasswordFile = "/var/secrets/firefly-db-key";
     appKeyFile = "/var/secrets/firefly-app-key";
+  };
+
+  services.postgresql = {
+    enable = true;
+    ensureDatabases = [ "mydatabase" ];
+    authentication = pkgs.lib.mkOverride 10 ''
+      #type database  DBuser  auth-method
+      local all       all     trust
+    '';
   };
 }
