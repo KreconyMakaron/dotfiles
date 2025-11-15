@@ -7,6 +7,14 @@
 }:
 with lib; let
   cfg = config.style.desktopEnvironment.gnome;
+
+  extensions = with pkgs.gnomeExtensions; [
+    appindicator      # tray icons
+    blur-my-shell     # adds transparency and blur to gnome
+    pano              # clipboard manager
+    media-controls    # adds mpris widget
+    caffeine          # adds a icon to idle-inhibit
+  ];
 in {
   config = mkIf cfg.enable {
     services = {
@@ -14,10 +22,11 @@ in {
       desktopManager.gnome.enable = true;
       gnome = {
         core-os-services.enable = true;
+        localsearch.enable = true;
+
         core-apps.enable = false;
         core-developer-tools.enable = false;
         games.enable = false;
-        localsearch.enable = true;
       };
     };
 
@@ -27,12 +36,7 @@ in {
         pkgs.nautilus
         gnome-clocks
         cheese
-
-        gnomeExtensions.appindicator
-        gnomeExtensions.blur-my-shell
-        gnomeExtensions.pano
-        gnomeExtensions.media-controls
-      ];
+      ] ++ extensions;
     };
 
     services.udev.packages = [pkgs.gnome-settings-daemon];
@@ -44,12 +48,7 @@ in {
       settings = {
         "org/gnome/shell" = {
           disable-user-extensions = false;
-          enabled-extensions = with pkgs.gnomeExtensions; [
-            appindicator.extensionUuid
-            blur-my-shell.extensionUuid
-            pano.extensionUuid
-            media-controls.extensionUuid
-          ];
+          enabled-extensions = map (x: x.extensionUuid) extensions;
         };
         "org/gnome/desktop/search-providers" = {
           disabled = [];
