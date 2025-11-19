@@ -13,7 +13,8 @@ with lib; let
     blur-my-shell     # adds transparency and blur to gnome
     pano              # clipboard manager
     media-controls    # adds mpris widget
-    caffeine          # adds a icon to idle-inhibit
+    caffeine          # provides idle-inhibit on demand
+    tiling-shell      # adds tiling support
   ];
 in {
   config = mkIf cfg.enable {
@@ -58,6 +59,11 @@ in {
           noise-amount = 0;
         };
         "org/gnome/desktop/interface".color-scheme = "prefer-dark";
+        "org/gnome/shell/extensions/tiling/shell" = {
+          inner-gaps = 0;
+          outer-gaps = 0;
+          enable-tiling-system = true;
+        };
       };
     };
   };
