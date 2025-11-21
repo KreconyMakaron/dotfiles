@@ -10,7 +10,9 @@
 
   home-manager.users.${user}.programs.git = {
     enable = true;
-    userName = "KreconyMakaron";
-    userEmail = "55319736+KreconyMakaron@users.noreply.github.com";
+    settings.user = {
+      name = "KreconyMakaron";
+      email = "55319736+KreconyMakaron@users.noreply.github.com";
+    };
   };
 }
