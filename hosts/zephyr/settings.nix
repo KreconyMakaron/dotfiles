@@ -71,8 +71,18 @@
     alsa-utils
   ];
 
+  nixpkgs.overlays = [
+    (self: super: let 
+        lmms-fix-pkgs = import inputs.lmms-nixpkgs { inherit system; };
+      in {
+        inherit (lmms-fix-pkgs) lmms;
+    })
+  ];
+
   home-manager.users.krecony = {
     home.packages = with pkgs; [
+      lmms
+
       libreoffice-qt
       obsidian
       anki

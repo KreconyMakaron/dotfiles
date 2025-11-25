@@ -1011,6 +1011,22 @@
         "type": "github"
       }
     },
+    "lmms-nixpkgs": {
+      "locked": {
+        "lastModified": 1738772928,
+        "narHash": "sha256-tK8zABMetc4JOeQWdjGJH7wcrGn4auScKqSX5DQ3iRk=",
+        "owner": "wizardlink",
+        "repo": "nixpkgs",
+        "rev": "1e6acfb058a0acbb5100f18441dd98dd94374e97",
+        "type": "github"
+      },
+      "original": {
+        "owner": "wizardlink",
+        "ref": "lmms",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1741513245,
@@ -1278,6 +1294,7 @@
         "hyprland": "hyprland",
         "hyprlock": "hyprlock",
         "hyprspace": "hyprspace",
+        "lmms-nixpkgs": "lmms-nixpkgs",
         "nixpkgs": "nixpkgs_3",
         "nixvim": "nixvim",
         "polymc": "polymc",

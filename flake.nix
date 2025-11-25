@@ -15,6 +15,7 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
+    lmms-nixpkgs.url = "github:wizardlink/nixpkgs/lmms";
 
     home-manager = {
       url = "github:nix-community/home-manager";
