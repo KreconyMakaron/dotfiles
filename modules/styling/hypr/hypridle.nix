@@ -7,7 +7,7 @@
   inherit (pkgs.lib) getExe getExe';
 in {
   home-manager.users.${user}.services.hypridle = {
-    enable = true;
+    inherit (config.style.desktopEnvironment.Hyprland) enable;
 
     settings = {
       general = {
