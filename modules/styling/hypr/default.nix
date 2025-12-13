@@ -4,7 +4,7 @@
   inputs,
   config,
   user,
-importWithStuff,
+  importWithStuff,
   ...
 }:
 with lib; let

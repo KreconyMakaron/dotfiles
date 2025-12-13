@@ -50,10 +50,10 @@
   ];
 
   nixpkgs.overlays = [
-    (self: super: let 
-        lmms-fix-pkgs = import inputs.lmms-nixpkgs { inherit system; };
-      in {
-        inherit (lmms-fix-pkgs) lmms;
+    (self: super: let
+      lmms-fix-pkgs = import inputs.lmms-nixpkgs {inherit system;};
+    in {
+      inherit (lmms-fix-pkgs) lmms;
     })
   ];
 
@@ -115,7 +115,7 @@
   services = {
     postgresql = {
       enable = true;
-      ensureDatabases = [ "mydatabase" ];
+      ensureDatabases = ["mydatabase"];
       authentication = pkgs.lib.mkOverride 10 ''
         #type database  DBuser  auth-method
         local all       all     trust

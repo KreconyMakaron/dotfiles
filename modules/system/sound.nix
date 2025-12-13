@@ -1,4 +1,8 @@
-{pkgs, user, ...}: {
+{
+  pkgs,
+  user,
+  ...
+}: {
   security.rtkit.enable = true;
 
   services.pipewire = {
@@ -13,11 +17,18 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [ 
-    libjack2 jack2 qjackctl pavucontrol libjack2 jack2 qjackctl jack_capture 
+  environment.systemPackages = with pkgs; [
+    libjack2
+    jack2
+    qjackctl
+    pavucontrol
+    libjack2
+    jack2
+    qjackctl
+    jack_capture
   ];
 
-  users.users.${user}.extraGroups = [ "audio" ];
+  users.users.${user}.extraGroups = ["audio"];
 
   musnix = {
     enable = true;

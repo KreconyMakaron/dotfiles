@@ -66,7 +66,7 @@
         util-linux
         xz
         systemd
-        
+
         xorg.libXcomposite
         xorg.libXtst
         xorg.libXrandr

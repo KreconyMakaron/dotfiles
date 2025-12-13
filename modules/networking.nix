@@ -3,45 +3,48 @@
   lib,
   config,
   ...
-}: with lib; let
+}:
+with lib; let
   cfg = config.preferences;
-in{
+in {
   options.preferences = {
     vpn.enable = mkEnableOption "enables the vpn";
   };
-  config = {
-    # reduce SECLEVEL to connect to wifi
-    systemd.services.wpa_supplicant.environment.OPENSSL_CONF = pkgs.writeText "openssl.cnf" ''
-      openssl_conf = openssl_init
-      [openssl_init]
-      ssl_conf = ssl_sect
-      [ssl_sect]
-      system_default = system_default_sect
-      [system_default_sect]
-      CipherString = DEFAULT@SECLEVEL=0
-    '';
+  config =
+    {
+      # reduce SECLEVEL to connect to wifi
+      systemd.services.wpa_supplicant.environment.OPENSSL_CONF = pkgs.writeText "openssl.cnf" ''
+        openssl_conf = openssl_init
+        [openssl_init]
+        ssl_conf = ssl_sect
+        [ssl_sect]
+        system_default = system_default_sect
+        [system_default_sect]
+        CipherString = DEFAULT@SECLEVEL=0
+      '';
 
-    networking = {
-      useDHCP = false;
-      dhcpcd.enable = false;
+      networking = {
+        useDHCP = false;
+        dhcpcd.enable = false;
 
-      networkmanager = {
-        enable = true;
-        dns = "none";
-        wifi.macAddress = "random";
+        networkmanager = {
+          enable = true;
+          dns = "none";
+          wifi.macAddress = "random";
+        };
+
+        firewall.enable = true;
+
+        nameservers = ["1.1.1.1"];
       };
+    }
+    // mkIf cfg.vpn.enable {
+      systemd.services.NetworkManager-wait-online.enable = true;
 
-      firewall.enable = true;
-
-      nameservers = ["1.1.1.1"];
+      environment.systemPackages = with pkgs; [
+        wireguard-tools
+        protonvpn-gui
+      ];
+      networking.firewall.checkReversePath = false;
     };
-  } // mkIf cfg.vpn.enable {
-    systemd.services.NetworkManager-wait-online.enable = true;
-
-    environment.systemPackages = with pkgs; [
-      wireguard-tools
-      protonvpn-gui
-    ];
-    networking.firewall.checkReversePath = false;
-  };
 }
