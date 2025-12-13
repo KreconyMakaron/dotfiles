@@ -35,6 +35,11 @@
     };
 
     vpn.enable = true;
+
+    sql = {
+      postgresql.enable = true;
+      pgadmin.enable = true;
+    };
   };
 
   style = {
@@ -110,39 +115,5 @@
     enableDataImporter = true;
     databasePasswordFile = "/var/secrets/firefly-db-key";
     appKeyFile = "/var/secrets/firefly-app-key";
-  };
-
-  services = {
-    postgresql = {
-      enable = true;
-      ensureDatabases = ["mydatabase"];
-      authentication = pkgs.lib.mkOverride 10 ''
-        #type database  DBuser  auth-method
-        local all       all     trust
-        # ipv4
-        host  all      all     127.0.0.1/32   trust
-        # ipv6
-        host all       all     ::1/128        trust
-      '';
-      enableTCPIP = true;
-      port = 5432;
-    };
-
-    pgadmin = {
-      enable = true;
-      initialEmail = "admin@example.com";
-      initialPasswordFile = "/home/krecony/other/pgadminpass";
-      port = 5050;
-      settings.authentication = ''
-        # Allow local socket connections
-        local   all   all                          trust
-
-        # Allow IPv4 localhost
-        host    all   all   127.0.0.1/32           trust
-
-        # Allow IPv6 localhost
-        host    all   all   ::1/128                trust
-      '';
-    };
   };
 }

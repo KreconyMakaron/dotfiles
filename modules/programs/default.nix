@@ -3,5 +3,6 @@
     ./git.nix
     ./firefly.nix
     ./foot.nix
+    ./sql.nix
   ];
 }
