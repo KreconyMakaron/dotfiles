@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  user,
   ...
 }:
 with lib; let
@@ -19,5 +20,21 @@ in {
       protonvpn-gui
     ];
     networking.firewall.checkReversePath = false;
+
+    home-manager.users.${user}.systemd.user.services.protonvpn-autostart = {
+      Unit = {
+        Description = "Starts ProtonVPN";
+        Requires = ["graphical-session.target"];
+        After = ["graphical-session.target"];
+      };
+      Service = {
+        RemainAfterExit = true;
+        Type = "simple";
+        ExecStart = [
+          "${lib.getExe' pkgs.protonvpn-gui "protonvpn-app"}"
+        ];
+      };
+      Install.WantedBy = ["graphical-session.target"];
+    };
   };
 }
