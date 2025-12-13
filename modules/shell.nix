@@ -27,7 +27,7 @@
   programs.starship = {
     enable = true;
     settings = {
-      format = "$username$hostname$directory$git_branch$git_state$git_status$cmd_duration$line_break$python$character";
+      format = "$username$hostname$directory$git_branch$git_state$git_status$nix_shell$cmd_duration$line_break$python$character";
       palette = "style";
       palettes.style = with colors.withHashtag; {
         color_bg1 = base01;
