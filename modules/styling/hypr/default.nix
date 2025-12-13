@@ -4,6 +4,7 @@
   inputs,
   config,
   user,
+importWithStuff,
   ...
 }:
 with lib; let
@@ -13,6 +14,12 @@ in {
     environment.etc."greetd/environments".text = ''
       Hyprland
     '';
+
+    imports = builtins.map importWithStuff [
+      ./binds.nix
+      ./hypridle.nix
+      ./hyprlock.nix
+    ];
 
     programs.hyprland.enable = true;
 

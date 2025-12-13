@@ -17,7 +17,7 @@
         s = map hex-to-dec (stringToCharacters (toLower x));
       in "rgb(${merge-hex s 0}, ${merge-hex s 2}, ${merge-hex s 4})";
   in {
-    inherit (config.style.desktopEnvironment.Hyprland) enable;
+    enable = true;
 
     settings = {
       general = {
