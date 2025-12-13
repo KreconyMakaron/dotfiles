@@ -34,29 +34,7 @@
       desktopFile = "org.gnome.Loupe.desktop";
     };
 
-    vpn = {
-      enable = true;
-      disabledIPs = [
-        # nixos.wiki gets mad
-        "172.67.75.217"
-        "104.26.14.206"
-        "104.26.15.206"
-      ];
-      dns = ["10.2.0.1"];
-      address = ["10.2.0.2/32"];
-      privateKeyDir = "/root/protonvpn-keys";
-      servers = {
-        warsaw = {
-          publicKey = "wpfRQRhJirL++QclFH6SDhc+TuJJB4UxbCABy7A1tS4=";
-          endpoint = "79.127.186.193:51820";
-        };
-        amsterdam = {
-          autostart = true;
-          publicKey = "afmlPt2O8Y+u4ykaOpMoO6q1JkbArZsaoFcpNXudXCg=";
-          endpoint = "46.29.25.3:51820";
-        };
-      };
-    };
+    vpn.enable = true;
   };
 
   style = {
@@ -82,6 +60,8 @@
   home-manager.users.krecony = {
     home.packages = with pkgs; [
       lmms
+
+      scenebuilder
 
       libreoffice-qt
       obsidian
@@ -132,12 +112,37 @@
     appKeyFile = "/var/secrets/firefly-app-key";
   };
 
-  services.postgresql = {
-    enable = true;
-    ensureDatabases = [ "mydatabase" ];
-    authentication = pkgs.lib.mkOverride 10 ''
-      #type database  DBuser  auth-method
-      local all       all     trust
-    '';
+  services = {
+    postgresql = {
+      enable = true;
+      ensureDatabases = [ "mydatabase" ];
+      authentication = pkgs.lib.mkOverride 10 ''
+        #type database  DBuser  auth-method
+        local all       all     trust
+        # ipv4
+        host  all      all     127.0.0.1/32   trust
+        # ipv6
+        host all       all     ::1/128        trust
+      '';
+      enableTCPIP = true;
+      port = 5432;
+    };
+
+    pgadmin = {
+      enable = true;
+      initialEmail = "admin@example.com";
+      initialPasswordFile = "/home/krecony/other/pgadminpass";
+      port = 5050;
+      settings.authentication = ''
+        # Allow local socket connections
+        local   all   all                          trust
+
+        # Allow IPv4 localhost
+        host    all   all   127.0.0.1/32           trust
+
+        # Allow IPv6 localhost
+        host    all   all   ::1/128                trust
+      '';
+    };
   };
 }
