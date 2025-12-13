@@ -21,8 +21,8 @@ in {
     ./zsh.nix
     ./firefly.nix
     ./foot.nix
-    ./networking.nix
 
+    ./networking
     ./styling
     ./system
   ];
