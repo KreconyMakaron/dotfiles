@@ -15,14 +15,11 @@
 in {
   imports = builtins.map importWithStuff [
     ./core.nix
-    ./shell.nix
     ./preferences.nix
-    ./git.nix
-    ./zsh.nix
-    ./firefly.nix
-    ./foot.nix
 
     ./networking
+    ./programs
+    ./shell
     ./styling
     ./system
   ];
