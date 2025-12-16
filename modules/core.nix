@@ -45,10 +45,12 @@ in {
 
     users = {
       defaultUserShell = shellPackage;
+      mutableUsers = false;
       users = {
         ${cfg.user} = {
           isNormalUser = true;
           useDefaultShell = true;
+          hashedPasswordFile = "/var/secrets/password";
           extraGroups = [
             "networkmanager"
             "wheel"

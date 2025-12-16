@@ -16,8 +16,6 @@
     dev.enable = false;
   };
 
-  programs.nix-ld.enable = true;
-
   programs.nh = {
     enable = true;
     flake = config.core.flakePath;

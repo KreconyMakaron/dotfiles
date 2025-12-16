@@ -9,10 +9,10 @@ with lib; let
   cfg = config.style;
 in {
   imports = builtins.map importWithStuff [
-    ./compositor.nix
-    ./binds.nix
     ./style.nix
     ./gnome.nix
+
+    ./hypr
   ];
 
   options.style = {

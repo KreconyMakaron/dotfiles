@@ -9,12 +9,12 @@ with lib; let
   cfg = config.style.desktopEnvironment.gnome;
 
   extensions = with pkgs.gnomeExtensions; [
-    appindicator      # tray icons
-    blur-my-shell     # adds transparency and blur to gnome
-    pano              # clipboard manager
-    media-controls    # adds mpris widget
-    caffeine          # provides idle-inhibit on demand
-    tiling-shell      # adds tiling support
+    appindicator # tray icons
+    blur-my-shell # adds transparency and blur to gnome
+    pano # clipboard manager
+    media-controls # adds mpris widget
+    caffeine # provides idle-inhibit on demand
+    tiling-shell # adds tiling support
   ];
 in {
   config = mkIf cfg.enable {
@@ -33,11 +33,13 @@ in {
 
     environment = {
       gnome.excludePackages = with pkgs; [gnome-tour gnome-user-docs];
-      systemPackages = with pkgs; [
-        pkgs.nautilus
-        gnome-clocks
-        cheese
-      ] ++ extensions;
+      systemPackages = with pkgs;
+        [
+          pkgs.nautilus
+          gnome-clocks
+          cheese
+        ]
+        ++ extensions;
     };
 
     services.udev.packages = [pkgs.gnome-settings-daemon];

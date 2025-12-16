@@ -6,8 +6,7 @@
   imports = builtins.map importWithStuff [
     ./vpn.nix
   ];
-
-  # reduce SECLEVEL to connect to uni wifi
+  # reduce SECLEVEL to connect to wifi
   systemd.services.wpa_supplicant.environment.OPENSSL_CONF = pkgs.writeText "openssl.cnf" ''
     openssl_conf = openssl_init
     [openssl_init]
