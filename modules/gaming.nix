@@ -22,11 +22,11 @@ in {
   config = mkMerge [
     (mkIf cfg.minecraft.enable {
       nixpkgs.overlays = [inputs.polymc.overlay];
-      preferences.userPackages = [cfg.minecraft.package];
+      settings.userPackages = [cfg.minecraft.package];
     })
     (mkIf cfg.steam.enable {
       programs.steam.enable = true;
-      preferences.nix.unfreePackages = [
+      settings.nix.unfreePackages = [
         "steam"
         "steam-unwrapped"
       ];

@@ -4,9 +4,9 @@
   ...
 }:
 with lib; let
-  cfg = config.preferences.nix;
+  cfg = config.settings.nix;
 in {
-  options.preferences.nix = {
+  options.settings.nix = {
     unfreePackages = mkOption {
       default = [];
       type = types.listOf types.str;

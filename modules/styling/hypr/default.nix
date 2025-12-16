@@ -23,7 +23,7 @@ in {
 
     programs.hyprland.enable = true;
 
-    preferences.userPackages = with pkgs; [
+    settings.userPackages = with pkgs; [
       brightnessctl
       wl-clipboard
       wl-clip-persist
@@ -53,10 +53,10 @@ in {
         #   inputs.hyprspace.packages.${pkgs.system}.Hyprspace
         # ];
 
-        settings = {
-          windowrulev2 = let
-            terminal = config.preferences.terminal.swallowClassRegex;
-          in [
+        settings = let
+          terminal = config.preferences.terminal.swallowClassRegex;
+        in {
+          windowrulev2 = [
             "float,class:^(org.pulseaudio.pavucontrol)$"
             "center,class:^(org.pulseaudio.pavucontrol)$"
             "size 50% 50%,class:^(org.pulseaudio.pavucontrol)$"
@@ -118,7 +118,7 @@ in {
             disable_autoreload = true;
 
             enable_swallow = true;
-            swallow_regex = config.preferences.terminal.swallowClassRegex;
+            swallow_regex = terminal;
             swallow_exception_regex = "^(pavucontrol)$";
           };
         };

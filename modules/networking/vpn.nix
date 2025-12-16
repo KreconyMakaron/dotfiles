@@ -6,7 +6,7 @@
   ...
 }:
 with lib; let
-  cfg = config.preferences.vpn;
+  cfg = config.networking.vpn;
 
   vpnScript = builtins.readFile ./vpn.sh;
 
@@ -28,7 +28,7 @@ with lib; let
     };
   };
 in {
-  options.preferences.vpn = {
+  options.networking.vpn = {
     enable = mkEnableOption "enables the vpn";
 
     useOfficialApp = mkOption {

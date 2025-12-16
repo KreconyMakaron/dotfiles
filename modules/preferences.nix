@@ -78,7 +78,7 @@ in {
       };
     };
 
-    preferences.userPackages = [
+    settings.userPackages = [
       cfg.browser.package
       cfg.pdf.package
       cfg.image.package

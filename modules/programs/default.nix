@@ -6,7 +6,7 @@
   ...
 }:
 with lib; let
-  cfg = config.preferences;
+  cfg = config.settings;
 in {
   imports = builtins.map importWithStuff [
     ./git.nix
@@ -15,7 +15,7 @@ in {
     ./sql.nix
   ];
 
-  options.preferences.userPackages = mkOption {
+  options.settings.userPackages = mkOption {
     type = types.listOf types.package;
     default = [];
     description = ''
