@@ -2,6 +2,7 @@
   lib,
   config,
   pkgs,
+  inputs,
   ...
 }:
 with lib; let
@@ -19,7 +20,10 @@ in {
   };
 
   config = mkMerge [
-    (mkIf cfg.minecraft.enable {preferences.userPackages = [cfg.minecraft.package];})
+    (mkIf cfg.minecraft.enable {
+      nixpkgs.overlays = [inputs.polymc.overlay];
+      preferences.userPackages = [cfg.minecraft.package];
+    })
     (mkIf cfg.steam.enable {
       programs.steam.enable = true;
       preferences.nix.unfreePackages = [
