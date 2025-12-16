@@ -57,7 +57,7 @@
   nixpkgs.overlays = [
     (self: super: let
       lmms-fix-pkgs = import inputs.lmms-nixpkgs {inherit system;};
-    in {
+   in {
       inherit (lmms-fix-pkgs) lmms;
     })
   ];
