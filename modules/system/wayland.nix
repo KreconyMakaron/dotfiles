@@ -1,24 +1,28 @@
-{...}: {
-  environment = {
-    variables = {
-      NIXOS_OZONE_WL = "1";
-      __GL_GSYNC_ALLOWED = "0";
-      __GL_VRR_ALLOWED = "0";
-      _JAVA_AWT_WM_NONEREPARENTING = "1";
-      DISABLE_QT5_COMPAT = "0";
-      ANKI_WAYLAND = "1";
-      DIRENV_LOG_FORMAT = "";
-      WLR_DRM_NO_ATOMIC = "1";
-      QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-      QT_QPA_PLATFORM = "wayland;xcb";
-      DISABLE_QT_COMPAT = "0";
-      QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-      MOZ_ENABLE_WAYLAND = "1";
-      WLR_BACKEND = "vulkan";
-      #WLR_RENDERER = "vulkan"; # https://github.com/hyprwm/Hyprland/issues/5996
-      XDG_SESSION_TYPE = "wayland";
-      SDL_VIDEODRIVER = "wayland";
-      CLUTTER_BACKEND = "wayland";
-    };
+{
+  lib,
+  config,
+  ...
+}:
+with lib; let
+  cfg = config.style.displayServer.wayland;
+in {
+  environment.variables = mkIf cfg.enable {
+    # make electron apps use wayland
+    NIXOS_OZONE_WL = "1";
+    # make anki use wayland
+    ANKI_WAYLAND = "1";
+    # make firefox use wayland
+    MOZ_ENABLE_WAYLAND = "1";
+    # make gtk use wayland
+    GDK_BACKEND = "wayland";
+    # prefer wayland on qt
+    QT_QPA_PLATFORM = "wayland;xcb";
+
+    XDG_SESSION_TYPE = "wayland";
+    CLUTTER_BACKEND = "wayland";
+
+    _JAVA_AWT_WM_NONEREPARENTING = "1";
+    QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
   };
 }
