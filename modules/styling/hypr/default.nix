@@ -23,24 +23,22 @@ in {
 
     programs.hyprland.enable = true;
 
-    home-manager.users.${user} = {
-      home.packages = with pkgs; [
-        brightnessctl
-        wl-clipboard
-        wl-clip-persist
-        cliphist
-        grimblast
-        grim
-        slurp
-      ];
+    preferences.userPackages = with pkgs; [
+      brightnessctl
+      wl-clipboard
+      wl-clip-persist
+      cliphist
+      grimblast
+      grim
+      slurp
+    ];
 
-      # wallpaper setter
-      services.hyprpaper = {
-        enable = true;
-        settings = {
-          preload = [config.style.settings.wallpaper];
-          wallpaper = [config.style.settings.wallpaper];
-        };
+    # wallpaper setter
+    home-manager.users.${user}.services.hyprpaper = {
+      enable = true;
+      settings = {
+        preload = [config.style.settings.wallpaper];
+        wallpaper = [config.style.settings.wallpaper];
       };
 
       wayland.windowManager.hyprland = {

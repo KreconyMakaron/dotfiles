@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  user,
   pkgs,
   ...
 }:
@@ -20,7 +19,7 @@ in {
   };
 
   config = mkMerge [
-    (mkIf cfg.minecraft.enable {home-manager.users.${user}.home.packages = [cfg.minecraft.package];})
+    (mkIf cfg.minecraft.enable {preferences.userPackages = [cfg.minecraft.package];})
     (mkIf cfg.steam.enable {
       programs.steam.enable = true;
       preferences.nix.unfreePackages = [

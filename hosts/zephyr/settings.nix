@@ -64,36 +64,7 @@
       pgadmin.enable = true;
     };
 
-    nix.unfreePackages = [
-      "obsidian"
-      "spotify"
-      "pycharm-professional"
-      "idea-ultimate"
-    ];
-  };
-
-  style = {
-    theme = "everforest";
-    desktopEnvironment.gnome.enable = true;
-    displayServer.wayland.enable = true;
-    widgets.ags.enable = false;
-  };
-
-  environment.systemPackages = with pkgs; [
-    sof-firmware
-    alsa-utils
-  ];
-
-  nixpkgs.overlays = [
-    (self: super: let
-      lmms-fix-pkgs = import inputs.lmms-nixpkgs {inherit system;};
-    in {
-      inherit (lmms-fix-pkgs) lmms;
-    })
-  ];
-
-  home-manager.users.krecony = {
-    home.packages = with pkgs; [
+    userPackages = with pkgs; [
       lmms
 
       scenebuilder
@@ -123,6 +94,35 @@
       typst
     ];
 
+    nix.unfreePackages = [
+      "obsidian"
+      "spotify"
+      "pycharm-professional"
+      "idea-ultimate"
+    ];
+  };
+
+  style = {
+    theme = "everforest";
+    desktopEnvironment.gnome.enable = true;
+    displayServer.wayland.enable = true;
+    widgets.ags.enable = false;
+  };
+
+  environment.systemPackages = with pkgs; [
+    sof-firmware
+    alsa-utils
+  ];
+
+  nixpkgs.overlays = [
+    (self: super: let
+      lmms-fix-pkgs = import inputs.lmms-nixpkgs {inherit system;};
+    in {
+      inherit (lmms-fix-pkgs) lmms;
+    })
+  ];
+
+  home-manager.users.krecony = {
     # huawei laptop go brrrr
     systemd.user.services.alsa-fixes = {
       Unit.Description = "Enable Speakers";
