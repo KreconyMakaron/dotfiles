@@ -87,12 +87,6 @@
       xournalpp
       texliveFull
 
-      # nice gnome apps
-      baobab
-      komikku
-      resources
-      gnome-calendar
-
       # nice latex alternative
       typst
     ];

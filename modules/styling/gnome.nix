@@ -31,15 +31,17 @@ in {
       };
     };
 
+    settings.userPackages = with pkgs; [
+      baobab
+      komikku
+      resources
+      gnome-calendar
+      gnome-clocks
+    ];
+
     environment = {
       gnome.excludePackages = with pkgs; [gnome-tour gnome-user-docs];
-      systemPackages = with pkgs;
-        [
-          pkgs.nautilus
-          gnome-clocks
-          cheese
-        ]
-        ++ extensions;
+      systemPackages = [pkgs.nautilus] ++ extensions;
     };
 
     services.udev.packages = [pkgs.gnome-settings-daemon];
