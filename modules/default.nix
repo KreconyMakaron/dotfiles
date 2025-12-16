@@ -16,6 +16,7 @@ in {
   imports = builtins.map importWithStuff [
     ./core.nix
     ./preferences.nix
+    ./gaming.nix
 
     ./networking
     ./programs
