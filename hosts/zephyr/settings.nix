@@ -6,8 +6,11 @@
   ...
 }: {
   hardware = {
-    cpu.intel.updateMicrocode = true;
     enableRedistributableFirmware = true;
+    audio = {
+      enable = true;
+      enableAudioProduction = true;
+    };
   };
 
   powerManagement.enable = true;
@@ -86,10 +89,8 @@
 
       # nice gnome apps
       baobab
-      gnome-logs
       komikku
       resources
-      wike
       gnome-calendar
 
       # nice latex alternative

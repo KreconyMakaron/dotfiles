@@ -1,40 +1,57 @@
 {
   pkgs,
   user,
+  lib,
+  config,
   ...
-}: {
-  security.rtkit.enable = true;
+}:
+with lib; let
+  cfg = config.hardware.audio;
+in {
+  options.hardware.audio = {
+    enable = mkEnableOption "enables sound on the device";
+    enableAudioProduction = mkEnableOption "enables audio production features";
+  };
 
-  services.pipewire = {
-    enable = true;
-    audio.enable = true;
-    wireplumber.enable = true;
-    pulse.enable = true;
-    jack.enable = true;
-    alsa = {
+  config = mkIf cfg.enable {
+    security.rtkit.enable = true;
+    services.pulseaudio.enable = false;
+
+    services.pipewire = {
       enable = true;
-      support32Bit = true;
+      audio.enable = true;
+      wireplumber.enable = true;
+      pulse.enable = true;
+      jack.enable = cfg.enableAudioProduction;
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
     };
+
+    environment.systemPackages = with pkgs;
+      [pavucontrol]
+      ++ (
+        if cfg.enableAudioProduction
+        then [
+          libjack2
+          jack2
+          qjackctl
+          libjack2
+          jack2
+          qjackctl
+          jack_capture
+        ]
+        else []
+      );
+
+    users.users.${user}.extraGroups = ["audio"];
+
+    musnix = {
+      enable = cfg.enableAudioProduction;
+      soundcardPciId = "00:1f.3";
+    };
+
+    environment.variables.PIPEWIRE_RUNTIME_DIR = "/run/user/1000";
   };
-
-  environment.systemPackages = with pkgs; [
-    libjack2
-    jack2
-    qjackctl
-    pavucontrol
-    libjack2
-    jack2
-    qjackctl
-    jack_capture
-  ];
-
-  users.users.${user}.extraGroups = ["audio"];
-
-  musnix = {
-    enable = true;
-    soundcardPciId = "00:1f.3";
-  };
-
-  services.pulseaudio.enable = false;
-  environment.variables.PIPEWIRE_RUNTIME_DIR = "/run/user/1000";
 }
