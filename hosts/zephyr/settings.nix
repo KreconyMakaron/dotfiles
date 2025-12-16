@@ -7,7 +7,7 @@
 }: {
   hardware = {
     cpu.intel.updateMicrocode = true;
-    enableAllFirmware = true;
+    enableRedistributableFirmware = true;
   };
 
   powerManagement.enable = true;
@@ -63,6 +63,13 @@
       postgresql.enable = true;
       pgadmin.enable = true;
     };
+
+    nix.unfreePackages = [
+      "obsidian"
+      "spotify"
+      "pycharm-professional"
+      "idea-ultimate"
+    ];
   };
 
   style = {
