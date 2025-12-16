@@ -7,5 +7,7 @@
     ./bluetooth.nix
     ./printing.nix
     ./sleep.nix
+    ./intel.nix
+    ./wayland.nix
   ];
 }

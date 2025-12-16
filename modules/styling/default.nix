@@ -11,6 +11,7 @@ in {
   imports = builtins.map importWithStuff [
     ./style.nix
     ./gnome.nix
+    ./fonts.nix
 
     ./hypr
   ];

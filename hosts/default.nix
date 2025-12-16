@@ -39,7 +39,6 @@
             };
           })
 
-          ../system
           ../modules
         ]
         ++ builtins.attrValues self.nixosModules;
