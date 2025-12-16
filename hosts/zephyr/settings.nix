@@ -34,7 +34,30 @@
       desktopFile = "org.gnome.Loupe.desktop";
     };
 
-    vpn.enable = true;
+    vpn = {
+      enable = true;
+      useOfficialApp = false;
+      disabledIPs = [
+        # nixos.wiki gets mad
+        "172.67.75.217"
+        "104.26.14.206"
+        "104.26.15.206"
+      ];
+      dns = ["10.2.0.1"];
+      address = ["10.2.0.2/32"];
+      privateKeyDir = "/root/protonvpn-keys";
+      servers = {
+        warsaw = {
+          publicKey = "wpfRQRhJirL++QclFH6SDhc+TuJJB4UxbCABy7A1tS4=";
+          endpoint = "79.127.186.193:51820";
+        };
+        amsterdam = {
+          autostart = true;
+          publicKey = "afmlPt2O8Y+u4ykaOpMoO6q1JkbArZsaoFcpNXudXCg=";
+          endpoint = "46.29.25.3:51820";
+        };
+      };
+    };
 
     sql = {
       postgresql.enable = true;
@@ -57,7 +80,7 @@
   nixpkgs.overlays = [
     (self: super: let
       lmms-fix-pkgs = import inputs.lmms-nixpkgs {inherit system;};
-   in {
+    in {
       inherit (lmms-fix-pkgs) lmms;
     })
   ];
