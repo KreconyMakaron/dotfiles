@@ -20,6 +20,7 @@ in {
 
     ./networking
     ./programs
+    ./security
     ./shell
     ./styling
     ./system

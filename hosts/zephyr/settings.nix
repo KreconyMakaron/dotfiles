@@ -13,6 +13,12 @@
     };
   };
 
+  hardening = {
+    disableSudo = true;
+    disableSUIDs = true;
+    clamav.enable = true;
+  };
+
   powerManagement.enable = true;
 
   core = {
