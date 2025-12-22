@@ -9,50 +9,62 @@ with lib; let
 
   scan = paths:
     pkgs.writeShellScript "scan.sh" ''
-      # Adapted from https://gist.github.com/Pavel-Novikov/0c7486b59f9237d339f562d30b05e56e
-      export LOG="/var/log/clamav/scan.log"
-      export SUMMARY_FILE=`mktemp`
-      export FIFO_DIR=`mktemp -d`
-      export FIFO="$FIFO_DIR/log"
+            # Adapted from https://gist.github.com/Pavel-Novikov/0c7486b59f9237d339f562d30b05e56e
+            export LOG="/var/log/clamav/scan.log"
+            export SUMMARY_FILE=$(mktemp)
+            export FIFO_DIR=$(mktemp -d)
+            export FIFO="$FIFO_DIR/log"
 
-      export SCAN_STATUS
-      export INFECTED_SUMMARY
-      export XUSERS
+            export SCAN_STATUS
+            export INFECTED_SUMMARY
+            export XUSERS
 
-      mkfifo "$FIFO"
-      tail -f "$FIFO" | tee -a "$LOG" "$SUMMARY_FILE" &
+            mkfifo "$FIFO"
+            tail -f "$FIFO" | tee -a "$LOG" "$SUMMARY_FILE" &
 
-      echo "------------ SCAN START ------------" > "$FIFO"
-      echo "Running scan on `date`" > "$FIFO"
-      echo "Scanning ${concatStringsSep " " paths}" > "$FIFO"
-      ${getExe' pkgs.clamav "clamdscan"} --infected --multiscan --fdpass --stdout ${concatStringsSep " " paths} | grep -vE 'WARNING|ERROR|^$' > "$FIFO"
-      echo > "$FIFO"
+            echo "------------ SCAN START ------------" > "$FIFO"
+            echo "Running scan on $(date)" > "$FIFO"
+            echo "Scanning ${concatStringsSep " " paths}" > "$FIFO"
+            ${getExe' pkgs.clamav "clamdscan"} --infected --multiscan --fdpass --stdout ${concatStringsSep " " paths} > >(grep -vE 'WARNING|ERROR|^$' > "$FIFO")
+            SCAN_STATUS=$?
+            echo > "$FIFO"
 
-      SCAN_STATUS="''${PIPESTATUS[0]}"
-      INFECTED_SUMMARY=`cat "$SUMMARY_FILE" | grep "Infected files"`
+            INFECTED_SUMMARY=$(cat "$SUMMARY_FILE" | grep "Infected files")
 
-      rm "$SUMMARY_FILE"
-      rm "$FIFO"
-      rmdir "$FIFO_DIR"
+            rm "$SUMMARY_FILE"
+            rm "$FIFO"
+            rmdir "$FIFO_DIR"
 
-      if [[ "$SCAN_STATUS" -ne "0" ]] ; then
+            if [[ "$SCAN_STATUS" -ne "0" ]] ; then
 
-        echo "Virus signature found - $INFECTED_SUMMARY" | ${getExe' pkgs.systemd "systemd-cat"} -t clamav -p emerg
+              echo "Virus signature found - $INFECTED_SUMMARY" | ${getExe' pkgs.systemd "systemd-cat"} -t clamav -p emerg
 
-        # Send an alert to all graphical users.
-        XUSERS=($(who|awk '{print $1$NF}'|sort -u))
-        for XUSER in $XUSERS; do
-          NAME=(''${XUSER/(/ })
-          DISPLAY=''${NAME[1]/)/}
-          DBUS_ADDRESS=unix:path=/run/user/$(id -u ''${NAME[0]})/bus
-          echo "run $NAME - $DISPLAY - $DBUS_ADDRESS -" >> /tmp/testlog
-          ${getExe' pkgs.systemd "run0"} -u ''${NAME[0]} DISPLAY=''${DISPLAY} \
-            DBUS_SESSION_BUS_ADDRESS=''${DBUS_ADDRESS} \
-            PATH=''${PATH} \
-            ${getExe' pkgs.libnotify "notify-send"} -i security-low "Virus signature(s) found" "$INFECTED_SUMMARY"
+      loginctl list-sessions --no-legend | while read -r session uid user seat tty; do
+        XDG_RUNTIME_DIR="/run/user/$uid"
+        DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
+
+        [[ -S "$XDG_RUNTIME_DIR/bus" ]] || continue
+
+        ${getExe' pkgs.systemd "run0"} -u "$user" -- \
+          /bin/sh -lc '
+            export INFECTED_SUMMARY="'"$INFECTED_SUMMARY"'"
+            export XDG_RUNTIME_DIR="'"$XDG_RUNTIME_DIR"'"
+            export DBUS_SESSION_BUS_ADDRESS="'"$DBUS_SESSION_BUS_ADDRESS"'"
+            HOST=$(hostname)
+
+            ${getExe' pkgs.libnotify "notify-send"} \
+              -u critical \
+              -t 0 \
+              -i security-high \
+              -h string:category:security \
+              -h string:x-canonical-private-synchronous:clamav-alert \
+              -a clamav \
+              "$HOST: Virus signature(s) found" \
+              "$INFECTED_SUMMARY"
+            '
         done
 
-      fi
+            fi
     '';
 in {
   options.hardening.clamav = {
@@ -139,7 +151,7 @@ in {
 
           OnAccessIncludePath = "/home/*/download";
           OnAccessPrevention = true;
-          OnAccessExcludeUname = "clamav";
+          OnAccessExcludeUname = mkForce ["clamav" "root"];
         };
       };
 
