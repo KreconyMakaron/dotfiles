@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  user,
   ...
 }:
 with lib; let
@@ -50,7 +51,6 @@ with lib; let
             export INFECTED_SUMMARY="'"$INFECTED_SUMMARY"'"
             export XDG_RUNTIME_DIR="'"$XDG_RUNTIME_DIR"'"
             export DBUS_SESSION_BUS_ADDRESS="'"$DBUS_SESSION_BUS_ADDRESS"'"
-            HOST=$(hostname)
 
             ${getExe' pkgs.libnotify "notify-send"} \
               -u critical \
@@ -59,13 +59,34 @@ with lib; let
               -h string:category:security \
               -h string:x-canonical-private-synchronous:clamav-alert \
               -a clamav \
-              "$HOST: Virus signature(s) found" \
+              "Virus signature(s) where found" \
               "$INFECTED_SUMMARY"
             '
         done
 
             fi
     '';
+
+  virusEvent = pkgs.writeShellScript "virusEvent" ''
+    ALERT="''${CLAM_VIRUSEVENT_VIRUSNAME:-''${CLAM_VIRUSEVENT_SIGNATURE:-Unknown virus}} in ''${CLAM_VIRUSEVENT_FILENAME:-Unknown file}"
+    echo "$ALERT" >> /run/clamav/alerts
+  '';
+
+  virusNotify = pkgs.writeShellScript "virusNotify" ''
+    ${pkgs.coreutils}/bin/tail -n0 -F /run/clamav/alerts | \
+      while IFS= read -r line; do \
+        ${getExe' pkgs.libnotify "notify-send"} \
+          -u critical \
+          -t 0 \
+          -i security-high \
+          -h string:category:security \
+          -h string:x-canonical-private-synchronous:clamav-alert \
+          -a clamav \
+          "Virus signature was found!" \
+          "$line"
+      done
+
+  '';
 in {
   options.hardening.clamav = {
     enable = mkEnableOption "enables ClamAV the antivirus scanner";
@@ -139,6 +160,16 @@ in {
         (mkIf cfg.scan.weekly.enable (mkClamScan "weekly" "Sun 21:00:00" cfg.scan.weekly.directories))
       ];
 
+    home-manager.users.${user}.systemd.user.services.clamav-notify = {
+      Unit.Description = "Notifies the user on VirusEvent";
+      Service = {
+        ExecStart = "${virusNotify}";
+        Restart = "always";
+        RestartSec = 2;
+      };
+      Install.WantedBy = ["default.target"];
+    };
+
     services.clamav = {
       daemon = {
         enable = true;
@@ -149,9 +180,11 @@ in {
           ExtendedDetectionInfo = true;
           MaxThreads = 8;
 
-          OnAccessIncludePath = "/home/*/download";
-          OnAccessPrevention = true;
+          OnAccessIncludePath = ["/home" "/var/tmp"];
+          OnAccessPrevention = false;
+          OnAccessExtraScanning = true;
           OnAccessExcludeUname = mkForce ["clamav" "root"];
+          VirusEvent = "${virusEvent}";
         };
       };
 
