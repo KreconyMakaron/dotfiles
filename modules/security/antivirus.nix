@@ -10,82 +10,95 @@ with lib; let
 
   scan = paths:
     pkgs.writeShellScript "scan.sh" ''
-            # Adapted from https://gist.github.com/Pavel-Novikov/0c7486b59f9237d339f562d30b05e56e
-            export LOG="/var/log/clamav/scan.log"
-            export SUMMARY_FILE=$(mktemp)
-            export FIFO_DIR=$(mktemp -d)
-            export FIFO="$FIFO_DIR/log"
+      # Adapted from https://gist.github.com/Pavel-Novikov/0c7486b59f9237d339f562d30b05e56e
+      set -euo pipefail
+      umask 077
 
-            export SCAN_STATUS
-            export INFECTED_SUMMARY
-            export XUSERS
+      export LOG="/var/log/clamav/scan.log"
 
-            mkfifo "$FIFO"
-            tail -f "$FIFO" | tee -a "$LOG" "$SUMMARY_FILE" &
+      touch "$LOG"
+      chmod 640 "$LOG"
+      chown clamav:clamav "$LOG"
 
-            echo "------------ SCAN START ------------" > "$FIFO"
-            echo "Running scan on $(date)" > "$FIFO"
-            echo "Scanning ${concatStringsSep " " paths}" > "$FIFO"
-            ${getExe' pkgs.clamav "clamdscan"} --infected --multiscan --fdpass --stdout ${concatStringsSep " " paths} > >(grep -vE 'WARNING|ERROR|^$' > "$FIFO")
-            SCAN_STATUS=$?
-            echo > "$FIFO"
+      export SUMMARY_FILE=$(mktemp)
+      export FIFO_DIR=$(mktemp -d)
+      export FIFO="$FIFO_DIR/log"
 
-            INFECTED_SUMMARY=$(cat "$SUMMARY_FILE" | grep "Infected files")
+      export SCAN_STATUS
+      export INFECTED_SUMMARY
+      export XUSERS
 
-            rm "$SUMMARY_FILE"
-            rm "$FIFO"
-            rmdir "$FIFO_DIR"
+      mkfifo "$FIFO"
+      tail -f "$FIFO" | tee -a "$LOG" "$SUMMARY_FILE" &
 
-            if [[ "$SCAN_STATUS" -ne "0" ]] ; then
+      echo "------------ SCAN START ------------" > "$FIFO"
+      echo "Running scan on $(date)" > "$FIFO"
+      echo "Scanning ${concatStringsSep " " paths}" > "$FIFO"
+      ${getExe' pkgs.clamav "clamdscan"} --infected --multiscan --fdpass --stdout ${concatStringsSep " " paths} > >(grep -vE 'WARNING|ERROR|^$' > "$FIFO")
+      SCAN_STATUS=$?
 
-              echo "Virus signature found - $INFECTED_SUMMARY" | ${getExe' pkgs.systemd "systemd-cat"} -t clamav -p emerg
+      echo > "$FIFO"
 
-      loginctl list-sessions --no-legend | while read -r session uid user seat tty; do
-        XDG_RUNTIME_DIR="/run/user/$uid"
-        DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
+      INFECTED_SUMMARY=$(cat "$SUMMARY_FILE" | grep "Infected files")
 
-        [[ -S "$XDG_RUNTIME_DIR/bus" ]] || continue
+      rm "$SUMMARY_FILE"
+      rm "$FIFO"
+      rmdir "$FIFO_DIR"
 
-        ${getExe' pkgs.systemd "run0"} -u "$user" -- \
-          /bin/sh -lc '
-            export INFECTED_SUMMARY="'"$INFECTED_SUMMARY"'"
-            export XDG_RUNTIME_DIR="'"$XDG_RUNTIME_DIR"'"
-            export DBUS_SESSION_BUS_ADDRESS="'"$DBUS_SESSION_BUS_ADDRESS"'"
+      if [[ "$SCAN_STATUS" -ne "0" ]] ; then
+        echo "Virus signature found - $INFECTED_SUMMARY" | ${getExe' pkgs.systemd "systemd-cat"} -t clamav -p emerg
 
-            ${getExe' pkgs.libnotify "notify-send"} \
-              -u critical \
-              -t 0 \
-              -i security-high \
-              -h string:category:security \
-              -h string:x-canonical-private-synchronous:clamav-alert \
-              -a clamav \
-              "Virus signature(s) where found" \
-              "$INFECTED_SUMMARY"
-            '
-        done
+        loginctl list-sessions --no-legend | while read -r _ uid user seat tty; do
+          XDG_RUNTIME_DIR="/run/user/$uid"
+          DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
 
-            fi
+          [[ -S "$XDG_RUNTIME_DIR/bus" ]] || continue
+
+          ${getExe' pkgs.systemd "run0"} -u "$user" -- \
+            /bin/sh -lc '
+              export INFECTED_SUMMARY="'"$INFECTED_SUMMARY"'"
+              export XDG_RUNTIME_DIR="'"$XDG_RUNTIME_DIR"'"
+              export DBUS_SESSION_BUS_ADDRESS="'"$DBUS_SESSION_BUS_ADDRESS"'"
+
+              ${getExe' pkgs.libnotify "notify-send"} \
+                -u critical \
+                -t 0 \
+                -i security-high \
+                -h string:category:security \
+                -h string:x-canonical-private-synchronous:clamav-alert \
+                -a clamav \
+                "Virus signature(s) where found" \
+                "$INFECTED_SUMMARY"
+              '
+          done
+        fi
     '';
 
   virusEvent = pkgs.writeShellScript "virusEvent" ''
-    ALERT="''${CLAM_VIRUSEVENT_VIRUSNAME:-''${CLAM_VIRUSEVENT_SIGNATURE:-Unknown virus}} in ''${CLAM_VIRUSEVENT_FILENAME:-Unknown file}"
-    echo "$ALERT" >> /run/clamav/alerts
+    ALERT="SIGNATURE FOUND: ''${CLAM_VIRUSEVENT_VIRUSNAME:-''${CLAM_VIRUSEVENT_SIGNATURE:-Unknown virus}} in ''${CLAM_VIRUSEVENT_FILENAME:-Unknown file}"
+    echo "$ALERT" | ${getExe' pkgs.systemd "systemd-cat"} -t clamav -p emerg
   '';
 
   virusNotify = pkgs.writeShellScript "virusNotify" ''
-    ${pkgs.coreutils}/bin/tail -n0 -F /run/clamav/alerts | \
+    ${getExe' pkgs.systemd "journalctl"} -f -o json -t clamav -n0 | \
       while IFS= read -r line; do \
-        ${getExe' pkgs.libnotify "notify-send"} \
-          -u critical \
-          -t 0 \
-          -i security-high \
-          -h string:category:security \
-          -h string:x-canonical-private-synchronous:clamav-alert \
-          -a clamav \
-          "Virus signature was found!" \
-          "$line"
-      done
+        priority=$(jq -r '.PRIORITY // empty' <<<"$line")
+        msg=$(jq -r '.MESSAGE // empty' <<<"$line")
 
+        if [[ "$priority" -le 1 ]]; then
+          if [[ "$msg" == *"SIGNATURE FOUND"* ]] then
+          ${getExe' pkgs.libnotify "notify-send"} \
+            -u critical \
+            -t 0 \
+            -i security-high \
+            -h string:category:security \
+            -h string:x-canonical-private-synchronous:clamav-alert \
+            -a clamav \
+            "Virus signature was found!" \
+            "$msg"
+          fi
+        fi
+      done
   '';
 in {
   options.hardening.clamav = {
@@ -183,7 +196,7 @@ in {
           OnAccessIncludePath = ["/home" "/var/tmp"];
           OnAccessPrevention = false;
           OnAccessExtraScanning = true;
-          OnAccessExcludeUname = mkForce ["clamav" "root"];
+          OnAccessExcludeUname = "clamav";
           VirusEvent = "${virusEvent}";
         };
       };
