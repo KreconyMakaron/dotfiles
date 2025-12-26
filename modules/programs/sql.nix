@@ -23,7 +23,7 @@ in {
         host all       all     ::1/128        trust
       '';
       enableTCPIP = true;
-      port = 5432;
+      settings.port = 5432;
     };
 
     pgadmin = {

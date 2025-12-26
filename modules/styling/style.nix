@@ -115,6 +115,10 @@ in {
         else throw "the theme ${cfg.theme} doesn't exist!";
     })
     {
+      stylix.targets.qt.platform = mkForce "qtct";
+      qt.platformTheme = mkForce "gnome";
+    }
+    {
       stylix = {
         enable = true;
         autoEnable = true;

@@ -86,8 +86,8 @@
       spotify
       vesktop # discord client
 
-      jetbrains.pycharm-professional
-      jetbrains.idea-ultimate
+      jetbrains.pycharm
+      jetbrains.idea
 
       # pdf edditing with math
       xournalpp
@@ -100,8 +100,8 @@
     nix.unfreePackages = [
       "obsidian"
       "spotify"
-      "pycharm-professional"
-      "idea-ultimate"
+      "pycharm"
+      "idea"
     ];
   };
 
