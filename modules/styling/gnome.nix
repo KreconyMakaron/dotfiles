@@ -11,7 +11,7 @@ with lib; let
   extensions = with pkgs.gnomeExtensions; [
     appindicator # tray icons
     blur-my-shell # adds transparency and blur to gnome
-    pano # clipboard manager
+    (pkgs.callPackage ./copyous.nix {inherit pkgs;})
     media-controls # adds mpris widget
     caffeine # provides idle-inhibit on demand
     tiling-shell # adds tiling support
