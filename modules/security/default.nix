@@ -25,7 +25,7 @@ in {
   };
 
   imports = map importWithStuff [
-    ./antivirus.nix
+    ./clamav.nix
   ];
 
   config = {
