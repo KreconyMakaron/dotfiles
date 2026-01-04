@@ -17,6 +17,7 @@
     disableSudo = true;
     disableSUIDs = true;
     clamav.enable = true;
+    usbguard.enable = true;
   };
 
   powerManagement.enable = true;

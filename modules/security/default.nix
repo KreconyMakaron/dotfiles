@@ -26,6 +26,7 @@ in {
 
   imports = map importWithStuff [
     ./clamav.nix
+    ./usbguard.nix
   ];
 
   config = {
