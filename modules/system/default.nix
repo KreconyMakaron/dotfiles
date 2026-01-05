@@ -5,7 +5,6 @@
     ./sound.nix
     ./boot.nix
     ./bluetooth.nix
-    ./printing.nix
     ./sleep.nix
     ./intel.nix
     ./wayland.nix
