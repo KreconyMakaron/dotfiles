@@ -13,6 +13,7 @@ in {
     ./firefly.nix
     ./foot.nix
     ./sql.nix
+    ./vscode.nix
   ];
 
   options.settings.userPackages = mkOption {
