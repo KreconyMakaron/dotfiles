@@ -10,9 +10,12 @@
 
   home-manager.users.${user}.programs.git = {
     enable = true;
-    settings.user = {
-      name = "KreconyMakaron";
-      email = "55319736+KreconyMakaron@users.noreply.github.com";
+    settings = {
+      user = {
+        name = "KreconyMakaron";
+        email = "55319736+KreconyMakaron@users.noreply.github.com";
+      };
+      init.defaultBranch = "main";
     };
   };
 }
