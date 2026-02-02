@@ -43,7 +43,7 @@ in {
       "...." = "cd ../../..";
       "....." = "cd ../../../..";
     };
-    initContent = 
+    initContent =
       /*
       bash
       */
@@ -66,8 +66,8 @@ in {
           '--preview-window=border-rounded'
 
         zstyle ':fzf-tab:*' fzf-preview '
-          if [[ -d $realpath ]]; then  
-            ${eza} --color=always --icons --oneline $realpath 2>/dev/null 
+          if [[ -d $realpath ]]; then
+            ${eza} --color=always --icons --oneline $realpath 2>/dev/null
           elif [[ -f $realpath ]]; then
             if ${grep} -Iq . "$realpath"; then
               ${bat} -n -P --color=always "$realpath"
