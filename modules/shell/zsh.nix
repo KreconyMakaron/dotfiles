@@ -8,6 +8,12 @@
 with lib; let
   histFile = "$HOME/.cache/.zsh_history";
   histSize = 100000000;
+  eza = getExe pkgs.eza;
+  bat = getExe pkgs.bat;
+  grep = getExe' pkgs.ripgrep "rg";
+  wl-copy = getExe' pkgs.wl-clipboard "wl-copy";
+  realpath = getExe' pkgs.toybox "realpath";
+  dirname = getExe' pkgs.toybox "dirname";
 in {
   programs.zsh.enable = true;
   home-manager.users.${user}.programs.zsh = {
@@ -24,10 +30,7 @@ in {
       path = histFile;
     };
 
-    shellAliases = let
-      eza = getExe pkgs.eza;
-      bat = getExe pkgs.bat;
-    in {
+    shellAliases = {
       l = "${eza} -la --color=always";
       ll = "${eza} -la --color=always";
       ls = "${eza} --git --group-directories-first -s extension --color=always";
@@ -40,45 +43,55 @@ in {
       "...." = "cd ../../..";
       "....." = "cd ../../../..";
     };
-    initContent = let
-      zsh-sudo =
-        pkgs.fetchFromGitHub {
-          owner = "hcgraf";
-          repo = "zsh-sudo";
-          rev = "0b29d30d8666b5272a6286da62b5036de2c83dee";
-          hash = "sha256-I17u8qmYttsodD58PqtTxtVZauyYcNw1orFLPngo9bY=";
-        }
-        + "/sudo.plugin.zsh";
-    in
+    initContent = 
       /*
       bash
       */
       ''
-        cpfile () {
-          ${getExe pkgs.bat} -pp $1 | ${getExe' pkgs.wl-clipboard "wl-copy"}
-        }
-
-        eval "$(${getExe pkgs.direnv} hook zsh)"
+        export ZSH_AUTOSUGGEST_STRATEGY=history
 
         source ${pkgs.zsh-defer}/share/zsh-defer/zsh-defer.plugin.zsh
-        export ZSH_AUTOSUGGEST_STRATEGY=history
-        eval "$(fzf --zsh)"
+        autoload -Uz compinit && compinit || true
 
-        # sets the title of foot to the last executed command, used in hyprland/rules
-        setfoottitle () {
-          printf '\e]2;%s\e\' $1
+        eval "$(fzf --zsh)"
+        eval "$(${getExe pkgs.direnv} hook zsh)"
+
+
+        # style fzf
+        zstyle ':fzf-tab:*' fzf-flags \
+          '--ansi' \
+          '--height=80%' \
+          '--layout=reverse' \
+          '--border=rounded' \
+          '--preview-window=border-rounded'
+
+        zstyle ':fzf-tab:*' fzf-preview '
+          if [[ -d $realpath ]]; then  
+            ${eza} --color=always --icons --oneline $realpath 2>/dev/null 
+          elif [[ -f $realpath ]]; then
+            if ${grep} -Iq . "$realpath"; then
+              ${bat} -n -P --color=always "$realpath"
+            else
+              print -P "%F{yellow}<BINARY%f %F{cyan}$(file -b $realpath)%f%F{yellow}%f>"
+            fi
+          fi'
+
+
+        # Edit line in vim with ctrl-e:
+        autoload edit-command-line; zle -N edit-command-line
+        bindkey '^e' edit-command-line
+
+        cpfile () {
+          ${bat} -pp $1 | ${wl-copy}
         }
 
-        add-zsh-hook -Uz preexec setfoottitle
+        store () {
+          ${realpath} $(where "$1")
+        }
 
-        zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
-
-        # vi mode
-        bindkey -v
-        export KEYTIMEOUT=1
-
-        # https://nixos.wiki/wiki/Zsh#Zsh-autocomplete_not_working
-        bindkey "''${key[Up]}" up-line-or-search
+        goto () {
+          cd $(${dirname} $(store "$1"))
+        }
 
         zsh-defer source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
         zsh-defer source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
@@ -86,7 +99,6 @@ in {
         zsh-defer source ${pkgs.zsh-autopair}/share/zsh/zsh-autopair/autopair.zsh
         zsh-defer source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
         zsh-defer source ${pkgs.zsh-nix-shell}/share/zsh-nix-shell/nix-shell.plugin.zsh
-        zsh-defer soruce ${pkgs.zsh-history-search-multi-word}/share/zsh/zsh-history-search-multi-word/zsh-history-search-multi-word.plugin.zsh
       '';
   };
 }

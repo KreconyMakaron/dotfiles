@@ -22,6 +22,10 @@
     qrcp
     libqalculate
     gcc
+    ffmpeg
+    toybox
+    inetutils
+    wl-clipboard
   ];
 
   programs.direnv = {
