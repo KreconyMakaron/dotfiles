@@ -16,7 +16,7 @@
   hardening = {
     disableSudo = true;
     disableSUIDs = true;
-    clamav.enable = true;
+    clamav.enable = false;
     usbguard.enable = true;
   };
 
