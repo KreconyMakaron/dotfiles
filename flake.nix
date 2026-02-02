@@ -9,6 +9,7 @@
     nixosModules = {
       inherit (inputs.stylix.nixosModules) stylix;
       inherit (inputs.musnix.nixosModules) musnix;
+      inherit (inputs.nix-mineral.nixosModules) nix-mineral;
     };
 
     nixosConfigurations = import ./hosts inputs;
@@ -18,6 +19,7 @@
     nixpkgs.url = "nixpkgs/nixos-unstable";
     lmms-nixpkgs.url = "github:wizardlink/nixpkgs/lmms";
     musnix.url = "github:musnix/musnix";
+    nix-mineral.url = "github:cynicsketch/nix-mineral/";
 
     home-manager = {
       url = "github:nix-community/home-manager";

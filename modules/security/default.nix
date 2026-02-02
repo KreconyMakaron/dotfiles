@@ -15,32 +15,35 @@ in {
         disables SUID on executables that can be used for privelage escalation
       '';
     };
-    disableSudo = mkOption {
+    replaceSudoWithRun0 = mkOption {
       type = types.bool;
       default = false;
       description = ''
         disables sudo (use run0 instead)
       '';
     };
+    nix-mineral.enable = mkEnableOption "enable nix mineral";
   };
 
-  imports = map importWithStuff [
-    ./clamav.nix
-    ./usbguard.nix
-  ];
-
   config = {
+    nix-mineral = {
+      inherit (cfg.nix-mineral) enable;
+      preset = "compatibility";
+
+      extras.misc.usbguard = {
+        enable = true;
+        gnome-integration = true;
+      };
+    };
+
     security = {
-      polkit.enable = true;
-      sudo.enable = !cfg.disableSudo;
       wrappers = mkIf (!cfg.disableSUIDs) {
-        su.setuid = lib.mkForce false;
-        sudo.setuid = !cfg.disableSudo;
         sudoedit.setuid = lib.mkForce false;
         sg.setuid = lib.mkForce false;
         fusermount.setuid = lib.mkForce false;
         fusermount3.setuid = lib.mkForce false;
         mount.setuid = lib.mkForce false;
+        umount.setuid = lib.mkForce false;
         pkexec.setuid = lib.mkForce false;
         newgrp.setuid = lib.mkForce false;
         newgidmap.setuid = lib.mkForce false;

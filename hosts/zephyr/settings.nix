@@ -3,7 +3,7 @@
   inputs,
   pkgs,
   system,
-  user,
+  config,
   ...
 }: {
   hardware = {
@@ -15,10 +15,8 @@
   };
 
   hardening = {
-    disableSudo = true;
     disableSUIDs = true;
-    clamav.enable = false;
-    usbguard.enable = true;
+    nix-mineral.enable = true;
   };
 
   powerManagement.enable = true;
@@ -128,7 +126,7 @@
   ];
 
   # huawei laptop go brrrr
-  home-manager.users.${user}.systemd.user.services.alsa-fixes = {
+  home-manager.users.${config.core.user}.systemd.user.services.alsa-fixes = {
     Unit.Description = "Enable Speakers";
     Service = {
       RemainAfterExit = true;
