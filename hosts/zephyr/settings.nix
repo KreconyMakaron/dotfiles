@@ -147,4 +147,6 @@
     databasePasswordFile = "/var/secrets/firefly-db-key";
     appKeyFile = "/var/secrets/firefly-app-key";
   };
+
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 }
