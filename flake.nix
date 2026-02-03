@@ -1,6 +1,15 @@
 {
-  outputs = inputs @ {nixpkgs, ...}: {
-    formatter."x86_64-linux" = nixpkgs.legacyPackages."x86_64-linux".alejandra;
+  outputs = inputs @ {nixpkgs, ...}: let
+    forAllSystems = nixpkgs.lib.genAttrs [
+      "aarch64-linux"
+      "x86_64-linux"
+      "x86_64-darwin"
+      "aarch64-darwin"
+    ];
+  in {
+    formatter = forAllSystems (
+      system: nixpkgs.legacyPackages.${system}.nixfmt-tree
+    );
 
     homeManagerModules = {
       ags = inputs.ags.homeManagerModules.default;
