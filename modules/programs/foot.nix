@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: {
-  home-manager.users.${user}.programs.foot = {
+  hm.programs.foot = {
     enable = config.preferences.terminal.package == pkgs.foot;
     server.enable = false;
     settings = {

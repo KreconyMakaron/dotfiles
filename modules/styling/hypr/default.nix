@@ -34,7 +34,7 @@ in {
     ];
 
     # wallpaper setter
-    home-manager.users.${user}.services.hyprpaper = {
+    hm.services.hyprpaper = {
       enable = true;
       settings = {
         preload = [config.style.settings.wallpaper];

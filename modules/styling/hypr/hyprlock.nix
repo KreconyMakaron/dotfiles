@@ -4,7 +4,7 @@
   user,
   ...
 }: {
-  home-manager.users.${user}.programs.hyprlock = with config.lib.stylix.colors; let
+  hm.programs.hyprlock = with config.lib.stylix.colors; let
     hex-to-rgb = with lib.strings;
       x: let
         hex-to-dec = x: let

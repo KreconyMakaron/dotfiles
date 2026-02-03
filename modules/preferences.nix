@@ -87,7 +87,7 @@ in {
       cfg.terminal.package
     ];
 
-    home-manager.users.${user}.xdg = {
+    hm.xdg = {
       enable = true;
 
       userDirs =

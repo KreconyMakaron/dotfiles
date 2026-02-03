@@ -142,7 +142,7 @@ in {
         };
       };
 
-      home-manager.users.${user} = let
+      hm = let
         hyprcursor = cfg.settings.cursor.hypr;
       in {
         stylix.targets = mkTargets cfg.settings.targets.hm;

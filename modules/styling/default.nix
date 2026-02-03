@@ -47,7 +47,7 @@ in {
   };
 
   config = {
-    home-manager.users.${user}.services.ags = {
+    hm.services.ags = {
       inherit (cfg.widgets.ags) enable;
       hyprlandIntegration = {
         inherit (cfg.desktop.Hyprland) enable;

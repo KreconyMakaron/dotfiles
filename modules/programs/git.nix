@@ -8,7 +8,7 @@
     lazygit
   ];
 
-  home-manager.users.${user}.programs.git = {
+  hm.programs.git = {
     enable = true;
     settings = {
       user = {

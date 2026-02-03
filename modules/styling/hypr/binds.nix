@@ -8,7 +8,7 @@
   mod = "SUPER";
   modshift = "SUPER SHIFT";
 in {
-  home-manager.users.${user}.wayland.windowManager.hyprland.settings = {
+  hm.wayland.windowManager.hyprland.settings = {
     bind =
       [
         "${mod},RETURN,exec,${lib.getExe config.preferences.terminal.package}"

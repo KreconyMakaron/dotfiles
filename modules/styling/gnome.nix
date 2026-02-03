@@ -48,7 +48,7 @@ in {
 
     preferences.terminal.package = pkgs.gnome-console;
 
-    home-manager.users.${user}.dconf = {
+    hm.dconf = {
       enable = true;
       settings = {
         "org/gnome/shell" = {

@@ -173,7 +173,7 @@ in {
         (mkIf cfg.scan.weekly.enable (mkClamScan "weekly" "Sun 21:00:00" cfg.scan.weekly.directories))
       ];
 
-    home-manager.users.${user}.systemd.user.services.clamav-notify = {
+    hm.systemd.user.services.clamav-notify = {
       Unit.Description = "Notifies the user on VirusEvent";
       Service = {
         ExecStart = "${virusNotify}";

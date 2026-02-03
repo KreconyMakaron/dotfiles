@@ -83,7 +83,7 @@ in {
       ];
       networking.firewall.checkReversePath = false;
 
-      home-manager.users.${user}.systemd.user.services.protonvpn-autostart = {
+      hm.systemd.user.services.protonvpn-autostart = {
         Unit = {
           Description = "Starts ProtonVPN";
           Requires = ["graphical-session.target"];

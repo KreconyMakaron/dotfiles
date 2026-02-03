@@ -25,6 +25,6 @@ in {
   };
 
   config = {
-    home-manager.users.${user}.home.packages = cfg.userPackages;
+    hm.home.packages = cfg.userPackages;
   };
 }

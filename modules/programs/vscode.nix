@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: {
-  home-manager.users.${user}.programs.vscode = {
+  hm.programs.vscode = {
     enable = lib.mkDefault true;
   };
 

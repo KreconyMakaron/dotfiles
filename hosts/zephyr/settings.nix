@@ -126,7 +126,7 @@
   ];
 
   # huawei laptop go brrrr
-  home-manager.users.${config.core.user}.systemd.user.services.alsa-fixes = {
+  hm.systemd.user.services.alsa-fixes = {
     Unit.Description = "Enable Speakers";
     Service = {
       RemainAfterExit = true;

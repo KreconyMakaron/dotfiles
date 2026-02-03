@@ -16,11 +16,11 @@ with lib; let
   dirname = getExe' pkgs.toybox "dirname";
 in {
   programs.zsh.enable = true;
-  home-manager.users.${user}.programs.zsh = {
+  hm.programs.zsh = {
     enable = true;
     enableCompletion = true;
 
-    dotDir = config.home-manager.users.${user}.xdg.configHome + "/zsh";
+    dotDir = config.hm.xdg.configHome + "/zsh";
 
     history = {
       size = histSize;
