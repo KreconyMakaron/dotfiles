@@ -2,7 +2,6 @@
   mkImports,
   config,
   lib,
-  user,
   ...
 }:
 with lib;

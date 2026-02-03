@@ -3,7 +3,6 @@
   inputs,
   pkgs,
   system,
-  config,
   ...
 }:
 {
@@ -120,7 +119,7 @@
 
   nixpkgs.overlays = [
     (
-      self: super:
+      _self: _super:
       let
         lmms-fix-pkgs = import inputs.lmms-nixpkgs { inherit system; };
       in
