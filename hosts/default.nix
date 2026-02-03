@@ -16,8 +16,6 @@
           }
           ./${name}
 
-          inputs.home-manager.nixosModules.home-manager
-
           ({config, ...}: {
             home-manager = {
               useUserPackages = true;
