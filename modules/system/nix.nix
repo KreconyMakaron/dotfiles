@@ -31,7 +31,7 @@ in {
       flake = config.core.flakePath;
       clean = {
         enable = false;
-        extraArgs = "--keep-since 5d --keep 5";
+        extraArgs = "--keep 5";
       };
     };
 
