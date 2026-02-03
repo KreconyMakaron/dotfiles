@@ -4,13 +4,13 @@
   inputs,
   config,
   user,
-  importWithStuff,
+  mkImports,
   ...
 }:
 with lib; let
   cfg = config.style.desktopEnvironment.Hyprland;
 in {
-  imports = builtins.map importWithStuff [
+  imports = mkImports [
     ./binds.nix
     ./hypridle.nix
     ./hyprlock.nix

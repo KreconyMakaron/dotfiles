@@ -1,9 +1,9 @@
 {
   pkgs,
-  importWithStuff,
+  mkImports,
   ...
 }: {
-  imports = builtins.map importWithStuff [
+  imports = mkImports [
     ./vpn.nix
   ];
   # reduce SECLEVEL to connect to wifi

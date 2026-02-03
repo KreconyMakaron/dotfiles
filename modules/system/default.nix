@@ -1,5 +1,5 @@
-{importWithStuff, ...}: {
-  imports = builtins.map importWithStuff [
+{mkImports, ...}: {
+  imports = mkImports [
     ./system.nix
     ./nix.nix
     ./sound.nix

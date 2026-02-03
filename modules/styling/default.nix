@@ -1,5 +1,5 @@
 {
-  importWithStuff,
+  mkImports,
   config,
   lib,
   user,
@@ -8,7 +8,7 @@
 with lib; let
   cfg = config.style;
 in {
-  imports = builtins.map importWithStuff [
+  imports = mkImports [
     ./style.nix
     ./gnome.nix
     ./fonts.nix

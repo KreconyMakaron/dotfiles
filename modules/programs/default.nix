@@ -1,5 +1,5 @@
 {
-  importWithStuff,
+  mkImports,
   config,
   lib,
   user,
@@ -8,7 +8,7 @@
 with lib; let
   cfg = config.settings;
 in {
-  imports = builtins.map importWithStuff [
+  imports = mkImports [
     ./git.nix
     ./firefly.nix
     ./foot.nix

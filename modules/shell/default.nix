@@ -1,9 +1,9 @@
 {
   pkgs,
-  importWithStuff,
+  mkImports,
   ...
 }: {
-  imports = builtins.map importWithStuff [
+  imports = mkImports [
     ./zsh.nix
     ./starship.nix
   ];

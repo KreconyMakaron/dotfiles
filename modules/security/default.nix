@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  importWithStuff,
+  mkImports,
   ...
 }:
 with lib; let
