@@ -31,12 +31,15 @@ in
       inherit (cfg.nix-mineral) enable;
       preset = "compatibility";
 
-      extras.misc = {
-        usbguard = {
-          enable = true;
-          gnome-integration = true;
+      extras = {
+        misc = {
+          usbguard = {
+            enable = true;
+            gnome-integration = true;
+          };
+          ssh-hardening = true;
         };
-        ssh-hardening = true;
+        system.secure-chrony = true;
       };
     };
 
