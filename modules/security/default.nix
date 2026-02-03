@@ -25,6 +25,10 @@ in {
     nix-mineral.enable = mkEnableOption "enable nix mineral";
   };
 
+  imports = builtins.map importWithStuff [
+    ./disable-unused-protocols.nix
+  ];
+
   config = {
     nix-mineral = {
       inherit (cfg.nix-mineral) enable;
