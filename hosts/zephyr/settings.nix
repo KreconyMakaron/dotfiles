@@ -5,7 +5,8 @@
   system,
   config,
   ...
-}: {
+}:
+{
   hardware = {
     enableRedistributableFirmware = true;
     audio = {
@@ -53,8 +54,8 @@
       "104.26.14.206"
       "104.26.15.206"
     ];
-    dns = ["10.2.0.1"];
-    address = ["10.2.0.2/32"];
+    dns = [ "10.2.0.1" ];
+    address = [ "10.2.0.2/32" ];
     privateKeyDir = "/root/protonvpn-keys";
     servers = {
       warsaw = {
@@ -118,11 +119,15 @@
   ];
 
   nixpkgs.overlays = [
-    (self: super: let
-      lmms-fix-pkgs = import inputs.lmms-nixpkgs {inherit system;};
-    in {
-      inherit (lmms-fix-pkgs) lmms;
-    })
+    (
+      self: super:
+      let
+        lmms-fix-pkgs = import inputs.lmms-nixpkgs { inherit system; };
+      in
+      {
+        inherit (lmms-fix-pkgs) lmms;
+      }
+    )
   ];
 
   # huawei laptop go brrrr
@@ -138,7 +143,7 @@
         "${lib.getExe' pkgs.alsa-utils "amixer"} -c 0 cset 'numid=72' 1"
       ];
     };
-    Install.WantedBy = ["default.target"];
+    Install.WantedBy = [ "default.target" ];
   };
 
   firefly-iii = {

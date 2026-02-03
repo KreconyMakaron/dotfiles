@@ -1,4 +1,5 @@
-{mkImports, ...}: {
+{ mkImports, ... }:
+{
   imports = mkImports [
     ./system.nix
     ./nix.nix

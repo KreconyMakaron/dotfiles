@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   services.logind = {
     settings = {
       Login = {

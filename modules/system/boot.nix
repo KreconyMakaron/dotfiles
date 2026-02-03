@@ -3,7 +3,8 @@
   lib,
   config,
   ...
-}: {
+}:
+{
   boot = {
     loader = {
       systemd-boot = {
@@ -29,12 +30,12 @@
     consoleLogLevel = 3;
   };
 
-  environment.systemPackages = [pkgs.tuigreet];
+  environment.systemPackages = [ pkgs.tuigreet ];
   services.greetd = {
     enable = !config.services.displayManager.gdm.enable;
     settings = {
       default_session = {
-        command = ''${lib.getExe pkgs.greetd.tuigreet} --time --cmd Hyprland'';
+        command = "${lib.getExe pkgs.greetd.tuigreet} --time --cmd Hyprland";
         user = "greeter";
       };
     };

@@ -5,7 +5,8 @@
   user,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.networking.vpn;
 
   vpnScript = builtins.readFile ./vpn.sh;
@@ -27,7 +28,8 @@ with lib; let
       };
     };
   };
-in {
+in
+{
   options.networking.vpn = {
     enable = mkEnableOption "enables the vpn";
 
@@ -39,7 +41,7 @@ in {
 
     disabledIPs = mkOption {
       type = types.listOf types.str;
-      default = [];
+      default = [ ];
     };
     privateKeyDir = mkOption {
       type = types.str;
@@ -52,11 +54,11 @@ in {
     };
     address = mkOption {
       type = types.listOf types.str;
-      default = ["1.1.1.1"];
+      default = [ "1.1.1.1" ];
     };
     servers = mkOption {
       type = types.attrsOf (types.submodule serverOpts);
-      default = {};
+      default = { };
       example = {
         server1 = {
           autostart = true;
@@ -86,8 +88,8 @@ in {
       hm.systemd.user.services.protonvpn-autostart = {
         Unit = {
           Description = "Starts ProtonVPN";
-          Requires = ["graphical-session.target"];
-          After = ["graphical-session.target"];
+          Requires = [ "graphical-session.target" ];
+          After = [ "graphical-session.target" ];
         };
         Service = {
           RemainAfterExit = true;
@@ -96,7 +98,7 @@ in {
             "${lib.getExe' pkgs.protonvpn-gui "protonvpn-app"}"
           ];
         };
-        Install.WantedBy = ["graphical-session.target"];
+        Install.WantedBy = [ "graphical-session.target" ];
       };
     })
     # custom solution
@@ -106,59 +108,64 @@ in {
       ];
 
       networking = {
-        wg-quick.interfaces = let
-          IPs = concatStringsSep " " cfg.disabledIPs;
-          tableID = "200";
+        wg-quick.interfaces =
+          let
+            IPs = concatStringsSep " " cfg.disabledIPs;
+            tableID = "200";
 
-          mkInterface = name: values:
-            nameValuePair name {
-              inherit (values) autostart;
-              inherit (cfg) dns address;
-              privateKeyFile = "${cfg.privateKeyDir}/${name}";
-              listenPort = 51820;
-              mtu = 1280;
+            mkInterface =
+              name: values:
+              nameValuePair name {
+                inherit (values) autostart;
+                inherit (cfg) dns address;
+                privateKeyFile = "${cfg.privateKeyDir}/${name}";
+                listenPort = 51820;
+                mtu = 1280;
 
-              peers = [
-                {
-                  inherit (values) publicKey endpoint;
-                  allowedIPs = ["0.0.0.0/0" "::/0"];
-                }
-              ];
+                peers = [
+                  {
+                    inherit (values) publicKey endpoint;
+                    allowedIPs = [
+                      "0.0.0.0/0"
+                      "::/0"
+                    ];
+                  }
+                ];
 
-              preUp = ''
-                set -euo pipefail
+                preUp = ''
+                  set -euo pipefail
 
-                gw=$(ip -4 route show default | ${getExe' pkgs.gawk "awk"} '/default/ {print $3; exit}') || gw=""
-                dev=$(ip -4 route show default | ${getExe' pkgs.gawk "awk"} '/default/ {print $5; exit}') || dev=""
+                  gw=$(ip -4 route show default | ${getExe' pkgs.gawk "awk"} '/default/ {print $3; exit}') || gw=""
+                  dev=$(ip -4 route show default | ${getExe' pkgs.gawk "awk"} '/default/ {print $5; exit}') || dev=""
 
-                if [ -n "$gw" ] && [ -n "$dev" ]; then
+                  if [ -n "$gw" ] && [ -n "$dev" ]; then
+                    ip route flush table ${tableID} || true
+                    ip route add default via "$gw" dev "$dev" table ${tableID}
+                  else
+                    echo "Error: no IPv4 default gateway found before VPN — cannot set exclusion table" >&2
+                    exit 1
+                  fi
+                '';
+
+                postUp = ''
+                  set -euo pipefail
+
+                  for ip in ${IPs}; do
+                    ip rule add to "$ip"/32 lookup ${tableID} priority 100 || true
+                  done
+                '';
+
+                postDown = ''
+                  set -euo pipefail
+
+                  for ip in ${IPs}; do
+                    ip rule del to "$ip"/32 lookup ${tableID} priority 100 || true
+                  done
+
                   ip route flush table ${tableID} || true
-                  ip route add default via "$gw" dev "$dev" table ${tableID}
-                else
-                  echo "Error: no IPv4 default gateway found before VPN — cannot set exclusion table" >&2
-                  exit 1
-                fi
-              '';
-
-              postUp = ''
-                set -euo pipefail
-
-                for ip in ${IPs}; do
-                  ip rule add to "$ip"/32 lookup ${tableID} priority 100 || true
-                done
-              '';
-
-              postDown = ''
-                set -euo pipefail
-
-                for ip in ${IPs}; do
-                  ip rule del to "$ip"/32 lookup ${tableID} priority 100 || true
-                done
-
-                ip route flush table ${tableID} || true
-              '';
-            };
-        in
+                '';
+              };
+          in
           attrsets.mapAttrs' mkInterface cfg.servers;
       };
     })

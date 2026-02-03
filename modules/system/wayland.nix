@@ -3,9 +3,11 @@
   config,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.style.displayServer.wayland;
-in {
+in
+{
   environment.variables = mkIf cfg.enable {
     # make electron apps use wayland
     NIXOS_OZONE_WL = "1";

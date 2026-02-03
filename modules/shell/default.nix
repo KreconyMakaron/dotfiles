@@ -2,7 +2,8 @@
   pkgs,
   mkImports,
   ...
-}: {
+}:
+{
   imports = mkImports [
     ./zsh.nix
     ./starship.nix

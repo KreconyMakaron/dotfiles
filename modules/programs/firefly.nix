@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.firefly-iii;
-in {
+in
+{
   options.firefly-iii = {
     enable = mkEnableOption "enables firefly-iii";
     databasePasswordFile = mkOption {
@@ -73,11 +75,13 @@ in {
       mysql = {
         enable = true;
         package = pkgs.mariadb;
-        ensureDatabases = ["firefly"];
+        ensureDatabases = [ "firefly" ];
         ensureUsers = [
           {
             name = "firefly";
-            ensurePermissions = {"firefly.*" = "ALL PRIVILEGES";};
+            ensurePermissions = {
+              "firefly.*" = "ALL PRIVILEGES";
+            };
           }
         ];
       };

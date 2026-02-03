@@ -4,9 +4,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.settings.sql;
-in {
+in
+{
   options.settings.sql = {
     postgresql.enable = mkEnableOption "enables postresql";
     pgadmin.enable = mkEnableOption "enables pgadmin";

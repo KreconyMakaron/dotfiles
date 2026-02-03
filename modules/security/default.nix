@@ -4,9 +4,11 @@
   mkImports,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.hardening;
-in {
+in
+{
   options.hardening = {
     disableSUIDs = mkOption {
       type = types.bool;

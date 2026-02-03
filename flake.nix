@@ -1,29 +1,30 @@
 {
-  outputs = inputs @ {nixpkgs, ...}: let
-    forAllSystems = nixpkgs.lib.genAttrs [
-      "aarch64-linux"
-      "x86_64-linux"
-      "x86_64-darwin"
-      "aarch64-darwin"
-    ];
-  in {
-    formatter = forAllSystems (
-      system: nixpkgs.legacyPackages.${system}.nixfmt-tree
-    );
+  outputs =
+    inputs@{ nixpkgs, ... }:
+    let
+      forAllSystems = nixpkgs.lib.genAttrs [
+        "aarch64-linux"
+        "x86_64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
+    in
+    {
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
 
-    homeManagerModules = {
-      ags = inputs.ags.homeManagerModules.default;
+      homeManagerModules = {
+        ags = inputs.ags.homeManagerModules.default;
+      };
+
+      nixosModules = {
+        inherit (inputs.stylix.nixosModules) stylix;
+        inherit (inputs.musnix.nixosModules) musnix;
+        inherit (inputs.nix-mineral.nixosModules) nix-mineral;
+        inherit (inputs.home-manager.nixosModules) home-manager;
+      };
+
+      nixosConfigurations = import ./hosts inputs;
     };
-
-    nixosModules = {
-      inherit (inputs.stylix.nixosModules) stylix;
-      inherit (inputs.musnix.nixosModules) musnix;
-      inherit (inputs.nix-mineral.nixosModules) nix-mineral;
-      inherit (inputs.home-manager.nixosModules) home-manager;
-    };
-
-    nixosConfigurations = import ./hosts inputs;
-  };
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";

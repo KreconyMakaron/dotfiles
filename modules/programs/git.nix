@@ -2,7 +2,8 @@
   pkgs,
   user,
   ...
-}: {
+}:
+{
   environment.systemPackages = with pkgs; [
     git
     lazygit

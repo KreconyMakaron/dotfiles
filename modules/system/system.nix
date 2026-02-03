@@ -2,30 +2,33 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   time = {
     timeZone = "Europe/Warsaw";
     hardwareClockInLocalTime = false;
   };
 
-  i18n = let
-    en = "en_GB.UTF-8";
-    pl = "pl_PL.UTF-8";
-  in {
-    defaultLocale = en;
-    extraLocaleSettings = {
-      LANG = en;
-      LC_ADDRESS = pl;
-      LC_IDENTIFICATION = pl;
-      LC_MEASUREMENT = pl;
-      LC_MONETARY = pl;
-      LC_NAME = pl;
-      LC_NUMERIC = pl;
-      LC_PAPER = pl;
-      LC_TELEPHONE = pl;
-      LC_TIME = pl;
+  i18n =
+    let
+      en = "en_GB.UTF-8";
+      pl = "pl_PL.UTF-8";
+    in
+    {
+      defaultLocale = en;
+      extraLocaleSettings = {
+        LANG = en;
+        LC_ADDRESS = pl;
+        LC_IDENTIFICATION = pl;
+        LC_MEASUREMENT = pl;
+        LC_MONETARY = pl;
+        LC_NAME = pl;
+        LC_NUMERIC = pl;
+        LC_PAPER = pl;
+        LC_TELEPHONE = pl;
+        LC_TIME = pl;
+      };
     };
-  };
 
   console.keyMap = "pl2";
 
@@ -38,7 +41,7 @@
     ];
   };
 
-  boot.binfmt.registrations = lib.genAttrs ["appimage" "AppImage"] (ext: {
+  boot.binfmt.registrations = lib.genAttrs [ "appimage" "AppImage" ] (ext: {
     recognitionType = "extension";
     magicOrExtension = ext;
     interpreter = "${lib.getExe' pkgs.appimage-run "appimage-run"}";

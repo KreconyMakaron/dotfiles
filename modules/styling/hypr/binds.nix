@@ -4,47 +4,50 @@
   config,
   user,
   ...
-}: let
+}:
+let
   mod = "SUPER";
   modshift = "SUPER SHIFT";
-in {
+in
+{
   hm.wayland.windowManager.hyprland.settings = {
-    bind =
-      [
-        "${mod},RETURN,exec,${lib.getExe config.preferences.terminal.package}"
-        "${mod},Q,killactive"
+    bind = [
+      "${mod},RETURN,exec,${lib.getExe config.preferences.terminal.package}"
+      "${mod},Q,killactive"
 
-        "${mod},H,movefocus,l"
-        "${mod},L,movefocus,r"
-        "${mod},K,movefocus,u"
-        "${mod},J,movefocus,d"
-        "${mod},P,exec,${lib.getExe pkgs.pavucontrol}"
+      "${mod},H,movefocus,l"
+      "${mod},L,movefocus,r"
+      "${mod},K,movefocus,u"
+      "${mod},J,movefocus,d"
+      "${mod},P,exec,${lib.getExe pkgs.pavucontrol}"
 
-        "${mod},V,togglefloating,"
-        "${mod},F,fullscreen,"
-        "${mod},W,exec,${lib.getExe config.preferences.browser.package}"
-        "${modshift},L,exec,${lib.getExe pkgs.hyprlock}"
+      "${mod},V,togglefloating,"
+      "${mod},F,fullscreen,"
+      "${mod},W,exec,${lib.getExe config.preferences.browser.package}"
+      "${modshift},L,exec,${lib.getExe pkgs.hyprlock}"
 
-        ",Print,exec,${lib.getExe pkgs.grimblast} --freeze copysave screen ${config.preferences.userDirs.pictures}/$(date +ScreenShot-%F-%R:%S).png"
-        "${mod},Print,exec,${lib.getExe pkgs.grimblast} --freeze copysave area ${config.preferences.userDirs.pictures}/$(date +ScreenShot-%F-%R:%S).png"
-        "${modshift},Print,exec,${lib.getExe pkgs.grimblast} --freeze copysave active ${config.preferences.userDirs.pictures}/$(date +ScreenShot-%F-%R:%S).png"
+      ",Print,exec,${lib.getExe pkgs.grimblast} --freeze copysave screen ${config.preferences.userDirs.pictures}/$(date +ScreenShot-%F-%R:%S).png"
+      "${mod},Print,exec,${lib.getExe pkgs.grimblast} --freeze copysave area ${config.preferences.userDirs.pictures}/$(date +ScreenShot-%F-%R:%S).png"
+      "${modshift},Print,exec,${lib.getExe pkgs.grimblast} --freeze copysave active ${config.preferences.userDirs.pictures}/$(date +ScreenShot-%F-%R:%S).png"
 
-        ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-      ]
-      ++ (
-        builtins.concatLists (builtins.genList (
-            x: let
-              ws = let
-                c = (x + 1) / 10;
-              in
-                builtins.toString (x + 1 - (c * 10));
-            in [
-              "${mod}, ${ws}, workspace, ${toString (x + 1)}"
-              "${modshift}, ${ws}, movetoworkspace, ${toString (x + 1)}"
-            ]
-          )
-          10)
-      );
+      ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+    ]
+    ++ (builtins.concatLists (
+      builtins.genList (
+        x:
+        let
+          ws =
+            let
+              c = (x + 1) / 10;
+            in
+            builtins.toString (x + 1 - (c * 10));
+        in
+        [
+          "${mod}, ${ws}, workspace, ${toString (x + 1)}"
+          "${modshift}, ${ws}, movetoworkspace, ${toString (x + 1)}"
+        ]
+      ) 10
+    ));
 
     bindm = [
       "${mod},mouse:272,movewindow"

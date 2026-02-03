@@ -5,9 +5,11 @@
   inputs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.gaming;
-in {
+in
+{
   options.gaming = {
     steam.enable = mkEnableOption "Enables steam";
     minecraft = {
@@ -21,8 +23,8 @@ in {
 
   config = mkMerge [
     (mkIf cfg.minecraft.enable {
-      nixpkgs.overlays = [inputs.polymc.overlay];
-      settings.userPackages = [cfg.minecraft.package];
+      nixpkgs.overlays = [ inputs.polymc.overlay ];
+      settings.userPackages = [ cfg.minecraft.package ];
     })
     (mkIf cfg.steam.enable {
       programs.steam.enable = true;

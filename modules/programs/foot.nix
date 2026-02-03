@@ -3,7 +3,8 @@
   user,
   pkgs,
   ...
-}: {
+}:
+{
   hm.programs.foot = {
     enable = config.preferences.terminal.package == pkgs.foot;
     server.enable = false;

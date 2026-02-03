@@ -5,9 +5,11 @@
   user,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.style;
-in {
+in
+{
   imports = mkImports [
     ./style.nix
     ./gnome.nix
@@ -58,15 +60,18 @@ in {
 
     programs.xwayland.enable = cfg.displayServer.wayland.enable;
 
-    assertions = let
-      workOnWayland = list: let
-        mkAssertion = attr: opt: {
-          assertion = !(attr && cfg.displayServer.x11.enable);
-          message = "${opt} only works on wayland!";
-        };
+    assertions =
+      let
+        workOnWayland =
+          list:
+          let
+            mkAssertion = attr: opt: {
+              assertion = !(attr && cfg.displayServer.x11.enable);
+              message = "${opt} only works on wayland!";
+            };
+          in
+          map (x: mkAssertion (elemAt x 0) (elemAt x 1)) list;
       in
-        map (x: mkAssertion (elemAt x 0) (elemAt x 1)) list;
-    in
       [
         {
           assertion = !(cfg.displayServer.wayland.enable && cfg.displayServer.x11.enable);
@@ -78,8 +83,14 @@ in {
         }
       ]
       ++ (workOnWayland [
-        [cfg.widgets.ags.enable "ags shell"]
-        [cfg.desktopEnvironment.Hyprland.enable "Hyprland"]
+        [
+          cfg.widgets.ags.enable
+          "ags shell"
+        ]
+        [
+          cfg.desktopEnvironment.Hyprland.enable
+          "Hyprland"
+        ]
       ]);
   };
 }

@@ -5,9 +5,11 @@
   user,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.settings;
-in {
+in
+{
   imports = mkImports [
     ./git.nix
     ./firefly.nix
@@ -18,7 +20,7 @@ in {
 
   options.settings.userPackages = mkOption {
     type = types.listOf types.package;
-    default = [];
+    default = [ ];
     description = ''
       Packages to be installed for the user
     '';

@@ -3,9 +3,11 @@
   user,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (pkgs.lib) getExe getExe';
-in {
+in
+{
   hm.services.hypridle = {
     inherit (config.style.desktopEnvironment.Hyprland) enable;
 

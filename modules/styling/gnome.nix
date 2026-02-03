@@ -5,18 +5,20 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.style.desktopEnvironment.gnome;
 
   extensions = with pkgs.gnomeExtensions; [
     appindicator # tray icons
     blur-my-shell # adds transparency and blur to gnome
-    (pkgs.callPackage ./copyous.nix {inherit pkgs;})
+    (pkgs.callPackage ./copyous.nix { inherit pkgs; })
     media-controls # adds mpris widget
     caffeine # provides idle-inhibit on demand
     tiling-shell # adds tiling support
   ];
-in {
+in
+{
   config = mkIf cfg.enable {
     services = {
       displayManager.gdm.enable = true;
@@ -40,11 +42,14 @@ in {
     ];
 
     environment = {
-      gnome.excludePackages = with pkgs; [gnome-tour gnome-user-docs];
-      systemPackages = [pkgs.nautilus] ++ extensions;
+      gnome.excludePackages = with pkgs; [
+        gnome-tour
+        gnome-user-docs
+      ];
+      systemPackages = [ pkgs.nautilus ] ++ extensions;
     };
 
-    services.udev.packages = [pkgs.gnome-settings-daemon];
+    services.udev.packages = [ pkgs.gnome-settings-daemon ];
 
     preferences.terminal.package = pkgs.gnome-console;
 
@@ -56,7 +61,7 @@ in {
           enabled-extensions = map (x: x.extensionUuid) extensions;
         };
         "org/gnome/desktop/search-providers" = {
-          disabled = [];
+          disabled = [ ];
         };
         "org/gnome/shell/extensions/blur/blur-my-shell" = {
           brightness = 0.75;

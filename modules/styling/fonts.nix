@@ -1,29 +1,32 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   fonts = {
-    packages = with pkgs; let
-      saira-semi-condensed = stdenv.mkDerivation {
-        pname = "saira-semi-condensed";
-        version = "1.0";
+    packages =
+      with pkgs;
+      let
+        saira-semi-condensed = stdenv.mkDerivation {
+          pname = "saira-semi-condensed";
+          version = "1.0";
 
-        src = pkgs.fetchzip {
-          url = "https://www.omnibus-type.com/wp-content/uploads/Saira-Semi-Condensed.zip";
-          hash = "sha256-5FH9O5rINVC8/aA4xC/SsefPBwGfqzmu/+K7A89G+JU=";
+          src = pkgs.fetchzip {
+            url = "https://www.omnibus-type.com/wp-content/uploads/Saira-Semi-Condensed.zip";
+            hash = "sha256-5FH9O5rINVC8/aA4xC/SsefPBwGfqzmu/+K7A89G+JU=";
+          };
+
+          installPhase = ''
+            runHook preInstall
+
+            install -m444 -Dt $out/share/fonts/truetype ttf/*.ttf
+
+            runHook postInstall
+          '';
+
+          meta = {
+            homepage = "https://www.omnibus-type.com/fonts/saira-semi-condensed/";
+            license = pkgs.lib.licenses.ofl;
+          };
         };
-
-        installPhase = ''
-          runHook preInstall
-
-          install -m444 -Dt $out/share/fonts/truetype ttf/*.ttf
-
-          runHook postInstall
-        '';
-
-        meta = {
-          homepage = "https://www.omnibus-type.com/fonts/saira-semi-condensed/";
-          license = pkgs.lib.licenses.ofl;
-        };
-      };
-    in
+      in
       [
         jetbrains-mono
         noto-fonts
@@ -36,10 +39,10 @@
       ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts); # all nerd-fonts
     fontconfig = {
       defaultFonts = {
-        monospace = ["JetBrainsMono"];
-        sansSerif = ["SairaSemiCondensed"];
-        serif = ["Dejavu Serif"];
-        emoji = ["Noto Color Emoji"];
+        monospace = [ "JetBrainsMono" ];
+        sansSerif = [ "SairaSemiCondensed" ];
+        serif = [ "Dejavu Serif" ];
+        emoji = [ "Noto Color Emoji" ];
       };
     };
   };

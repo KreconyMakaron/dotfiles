@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.core;
-in {
+in
+{
   options.core = {
     user = mkOption {
       type = types.str;
@@ -30,34 +32,33 @@ in {
     };
   };
 
-  config = let
-    shellPackage =
-      if cfg.shell == "zsh"
-      then pkgs.zsh
-      else pkgs.bash;
-  in {
-    assertions = [
-      {
-        assertion = cfg.user != "";
-        message = "A username must be set";
-      }
-    ];
+  config =
+    let
+      shellPackage = if cfg.shell == "zsh" then pkgs.zsh else pkgs.bash;
+    in
+    {
+      assertions = [
+        {
+          assertion = cfg.user != "";
+          message = "A username must be set";
+        }
+      ];
 
-    users = {
-      defaultUserShell = shellPackage;
-      mutableUsers = false;
       users = {
-        ${cfg.user} = {
-          isNormalUser = true;
-          useDefaultShell = true;
-          hashedPasswordFile = "/var/secrets/password";
-          extraGroups = [
-            "networkmanager"
-            "wheel"
-            "bluetooth"
-          ];
+        defaultUserShell = shellPackage;
+        mutableUsers = false;
+        users = {
+          ${cfg.user} = {
+            isNormalUser = true;
+            useDefaultShell = true;
+            hashedPasswordFile = "/var/secrets/password";
+            extraGroups = [
+              "networkmanager"
+              "wheel"
+              "bluetooth"
+            ];
+          };
         };
       };
     };
-  };
 }

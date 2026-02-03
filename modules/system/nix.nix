@@ -3,19 +3,21 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.settings.nix;
-in {
+in
+{
   options.settings.nix = {
     unfreePackages = mkOption {
-      default = [];
+      default = [ ];
       type = types.listOf types.str;
       description = "Allows for unfree packages by their name";
     };
   };
 
   config = {
-    nixpkgs.config = lib.mkIf (cfg.unfreePackages != []) {
+    nixpkgs.config = lib.mkIf (cfg.unfreePackages != [ ]) {
       allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) cfg.unfreePackages;
     };
 
@@ -44,7 +46,10 @@ in {
 
       settings = {
         auto-optimise-store = true;
-        experimental-features = ["nix-command" "flakes"];
+        experimental-features = [
+          "nix-command"
+          "flakes"
+        ];
 
         substituters = [
           "https://cache.nixos.org"

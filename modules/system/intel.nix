@@ -1,7 +1,8 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   boot = {
-    kernelModules = ["i915"];
-    kernelParams = ["i915.fastboot=1"];
+    kernelModules = [ "i915" ];
+    kernelParams = [ "i915.fastboot=1" ];
   };
 
   hardware = {

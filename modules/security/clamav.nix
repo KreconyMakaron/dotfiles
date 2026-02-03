@@ -5,10 +5,12 @@
   user,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.hardening.clamav;
 
-  scan = paths:
+  scan =
+    paths:
     pkgs.writeShellScript "scan.sh" ''
       # Adapted from https://gist.github.com/Pavel-Novikov/0c7486b59f9237d339f562d30b05e56e
       set -euo pipefail
@@ -100,7 +102,8 @@ with lib; let
         fi
       done
   '';
-in {
+in
+{
   options.hardening.clamav = {
     enable = mkEnableOption "enables ClamAV the antivirus scanner";
     scan = {
@@ -143,31 +146,32 @@ in {
       pkgs.clamav
     ];
 
-    systemd = let
-      mkClamScan = name: interval: paths: {
-        services."clamdscan-${name}" = {
-          description = "ClamAV ${name} virus scanner";
-          after = ["clamav-freshclam.service"];
-          wants = ["clamav-freshclam.service"];
+    systemd =
+      let
+        mkClamScan = name: interval: paths: {
+          services."clamdscan-${name}" = {
+            description = "ClamAV ${name} virus scanner";
+            after = [ "clamav-freshclam.service" ];
+            wants = [ "clamav-freshclam.service" ];
 
-          serviceConfig = {
-            Type = "oneshot";
-            ExecStart = "${scan paths}";
-            Slice = "system-clamav.slice";
-            Nice = 5;
-            IOWeight = 75;
+            serviceConfig = {
+              Type = "oneshot";
+              ExecStart = "${scan paths}";
+              Slice = "system-clamav.slice";
+              Nice = 5;
+              IOWeight = 75;
+            };
+          };
+          timers."clamdscan-${name}" = {
+            description = "Timer for ClamAV ${name} virus scanner";
+            wantedBy = [ "timers.target" ];
+            timerConfig = {
+              OnCalendar = "${interval}";
+              Unit = "clamdscan-${name}.service";
+            };
           };
         };
-        timers."clamdscan-${name}" = {
-          description = "Timer for ClamAV ${name} virus scanner";
-          wantedBy = ["timers.target"];
-          timerConfig = {
-            OnCalendar = "${interval}";
-            Unit = "clamdscan-${name}.service";
-          };
-        };
-      };
-    in
+      in
       mkMerge [
         (mkIf cfg.scan.daily.enable (mkClamScan "daily" "*-*-* 21:00:00" cfg.scan.daily.directories))
         (mkIf cfg.scan.weekly.enable (mkClamScan "weekly" "Sun 21:00:00" cfg.scan.weekly.directories))
@@ -180,7 +184,7 @@ in {
         Restart = "always";
         RestartSec = 2;
       };
-      Install.WantedBy = ["default.target"];
+      Install.WantedBy = [ "default.target" ];
     };
 
     services.clamav = {
@@ -193,7 +197,10 @@ in {
           ExtendedDetectionInfo = true;
           MaxThreads = 8;
 
-          OnAccessIncludePath = ["/home" "/var/tmp"];
+          OnAccessIncludePath = [
+            "/home"
+            "/var/tmp"
+          ];
           OnAccessPrevention = false;
           OnAccessExtraScanning = true;
           OnAccessExcludeUname = "clamav";

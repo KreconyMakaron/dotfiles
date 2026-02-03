@@ -5,9 +5,11 @@
   config,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.hardware.audio;
-in {
+in
+{
   options.hardware.audio = {
     enable = mkEnableOption "enables sound on the device";
     enableAudioProduction = mkEnableOption "enables audio production features";
@@ -29,23 +31,25 @@ in {
       };
     };
 
-    environment.systemPackages = with pkgs;
-      [pavucontrol]
+    environment.systemPackages =
+      with pkgs;
+      [ pavucontrol ]
       ++ (
-        if cfg.enableAudioProduction
-        then [
-          libjack2
-          jack2
-          qjackctl
-          libjack2
-          jack2
-          qjackctl
-          jack_capture
-        ]
-        else []
+        if cfg.enableAudioProduction then
+          [
+            libjack2
+            jack2
+            qjackctl
+            libjack2
+            jack2
+            qjackctl
+            jack_capture
+          ]
+        else
+          [ ]
       );
 
-    users.users.${user}.extraGroups = ["audio"];
+    users.users.${user}.extraGroups = [ "audio" ];
 
     musnix = {
       enable = cfg.enableAudioProduction;
