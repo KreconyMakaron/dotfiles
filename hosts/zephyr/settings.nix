@@ -42,6 +42,11 @@
       package = pkgs.loupe;
       desktopFile = "org.gnome.Loupe.desktop";
     };
+
+    browser = {
+      package = pkgs.mullvad-browser;
+      desktopFile = "mullvad-browser.desktop";
+    };
   };
 
   networking.vpn = {
@@ -77,6 +82,7 @@
 
     userPackages = with pkgs; [
       lmms
+      brave
 
       scenebuilder
 
