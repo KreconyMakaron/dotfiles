@@ -12,6 +12,7 @@
       };
 
       nixosModules = {
+        inherit (inputs.disko.nixosModules) disko;
         inherit (inputs.stylix.nixosModules) stylix;
         inherit (inputs.musnix.nixosModules) musnix;
         inherit (inputs.nix-mineral.nixosModules) nix-mineral;
@@ -32,6 +33,7 @@
     stylix.url = "github:danth/stylix";
     ags.url = "github:KreconyMakaron/ags";
     polymc.url = "github:PolyMC/PolyMC";
+    disko.url = "github:nix-community/disko";
 
     #https://github.com/hyprwm/Hyprland/issues/5891
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";

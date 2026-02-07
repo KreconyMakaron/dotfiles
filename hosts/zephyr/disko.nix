@@ -1,0 +1,94 @@
+let
+  mkOpts = sv: [
+    "ssd"
+    "subvol=${sv}"
+    "compress=zstd"
+    "noatime"
+  ];
+in
+{
+  disko.devices.disk = {
+    nvme0n1 = {
+      type = "disk";
+      device = "/dev/nvme0n1";
+      content = {
+        type = "gpt";
+        partitions = {
+          esp = {
+            label = "esp";
+            name = "esp";
+            size = "512M";
+            type = "EF00";
+            content = {
+              type = "filesystem";
+              format = "vfat";
+              mountpoint = "/efi";
+            };
+          };
+          luks = {
+            size = "100%";
+            label = "luks";
+            content = {
+              type = "luks";
+              name = "cryptroot";
+              settings = {
+                allowDiscards = true;
+                bypassWorkqueues = true;
+              };
+              content = {
+                type = "btrfs";
+                extraArgs = [
+                  "-L"
+                  "nixos"
+                  "-f"
+                ];
+                subvolumes = {
+                  "@boot" = {
+                    mountpoint = "/boot";
+                    mountOptions = [
+                      "ssd"
+                      "compress=no"
+                      "subvol=@boot"
+                    ];
+                  };
+                  "@root" = {
+                    mountpoint = "/";
+                    mountOptions = mkOpts "@root";
+                  };
+                  "@home" = {
+                    mountpoint = "/home";
+                    mountOptions = mkOpts "@home";
+                  };
+                  "@nix" = {
+                    mountpoint = "/nix";
+                    mountOptions = mkOpts "@nix";
+                  };
+                  "@persist" = {
+                    mountpoint = "/persist";
+                    mountOptions = mkOpts "@persist";
+                  };
+                  "@log" = {
+                    mountpoint = "/var/log";
+                    mountOptions = mkOpts "@log";
+                  };
+                  "@swap" = {
+                    mountpoint = "/swap";
+                    mountOptions = [
+                      "subvol=@swap"
+                      "compress=no"
+                      "noatime"
+                      "nodatacow"
+                    ];
+                    swap.swapfile.size = "16G";
+                  };
+                };
+              };
+            };
+          };
+        };
+      };
+    };
+  };
+  fileSystems."/persist".neededForBoot = true;
+  fileSystems."/var/log".neededForBoot = true;
+}

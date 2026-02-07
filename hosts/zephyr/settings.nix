@@ -3,6 +3,7 @@
   inputs,
   pkgs,
   system,
+  config,
   ...
 }:
 {
@@ -50,7 +51,7 @@
   };
 
   networking.vpn = {
-    enable = true;
+    enable = false; # temporarily until i get sops working
     useOfficialApp = false;
     disabledIPs = [
       # nixos.wiki gets mad
@@ -75,9 +76,9 @@
   };
 
   settings = {
-    sql = {
-      postgresql.enable = true;
-      pgadmin.enable = true;
+    boot = {
+      diskEncryption = true;
+      quietBoot = true;
     };
 
     userPackages = with pkgs; [
@@ -135,6 +136,9 @@
     )
   ];
 
+  users.users.${config.core.user}.initialHashedPassword =
+    lib.mkForce "$y$j9T$bqd5qnedPH0HoyQhPxSyO0$t92xvx7GnqSEe8iaptbz4JeKu2P9y3.PV5YN.oluT33";
+
   # huawei laptop go brrrr
   hm.systemd.user.services.alsa-fixes = {
     Unit.Description = "Enable Speakers";
@@ -149,13 +153,6 @@
       ];
     };
     Install.WantedBy = [ "default.target" ];
-  };
-
-  firefly-iii = {
-    enable = true;
-    enableDataImporter = true;
-    databasePasswordFile = "/var/secrets/firefly-db-key";
-    appKeyFile = "/var/secrets/firefly-app-key";
   };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
