@@ -137,7 +137,7 @@
   ];
 
   users.users.${config.core.user}.initialHashedPassword =
-    lib.mkForce "$y$j9T$bqd5qnedPH0HoyQhPxSyO0$t92xvx7GnqSEe8iaptbz4JeKu2P9y3.PV5YN.oluT33";
+    lib.mkForce "$y$j9T$Bt8F5jl2GFtzJRZLtqsN61$ZkOYbAW3JjtERpj9CqnXCedKw8/c6l6IrJO180T7tsC";
 
   # huawei laptop go brrrr
   hm.systemd.user.services.alsa-fixes = {
