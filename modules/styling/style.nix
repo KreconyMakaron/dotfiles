@@ -155,7 +155,8 @@ in
         in
         {
           stylix.targets = mkTargets cfg.settings.targets.hm;
-
+        }
+        // mkIf cfg.desktopEnvironment.Hyprland.enable {
           home.file.".local/share/icons/${hyprcursor.name}".source = hyprcursor.package;
 
           wayland.windowManager.hyprland.settings.env = [
