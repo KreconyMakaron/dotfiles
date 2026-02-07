@@ -65,7 +65,6 @@ in
       };
     };
     system = {
-      stateVersion = "24.05";
       autoUpgrade.enable = false; # maybe change later?
     };
   };

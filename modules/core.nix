@@ -51,7 +51,7 @@ in
           ${cfg.user} = {
             isNormalUser = true;
             useDefaultShell = true;
-            hashedPasswordFile = "/var/secrets/password";
+            initialHashedPassword = lib.mkDefault "";
             extraGroups = [
               "networkmanager"
               "wheel"
