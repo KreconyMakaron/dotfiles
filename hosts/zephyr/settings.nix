@@ -37,6 +37,7 @@
       "spotify"
       "pycharm"
       "idea"
+      "cursor"
     ];
   };
 
@@ -100,6 +101,8 @@
       protonmail-desktop
 
       scenebuilder
+
+      code-cursor
 
       libreoffice-qt
       obsidian
