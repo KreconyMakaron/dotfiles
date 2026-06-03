@@ -123,6 +123,10 @@ in
     })
     {
       stylix.targets.qt.platform = mkForce "qtct";
+
+      # FIXME: workaround until https://github.com/nix-community/stylix/pull/2337 gets merged
+      stylix.targets.kmscon.enable = false;
+
       qt.platformTheme = mkForce "gnome";
       hm.gtk.gtk4.theme = mkForce config.hm.gtk.theme; # post 26.05 behaviour
     }
