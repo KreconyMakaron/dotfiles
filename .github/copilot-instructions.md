@@ -9,6 +9,8 @@ These instructions help GitHub Copilot understand our NixOS configuration prefer
 - Maintain pure and reproducible builds
 - Use flakes for dependency management
 - Prefer functional programming patterns
+- All operations should be done inside a nix shell which can be entered by using "nix develop"
+
 
 ## Important! Configuration Structure
 - Host specific configuration, and hardware configuration lives under hosts/
