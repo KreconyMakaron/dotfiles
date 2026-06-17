@@ -75,6 +75,9 @@ in
             outer-gaps = 0;
             enable-tiling-system = true;
           };
+          # disable accessibility menu on the login screen
+          "org/gnome/desktop/a11y".always-show-universal-access-status = false;
+          "org/gnome/shell".always-show-log-out = true;
         }
         (import ./binds.nix { inherit config lib; })
       ];
