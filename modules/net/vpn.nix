@@ -6,7 +6,7 @@
 }:
 with lib;
 let
-  cfg = config.network.vpn;
+  cfg = config.net.vpn;
 
   vpnScript = lib.readFile ./vpn.sh;
 
@@ -34,7 +34,7 @@ let
   };
 in
 {
-  options.network.vpn = {
+  options.net.vpn = {
     enable = mkEnableOption "enables the vpn";
 
     useOfficialApp = mkOption {
@@ -111,11 +111,11 @@ in
             disabled = map (ip: if hasInfix "/" ip then ip else "${ip}/32") cfg.disabledIPs;
             IPs = concatStringsSep " " disabled;
             tableID = "200";
-            tailscaleRules = optionalString config.network.tailscale.enable ''
+            tailscaleRules = optionalString config.net.tailscale.enable ''
               ip rule add to 100.64.0.0/10 lookup 52 priority 90 || true
               ip -6 rule add to fd7a:115c:a1e0::/48 lookup 52 priority 90 || true
             '';
-            tailscaleRulesCleanup = optionalString config.network.tailscale.enable ''
+            tailscaleRulesCleanup = optionalString config.net.tailscale.enable ''
               ip rule del to 100.64.0.0/10 lookup 52 priority 90 || true
               ip -6 rule del to fd7a:115c:a1e0::/48 lookup 52 priority 90 || true
             '';

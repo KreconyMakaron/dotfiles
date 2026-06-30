@@ -44,7 +44,7 @@
     secondaryBrowser.package = pkgs.librewolf;
   };
 
-  network = {
+  net = {
     tailscale.enable = true;
     vpn = {
       enable = true;

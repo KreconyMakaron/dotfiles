@@ -1,10 +1,10 @@
 { config, lib, ... }:
 with lib;
 let
-  cfg = config.network.tailscale;
+  cfg = config.net.tailscale;
 in
 {
-  options.network.tailscale.enable = mkEnableOption "Enables tailscale";
+  options.net.tailscale.enable = mkEnableOption "Enables tailscale";
 
   config = mkIf cfg.enable {
     services.tailscale = {

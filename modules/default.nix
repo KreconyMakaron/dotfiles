@@ -39,7 +39,7 @@ in
     ./apps
     ./core
     ./hardening
-    ./network
+    ./net
     ./shell
     ./style
   ];

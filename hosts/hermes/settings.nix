@@ -71,5 +71,5 @@ with lib;
   core.bluetooth.enable = mkForce false;
   core.audio.enable = mkForce false;
 
-  network.tailscale.enable = true;
+  net.tailscale.enable = true;
 }
