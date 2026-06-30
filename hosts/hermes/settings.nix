@@ -31,18 +31,34 @@ with lib;
     linger = true;
   };
 
-  systemd.user.services.house-scraper = {
-    description = "House scraper container";
-    wantedBy = [ "default.target" ];
-    after = [ "network-online.target" ];
-    wants = [ "network-online.target" ];
-    serviceConfig = {
-      Restart = "always";
-      RestartSec = "10s";
-      ExecStartPre = "-${pkgs.podman}/bin/podman rm -f house-scraper";
-      ExecStart = "${pkgs.podman}/bin/podman run --name house-scraper --replace --env-file /home/hermes/house/.env localhost/house-scraper:latest";
-      ExecStop = "${pkgs.podman}/bin/podman stop -t 30 house-scraper";
-      ExecStopPost = "-${pkgs.podman}/bin/podman rm -f house-scraper";
+  systemd.user.services = {
+    house-scraper = {
+      description = "House scraper container";
+      wantedBy = [ "default.target" ];
+      after = [ "network-online.target" ];
+      wants = [ "network-online.target" ];
+      serviceConfig = {
+        Restart = "always";
+        RestartSec = "10s";
+        ExecStartPre = "-${pkgs.podman}/bin/podman rm -f house-scraper";
+        ExecStart = "${pkgs.podman}/bin/podman run --name house-scraper --replace --env-file /home/hermes/house/.env localhost/house-scraper:latest";
+        ExecStop = "${pkgs.podman}/bin/podman stop -t 30 house-scraper";
+        ExecStopPost = "-${pkgs.podman}/bin/podman rm -f house-scraper";
+      };
+    };
+    plaza = {
+      description = "Plaza notifier container";
+      wantedBy = [ "default.target" ];
+      after = [ "network-online.target" ];
+      wants = [ "network-online.target" ];
+      serviceConfig = {
+        Restart = "always";
+        RestartSec = "10s";
+        ExecStartPre = "-${pkgs.podman}/bin/podman rm -f plaza-bot";
+        ExecStart = "${pkgs.podman}/bin/podman run --name plaza-bot --replace --env-file /home/hermes/plaza_bot_1/.env localhost/plaza-bot:latest";
+        ExecStop = "${pkgs.podman}/bin/podman stop -t 30 plaza-bot";
+        ExecStopPost = "-${pkgs.podman}/bin/podman rm -f plaza-bot";
+      };
     };
   };
 
