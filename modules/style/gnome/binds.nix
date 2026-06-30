@@ -1,7 +1,17 @@
 { lib, config, ... }:
 with lib;
 {
-  "org/gnome/desktop/wm/keybindings".close = [ "<Super>q" ];
+  "org/gnome/desktop/wm/keybindings" = {
+    close = [ "<Super>q" ];
+    # grouped by app
+    switch-applications = [ "<Super>Tab" ];
+    switch-applications-backward = [ "<Shift><Super>Tab" ];
+    # not grouped
+    switch-windows = [ "<Alt>Tab" ];
+    switch-windows-backward = [ "<Shift><Alt>Tab" ];
+  };
+  # cycles through everything, not just current workspace
+  "org/gnome/shell/window-switcher".current-workspace-only = false;
   "org/gnome/settings-daemon/plugins/media-keys" = {
     custom-keybindings = [
       "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
