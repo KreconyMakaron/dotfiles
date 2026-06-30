@@ -11,7 +11,7 @@ in
 {
   options.core.bluetooth.enable = mkOption {
     type = types.bool;
-    default = elem "desktop" config.core.capabilities;
+    default = true;
     example = false;
     description = "Enables bluetooth on the device";
   };

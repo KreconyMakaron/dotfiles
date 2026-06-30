@@ -11,8 +11,8 @@ in
 {
   options.programs.podman.enable = mkOption {
     type = types.bool;
-    default = elem "server" config.core.capabilities;
-    example = false;
+    default = false;
+    example = true;
     description = "Enables podman on the device";
   };
 

@@ -14,7 +14,7 @@ in
   options.core.audio = {
     enable = mkOption {
       type = types.bool;
-      default = elem "desktop" config.core.capabilities;
+      default = true;
       example = false;
       description = "Enables audio on the device";
     };

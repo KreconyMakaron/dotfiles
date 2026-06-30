@@ -20,12 +20,6 @@
   core = {
     user = "krecony";
     flakePath = "/home/krecony/dotfiles";
-    capabilities = [
-      "basic"
-      "desktop"
-      "development"
-      "gaming"
-    ];
     boot = {
       diskEncryption = true;
       quietBoot = true;

@@ -9,11 +9,6 @@ with lib;
   core = {
     user = "hermes";
     flakePath = "/home/hermes/dotfiles";
-    capabilities = [
-      "basic"
-      "server"
-    ];
-
     intel.enable = false;
   };
 
@@ -71,6 +66,10 @@ with lib;
     sops.enable = false;
     disableSUIDs = true;
   };
+
+  programs.podman.enable = true;
+  core.bluetooth.enable = mkForce false;
+  core.audio.enable = mkForce false;
 
   network.tailscale.enable = true;
 }
