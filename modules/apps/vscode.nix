@@ -5,10 +5,10 @@
 }:
 with lib;
 let
-  cfg = config.programs.vs-code;
+  cfg = config.apps.vs-code;
 in
 {
-  options.programs.vs-code.enable = mkEnableOption "enables vscode";
+  options.apps.vs-code.enable = mkEnableOption "enables vscode";
 
   config = mkIf cfg.enable {
     hm.programs.vscode = {

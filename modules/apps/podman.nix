@@ -6,10 +6,10 @@
 }:
 with lib;
 let
-  cfg = config.programs.podman;
+  cfg = config.apps.podman;
 in
 {
-  options.programs.podman.enable = mkOption {
+  options.apps.podman.enable = mkOption {
     type = types.bool;
     default = false;
     example = true;

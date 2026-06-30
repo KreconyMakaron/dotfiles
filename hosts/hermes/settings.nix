@@ -67,7 +67,7 @@ with lib;
     disableSUIDs = true;
   };
 
-  programs.podman.enable = true;
+  apps.podman.enable = true;
   core.bluetooth.enable = mkForce false;
   core.audio.enable = mkForce false;
 

@@ -37,7 +37,7 @@ in
     ./gaming.nix
 
     ./network
-    ./programs
+    ./apps
     ./security
     ./shell
     ./style

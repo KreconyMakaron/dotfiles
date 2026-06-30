@@ -5,10 +5,10 @@
 }:
 with lib;
 let
-  cfg = config.programs.firefly-iii;
+  cfg = config.apps.firefly-iii;
 in
 {
-  options.programs.firefly-iii = {
+  options.apps.firefly-iii = {
     enable = mkEnableOption "enables firefly-iii";
     databasePasswordFile = mkOption {
       type = types.str;
@@ -22,7 +22,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    programs.sql.mysql.enable = true;
+    apps.sql.mysql.enable = true;
     services = {
       firefly-iii = {
         enable = true;

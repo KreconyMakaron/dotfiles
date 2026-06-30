@@ -6,10 +6,10 @@
 }:
 with lib;
 let
-  cfg = config.programs.sql;
+  cfg = config.apps.sql;
 in
 {
-  options.programs.sql = {
+  options.apps.sql = {
     postgresql.enable = mkEnableOption "enables postresql";
     pgadmin.enable = mkEnableOption "enables pgadmin";
     mysql.enable = mkEnableOption "enables mysql";

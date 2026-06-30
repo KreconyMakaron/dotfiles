@@ -6,10 +6,10 @@
 }:
 with lib;
 let
-  cfg = config.programs.lmms;
+  cfg = config.apps.lmms;
 in
 {
-  options.programs.lmms = {
+  options.apps.lmms = {
     enable = mkEnableOption "enables lmms, the digital audio workstation";
   };
 

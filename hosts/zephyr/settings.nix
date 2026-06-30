@@ -84,7 +84,7 @@
     };
   };
 
-  programs = {
+  apps = {
     vs-code.enable = true;
     nix-locate.enable = true;
   };
@@ -154,7 +154,7 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  programs.podman.enable = true;
+  apps.podman.enable = true;
 
   # FIXME: workaround for https://github.com/NixOS/nixpkgs/issues/536623 until it gets fixed
   nixpkgs.overlays = [
