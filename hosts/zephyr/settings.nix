@@ -161,4 +161,11 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   programs.podman.enable = true;
+
+  # FIXME: workaround for https://github.com/NixOS/nixpkgs/issues/536623 until it gets fixed
+  nixpkgs.overlays = [
+    (final: _: {
+      pnpm_10_29_2 = final.pnpm_10;
+    })
+  ];
 }
