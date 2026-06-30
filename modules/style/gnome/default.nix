@@ -21,14 +21,30 @@ in
       displayManager.gdm.enable = true;
       desktopManager.gnome.enable = true;
       gnome = {
+        # gnome is bad without these
         core-os-services.enable = true;
-        localsearch.enable = true;
-        gnome-keyring.enable = true;
+        core-shell.enable = true;
+        localsearch.enable = true; # global file and option search
 
+        gnome-keyring.enable = true; # needed for some apps
+
+        # bloat apps
         core-apps.enable = false;
         core-developer-tools.enable = false;
         games.enable = false;
+
+        # more bloat
+        gnome-remote-desktop.enable = false; # RDP/VNC remote desktop server
+        rygel.enable = false; # UPnP/DLNA media server
+        gnome-user-share.enable = false; # WebDAV personal file sharing
+        gnome-browser-connector.enable = false; # allows enabling extensions from browser
+        gnome-online-accounts.enable = false; # accounts in gnome like Google
+        gnome-initial-setup.enable = false; # initial setup script
+
       };
+      geoclue2.enable = false; # geolocation
+      dleyna.enable = false; # UPnP/DLNA media controller (D-Bus)
+      avahi.enable = false; # mDNS responder
     };
 
     security.pam.services.login.enableGnomeKeyring = config.services.gnome.gnome-keyring.enable;
