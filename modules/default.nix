@@ -36,11 +36,11 @@ in
     ./preferences.nix
     ./gaming.nix
 
-    ./network
     ./apps
-    ./security
+    ./core
+    ./hardening
+    ./network
     ./shell
     ./style
-    ./core
   ];
 }

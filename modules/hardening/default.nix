@@ -7,10 +7,10 @@
 }:
 with lib;
 let
-  cfg = config.security;
+  cfg = config.hardening;
 in
 {
-  options.security = {
+  options.hardening = {
     disableSUIDs = mkOption {
       type = types.bool;
       default = false;

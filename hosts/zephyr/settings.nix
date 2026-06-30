@@ -10,7 +10,7 @@
   gaming.steam.enable = true;
   gaming.lutris.enable = true;
 
-  security = {
+  hardening = {
     disableSUIDs = true;
     nix-mineral.enable = true;
   };

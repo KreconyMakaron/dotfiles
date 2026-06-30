@@ -62,7 +62,7 @@ with lib;
     theme = "everforest";
   };
 
-  security = {
+  hardening = {
     sops.enable = false;
     disableSUIDs = true;
   };

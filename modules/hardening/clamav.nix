@@ -6,7 +6,7 @@
 }:
 with lib;
 let
-  cfg = config.security.clamav;
+  cfg = config.hardening.clamav;
 
   scan =
     paths:
@@ -103,7 +103,7 @@ let
   '';
 in
 {
-  options.security.clamav = {
+  options.hardening.clamav = {
     enable = mkEnableOption "enables ClamAV the antivirus scanner";
     scan = {
       daily = {

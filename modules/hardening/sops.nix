@@ -7,14 +7,14 @@
 }:
 with lib;
 let
-  cfg = config.security.sops;
+  cfg = config.hardening.sops;
 in
 {
   imports = [
     inputs.sops-nix.nixosModules.sops
   ];
 
-  options.security.sops.enable = custom.mkBoolOption "enables sops secret managment" true;
+  options.hardening.sops.enable = custom.mkBoolOption "enables sops secret managment" true;
 
   config = mkIf cfg.enable {
     sops = {
