@@ -36,6 +36,4 @@ lib: {
   ifNull = new: old: if old == null then new else old;
 
   genAttrsSame = names: value: lib.genAttrs names (_: value);
-
-  associations = import ./associations.nix;
 }

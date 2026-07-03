@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  mkImports,
   config,
   ...
 }:
@@ -30,6 +31,10 @@ let
     };
 in
 {
+  imports = mkImports [
+    ./mimeapps.nix
+  ];
+
   options.preferences = {
     editor.package = mkOption {
       type = types.package;
@@ -62,10 +67,6 @@ in
       desktop = mkDir "$HOME/other";
       publicShare = mkDir "$HOME/other";
       templates = mkDir "$HOME/other";
-    };
-    mimeApps.enable = mkOption {
-      type = types.bool;
-      default = true;
     };
     userDirs.enable = mkOption {
       type = types.bool;
