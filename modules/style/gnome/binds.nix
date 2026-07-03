@@ -25,12 +25,12 @@ with lib;
     mkIf (config.preferences.secondaryBrowser != null)
       {
         binding = "<Shift><Super>w";
-        command = getExe config.preferences.secondaryBrowser.package;
+        command = getExe config.preferences.secondaryBrowser;
         name = "Launch second browser";
       };
   "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
     binding = "<Super>Return";
-    command = getExe config.preferences.terminal.package;
+    command = getExe config.preferences.terminal;
     name = "Launch terminal";
   };
   "org/gnome/shell/extensions/tilingshell" = {

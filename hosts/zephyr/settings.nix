@@ -36,12 +36,12 @@
   };
 
   preferences = {
-    editor.package = inputs.nvim.packages.${system}.default;
-    pdf.package = pkgs.papers;
-    video.package = pkgs.showtime;
-    image.package = pkgs.loupe;
-    browser.package = pkgs.mullvad-browser;
-    secondaryBrowser.package = pkgs.librewolf;
+    editor = inputs.nvim.packages.${system}.default;
+    pdf = pkgs.papers;
+    video = pkgs.showtime;
+    image = pkgs.loupe;
+    browser = pkgs.mullvad-browser;
+    secondaryBrowser = pkgs.librewolf;
   };
 
   net = {

@@ -53,7 +53,7 @@ with lib;
 
         settings =
           let
-            terminal = config.preferences.terminal.swallowClassRegex;
+            terminal = config.preferences.terminalSwallowClassRegex;
           in
           {
             windowrulev2 = [

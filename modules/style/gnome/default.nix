@@ -68,7 +68,7 @@ in
 
     services.udev.packages = [ pkgs.gnome-settings-daemon ];
 
-    preferences.terminal.package = pkgs.gnome-console;
+    preferences.terminal = pkgs.gnome-console;
 
     hm.dconf = {
       enable = true;

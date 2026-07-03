@@ -11,7 +11,7 @@ in
 {
   hm.wayland.windowManager.hyprland.settings = {
     bind = [
-      "${mod},RETURN,exec,${lib.getExe config.preferences.terminal.package}"
+      "${mod},RETURN,exec,${lib.getExe config.preferences.terminal}"
       "${mod},Q,killactive"
 
       "${mod},H,movefocus,l"

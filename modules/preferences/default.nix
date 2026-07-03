@@ -9,19 +9,12 @@ with lib;
 let
   cfg = config.preferences;
 
-  mkDefaultApp = pkg: {
-    package = mkOption {
+  mkApp =
+    pkg:
+    mkOption {
       type = types.nullOr types.package;
       default = pkg;
     };
-    desktopFile = mkOption {
-      type = types.nullOr types.str;
-      default = null;
-      description = ''
-        If set to null a heuristic will try to get the desktop file
-      '';
-    };
-  };
 
   mkDir =
     dir:
@@ -36,26 +29,21 @@ in
   ];
 
   options.preferences = {
-    editor.package = mkOption {
+    editor = mkOption {
       type = types.package;
       default = pkgs.neovim;
     };
 
-    browser = mkDefaultApp pkgs.brave;
-    secondaryBrowser = mkDefaultApp null;
-    pdf = mkDefaultApp pkgs.zathura;
-    image = mkDefaultApp pkgs.imv;
-    audio = mkDefaultApp pkgs.mpv;
-    video = mkDefaultApp pkgs.mpv;
-    terminal = {
-      package = mkOption {
-        type = types.package;
-        default = pkgs.foot;
-      };
-      swallowClassRegex = mkOption {
-        type = types.str;
-        default = "^(foot)";
-      };
+    browser = mkApp pkgs.brave;
+    secondaryBrowser = mkApp null;
+    pdf = mkApp pkgs.zathura;
+    image = mkApp pkgs.imv;
+    audio = mkApp pkgs.mpv;
+    video = mkApp pkgs.mpv;
+    terminal = mkApp pkgs.foot;
+    terminalSwallowClassRegex = mkOption {
+      type = types.str;
+      default = "^(foot)";
     };
 
     userDirs = {
@@ -76,17 +64,17 @@ in
 
   config = mkMerge [
     (mkIf (config.style.displayServer != "headless") {
-      environment.sessionVariables.BROWSER = "${getExe cfg.browser.package}";
+      environment.sessionVariables.BROWSER = "${getExe cfg.browser}";
 
       settings.userPackages = [
-        cfg.browser.package
-        cfg.pdf.package
-        cfg.image.package
-        cfg.audio.package
-        cfg.video.package
-        cfg.terminal.package
+        cfg.browser
+        cfg.pdf
+        cfg.image
+        cfg.audio
+        cfg.video
+        cfg.terminal
       ]
-      ++ (optionals (cfg.secondaryBrowser.package != null) [ cfg.secondaryBrowser.package ]);
+      ++ (optionals (cfg.secondaryBrowser != null) [ cfg.secondaryBrowser ]);
 
       hm.xdg = {
         enable = true;
@@ -97,45 +85,15 @@ in
           setSessionVariables = true;
         }
         // cfg.userDirs;
-
-        mimeApps =
-          let
-            mkAssociations =
-              assoc: name:
-              custom.genAttrsSame assoc (
-                pipe name [
-                  (_: cfg.${name}.package)
-                  custom.getDesktopFile
-
-                  (custom.ifNull cfg.${name}.desktopFile)
-                  (custom.ifNull "")
-                ]
-              );
-
-            associations =
-              with custom.associations;
-              mergeAttrsList [
-                (mkAssociations browser "browser")
-                (mkAssociations pdf "pdf")
-                (mkAssociations audio "audio")
-                (mkAssociations image "image")
-                (mkAssociations video "video")
-              ];
-          in
-          {
-            inherit (cfg.mimeApps) enable;
-            defaultApplications = associations;
-            associations.added = associations;
-          };
       };
     })
     {
       environment = {
         systemPackages = [
-          cfg.editor.package
+          cfg.editor
         ];
         sessionVariables = {
-          EDITOR = "${getExe cfg.editor.package}";
+          EDITOR = "${getExe cfg.editor}";
         };
       };
     }

@@ -18,15 +18,15 @@ in
   config =
     let
       defaultPkgs = [
-        cfg.browser.package
-        cfg.pdf.package
-        cfg.image.package
-        cfg.audio.package
-        cfg.video.package
-        cfg.terminal.package
-        cfg.editor.package
+        cfg.browser
+        cfg.pdf
+        cfg.image
+        cfg.audio
+        cfg.video
+        cfg.terminal
+        cfg.editor
       ]
-      ++ (optionals (cfg.secondaryBrowser.package != null) [ cfg.secondaryBrowser.package ]);
+      ++ (optionals (cfg.secondaryBrowser != null) [ cfg.secondaryBrowser ]);
     in
     mkMerge [
       (mkIf cfgMime.enable {
