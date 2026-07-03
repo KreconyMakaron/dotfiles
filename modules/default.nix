@@ -33,9 +33,9 @@ let
 in
 {
   imports = mkImports [
-    ./preferences.nix
     ./gaming.nix
 
+    ./preferences
     ./apps
     ./core
     ./hardening
