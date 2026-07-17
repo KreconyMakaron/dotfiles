@@ -35,7 +35,7 @@ in
       flake = config.core.flakePath;
       clean = {
         enable = true;
-        extraArgs = "--keep 10 --keep-since 7d";
+        extraArgs = "--keep 10 --keep-since 7d --no-gcroots --optimise";
         dates = "weekly";
       };
     };
