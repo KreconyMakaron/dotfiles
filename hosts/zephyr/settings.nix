@@ -41,7 +41,7 @@
     video = pkgs.showtime;
     image = pkgs.loupe;
     browser = pkgs.mullvad-browser;
-    secondaryBrowser = pkgs.librewolf;
+    secondaryBrowser = pkgs.firefox;
   };
 
   net = {
