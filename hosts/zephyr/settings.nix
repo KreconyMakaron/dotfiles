@@ -102,7 +102,9 @@
       obsidian
       # anki
       spotify
-      vesktop # discord client
+
+      # FIXME: wait for vesktop's electron version to be bumped
+      # vesktop # discord client
 
       jetbrains.pycharm
       jetbrains.idea
