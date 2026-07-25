@@ -12,7 +12,7 @@ let
     # (pkgs.callPackage ./copyous.nix { inherit pkgs; }) # clipboard
     media-controls # adds mpris widget
     caffeine # provides idle-inhibit on demand
-    tiling-shell # adds tiling support
+    paperwm
   ];
 in
 {

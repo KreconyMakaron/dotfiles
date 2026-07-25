@@ -42,4 +42,60 @@ with lib;
   "org/gnome/shell/extensions/caffeine" = {
     toggle-shortcut = [ "<Shift><Super>c" ];
   };
+  "org/gnome/shell/extensions/paperwm" = {
+    horizontal-margin = 0;
+    open-window-position = 0;
+    restore-attach-modal-dialogs = "true";
+    restore-edge-tiling = "true";
+    restore-workspaces-only-on-primary = "true";
+    selection-border-radius-top = 0;
+    selection-border-size = 0;
+    show-window-position-bar = true;
+    show-workspace-indicator = false;
+    use-default-background = true;
+    vertical-margin = 0;
+    vertical-margin-bottom = 0;
+    window-gap = 0;
+  };
+  "org/gnome/shell/extensions/paperwm/keybindings" = {
+    live-alt-tab = [ "" ];
+    live-alt-tab-backward = [ "" ];
+    move-down = [
+      "<Shift><Super>j"
+      "<Shift><Super>Down"
+    ];
+    move-left = [
+      "<Shift><Super>h"
+      "<Shift><Super>Left"
+    ];
+    move-right = [
+      "<Shift><Super>l"
+      "<Shift><Super>Right"
+    ];
+    move-up = [
+      "<Shift><Super>k"
+      "<Shift><Super>Up"
+    ];
+    new-window = [ "<Super>n" ];
+    switch-down = [
+      "<Super>Down"
+      "<Super>j"
+    ];
+    switch-focus-mode = [ "" ];
+    switch-left = [
+      "<Super>Left"
+      "<Super>h"
+    ];
+    switch-open-window-position = [ "<Shift><Super>a" ];
+    switch-right = [
+      "<Super>Right"
+      "<Super>l"
+    ];
+    switch-up = [
+      "<Super>Up"
+      "<Super>k"
+    ];
+    toggle-scratch = [ "<Control><Super>x" ];
+    toggle-scratch-layer = [ "<Control><Super>z" ];
+  };
 }
