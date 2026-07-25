@@ -98,4 +98,13 @@ with lib;
     toggle-scratch = [ "<Control><Super>x" ];
     toggle-scratch-layer = [ "<Control><Super>z" ];
   };
+  "org/gnome/shell/extensions/advanced-media-controller" = {
+    enable-lyrics = false;
+    hide-default-player = true;
+    panel-index = 15;
+    panel-label-width = 230;
+    panel-position = "left";
+    popup-width = 280;
+    show-artist = false;
+  };
 }
