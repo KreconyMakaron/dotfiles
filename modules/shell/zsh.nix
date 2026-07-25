@@ -44,58 +44,68 @@ in
       "...." = "cd ../../..";
       "....." = "cd ../../../..";
     };
-    initContent = /* bash */ ''
-      export ZSH_AUTOSUGGEST_STRATEGY=history
+    initContent =
+      /* bash */ ''
+        export ZSH_AUTOSUGGEST_STRATEGY=history
 
-      source ${pkgs.zsh-defer}/share/zsh-defer/zsh-defer.plugin.zsh
-      autoload -Uz compinit && compinit || true
+        source ${pkgs.zsh-defer}/share/zsh-defer/zsh-defer.plugin.zsh
+        autoload -Uz compinit && compinit || true
 
-      eval "$(fzf --zsh)"
-      eval "$(${getExe pkgs.direnv} hook zsh)"
-
-
-      # style fzf
-      zstyle ':fzf-tab:*' fzf-flags \
-        '--ansi' \
-        '--height=80%' \
-        '--layout=reverse' \
-        '--border=rounded' \
-        '--preview-window=border-rounded'
-
-      zstyle ':fzf-tab:*' fzf-preview '
-        if [[ -d $realpath ]]; then
-          ${eza} --color=always --icons --oneline $realpath 2>/dev/null
-        elif [[ -f $realpath ]]; then
-          if ${grep} -Iq . "$realpath"; then
-            ${bat} -n -P --color=always "$realpath"
-          else
-            print -P "%F{yellow}<BINARY%f %F{cyan}$(file -b $realpath)%f%F{yellow}%f>"
-          fi
-        fi'
+        eval "$(fzf --zsh)"
+        eval "$(${getExe pkgs.direnv} hook zsh)"
 
 
-      # Edit line in vim with ctrl-e:
-      autoload edit-command-line; zle -N edit-command-line
-      bindkey '^e' edit-command-line
+        # style fzf
+        zstyle ':fzf-tab:*' fzf-flags \
+          '--ansi' \
+          '--height=80%' \
+          '--layout=reverse' \
+          '--border=rounded' \
+          '--preview-window=border-rounded'
 
-      cpfile () {
-        ${bat} -pp $1 | ${wl-copy}
-      }
+        zstyle ':fzf-tab:*' fzf-preview '
+          if [[ -d $realpath ]]; then
+            ${eza} --color=always --icons --oneline $realpath 2>/dev/null
+          elif [[ -f $realpath ]]; then
+            if ${grep} -Iq . "$realpath"; then
+              ${bat} -n -P --color=always "$realpath"
+            else
+              print -P "%F{yellow}<BINARY%f %F{cyan}$(file -b $realpath)%f%F{yellow}%f>"
+            fi
+          fi'
 
-      store () {
-        ${realpath} $(where "$1")
-      }
 
-      goto () {
-        cd $(${dirname} $(store "$1"))
-      }
+        # Edit line in vim with ctrl-e:
+        autoload edit-command-line; zle -N edit-command-line
+        bindkey '^e' edit-command-line
 
-      zsh-defer source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-      zsh-defer source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-      zsh-defer source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
-      zsh-defer source ${pkgs.zsh-autopair}/share/zsh/zsh-autopair/autopair.zsh
-      zsh-defer source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-      zsh-defer source ${pkgs.zsh-nix-shell}/share/zsh-nix-shell/nix-shell.plugin.zsh
-    '';
+        cpfile () {
+          ${bat} -pp $1 | ${wl-copy}
+        }
+
+        store () {
+          ${realpath} $(where "$1")
+        }
+
+        goto () {
+          cd $(${dirname} $(store "$1"))
+        }
+
+        zsh-defer source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+        zsh-defer source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+        zsh-defer source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
+        zsh-defer source ${pkgs.zsh-autopair}/share/zsh/zsh-autopair/autopair.zsh
+        zsh-defer source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+        zsh-defer source ${pkgs.zsh-nix-shell}/share/zsh-nix-shell/nix-shell.plugin.zsh
+      ''
+      + (
+        if config.hm.programs.starship.enable then
+          ''
+            eval "$(starship init zsh)"
+          ''
+        else
+          ""
+      );
+
   };
 }

@@ -1,43 +1,57 @@
 { ... }:
 {
-  programs.starship = {
+  hm.programs.starship = {
     enable = true;
+
     settings = {
-      format = "$username$hostname$directory$git_branch$git_state$git_status$nix_shell$cmd_duration$line_break$python$character";
+      format = "$username$hostname$directory$git_branch$git_commit$git_state$git_status$nix_shell$jobs$line_break$python$character";
+      right_format = "$cmd_duration";
+
+      # makes right_format be on the first line of prompt
+      fill.symbol = " ";
+
       directory = {
-        style = "fg:color_blue";
+        style = "fg:blue";
       };
       character = {
-        success_symbol = "[❯](fg:color_purple)";
-        error_symbol = "[❯](fg:color_red)";
-        vimcmd_symbol = "[❮](fg:color_green)";
+        success_symbol = "[❯](fg:purple)";
+        error_symbol = "[❯](fg:red)";
+        vimcmd_symbol = "[❮](fg:green)";
       };
       git_branch = {
         format = "[$branch]($style)";
-        style = "fg:color_bright-black";
+        style = "fg:bright-black";
+      };
+      git_commit = {
+        only_detached = true;
+        tag_disabled = false;
+        style = "fg:bright-black";
       };
       git_status = {
-        format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style) ";
-        style = "fg:color_cyan";
+        # Both groups disappear completely when their variables are empty.
+        format = "([*$conflicted$untracked$modified$staged$renamed$deleted$typechanged](fg:purple) )([$ahead_behind$stashed]($style) )";
+        style = "fg:cyan";
+
         conflicted = "​";
         untracked = "​";
         modified = "​";
         staged = "​";
         renamed = "​";
         deleted = "​";
+        typechanged = "​";
         stashed = "≡";
       };
       git_state = {
         format = "\\([$state( $progress_current/$progress_total)]($style)\\) ";
-        style = "fg:color_bright-black";
+        style = "fg:bright-black";
       };
       cmd_duration = {
-        format = "[$duration]($style) ";
-        style = "fg:color_yellow";
+        format = "[took $duration]($style) ";
+        style = "fg:yellow";
       };
       python = {
         format = "[$virtualenv]($style) ";
-        style = "fg:color_bright-black";
+        style = "fg:bright-black";
       };
     };
   };
