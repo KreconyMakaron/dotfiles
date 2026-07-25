@@ -17,8 +17,8 @@ with lib;
       "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
       "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
     ];
-    home = [ "<Shift><Super>f" ];
-    screensaver = [ "<Shift><Super>l" ];
+    home = [ "<Shift><Super>e" ];
+    screensaver = [ "<Control><Shift>l" ];
     www = [ "<Super>w" ];
   };
   "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
@@ -50,7 +50,7 @@ with lib;
     restore-workspaces-only-on-primary = "true";
     selection-border-radius-top = 0;
     selection-border-size = 0;
-    show-window-position-bar = true;
+    show-window-position-bar = false;
     show-workspace-indicator = false;
     use-default-background = true;
     vertical-margin = 0;
