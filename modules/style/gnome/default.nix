@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  colors,
   ...
 }:
 with lib;
@@ -73,7 +74,7 @@ in
     hm.dconf = {
       enable = true;
       settings = mkMerge [
-        (import ./dconf.nix { inherit extensions; })
+        (import ./dconf.nix { inherit extensions colors lib; })
         (import ./binds.nix { inherit config lib; })
       ];
     };

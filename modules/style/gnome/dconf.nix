@@ -1,4 +1,9 @@
-{ extensions, ... }:
+{
+  extensions,
+  colors,
+  lib,
+  ...
+}:
 {
   "org/gnome/shell" = {
     disable-user-extensions = false;
@@ -58,11 +63,14 @@
     show-text-info = true;
     text-count-mode = "words";
   };
-  "org/gnome/shell/extensions/copyous/theme" = {
-    custom-bg-color = "rgb(255,255,255)";
-    custom-card-bg-color = "rgb(54,54,58)";
-    custom-fg-color = "rgb(71,71,76)";
-    custom-search-bg-color = "rgb(54,54,58)";
-    theme = "custom";
-  };
+  "org/gnome/shell/extensions/copyous/theme" =
+    with lib.custom;
+    with colors;
+    {
+      custom-bg-color = hex-to-rgb base00;
+      custom-card-bg-color = hex-to-rgb base01;
+      custom-fg-color = hex-to-rgb base05;
+      custom-search-bg-color = hex-to-rgb base01;
+      theme = "custom";
+    };
 }
