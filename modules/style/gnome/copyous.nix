@@ -2,19 +2,26 @@
   pkgs ? import <nixpkgs> { },
 }:
 with pkgs;
+let
+  highlightJs = fetchurl {
+    url = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/es/highlight.min.js";
+    hash = "sha256-eGWDmUnwdk2eCiHjEaTixCYz7q7oyl7BJ7hkOFZXMf4=";
+  };
+in
 stdenv.mkDerivation (finalAttrs: {
   pname = "gnome-shell-extension-copyous";
-  version = "1.2.0";
+  version = "2.0.1";
 
   src = fetchzip {
     url = "https://github.com/boerdereinar/copyous/releases/download/v${finalAttrs.version}/copyous@boerdereinar.dev.zip";
-    hash = "sha256-3yE0+F/E1/qrGGO6loaMoCzf5gtT1j964/HdytU0ePM=";
+    hash = "sha256-jTVRjVqJu1g4opZ7G57h9iKg3JZ2qbWp27ZF/VoX0Kw=";
     stripRoot = false;
   };
 
   nativeBuildInputs = [
     glib
     libgda5
+    gsound
   ];
 
   buildPhase = ''
@@ -25,15 +32,23 @@ stdenv.mkDerivation (finalAttrs: {
 
   preInstall = ''
     sed -i "1i import GIRepository from 'gi://GIRepository';\nGIRepository.Repository.dup_default().prepend_search_path('${libgda5}/lib/girepository-1.0');\nGIRepository.Repository.dup_default().prepend_search_path('${gsound}/lib/girepository-1.0');\n" lib/preferences/dependencies/dependencies.js
-    sed -i "1i import GIRepository from 'gi://GIRepository';\nGIRepository.Repository.dup_default().prepend_search_path('${libgda5}/lib/girepository-1.0');\n" lib/misc/db.js
+
+    sed -i "1i import GIRepository from 'gi://GIRepository';\nGIRepository.Repository.dup_default().prepend_search_path('${libgda5}/lib/girepository-1.0');\n" lib/database/entryTracker.js
     sed -i "1i import GIRepository from 'gi://GIRepository';\nGIRepository.Repository.dup_default().prepend_search_path('${gsound}/lib/girepository-1.0');\n" lib/common/sound.js
+
     sed -i "1i import GIRepository from 'gi://GIRepository';\nGIRepository.Repository.dup_default().prepend_search_path('${gsound}/lib/girepository-1.0');\n" lib/preferences/general/feedbackSettings.js
   '';
 
   installPhase = ''
     runHook preInstall
-    mkdir -p $out/share/gnome-shell/extensions
-    cp -r -T . $out/share/gnome-shell/extensions/copyous@boerdereinar.dev
+
+    extensionDir="$out/share/gnome-shell/extensions/copyous@boerdereinar.dev"
+
+    mkdir -p "$extensionDir"
+    cp -r -T . "$extensionDir"
+
+    install -Dm444 ${highlightJs} "$extensionDir/highlight.min.js"
+
     runHook postInstall
   '';
 
