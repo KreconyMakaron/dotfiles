@@ -28,10 +28,18 @@ in
       settings.userPackages = [ cfg.minecraft.package ];
     })
     (mkIf cfg.steam.enable {
+      programs.gamemode.enable = true;
+
       programs.steam = {
         enable = true;
+
         extraCompatPackages = with pkgs; [
           proton-ge-bin
+        ];
+
+        extraPackages = with pkgs; [
+          mangohud
+          gamemode
         ];
       };
       core.nix.unfreePackages = [
