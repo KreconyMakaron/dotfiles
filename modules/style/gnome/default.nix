@@ -73,28 +73,7 @@ in
     hm.dconf = {
       enable = true;
       settings = mkMerge [
-        {
-          "org/gnome/shell" = {
-            disable-user-extensions = false;
-            enabled-extensions = map (x: x.extensionUuid) extensions;
-          };
-          "org/gnome/desktop/search-providers" = {
-            disabled = [ ];
-          };
-          "org/gnome/shell/extensions/blur/blur-my-shell" = {
-            brightness = 0.75;
-            noise-amount = 0;
-          };
-          "org/gnome/desktop/interface".color-scheme = "prefer-dark";
-          "org/gnome/shell/extensions/tiling/shell" = {
-            inner-gaps = 0;
-            outer-gaps = 0;
-            enable-tiling-system = true;
-          };
-          # disable accessibility menu on the login screen
-          "org/gnome/desktop/a11y".always-show-universal-access-status = false;
-          "org/gnome/shell".always-show-log-out = true;
-        }
+        (import ./dconf.nix { inherit extensions; })
         (import ./binds.nix { inherit config lib; })
       ];
     };

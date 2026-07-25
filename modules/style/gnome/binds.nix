@@ -42,21 +42,6 @@ with lib;
   "org/gnome/shell/extensions/caffeine" = {
     toggle-shortcut = [ "<Shift><Super>c" ];
   };
-  "org/gnome/shell/extensions/paperwm" = {
-    horizontal-margin = 0;
-    open-window-position = 0;
-    restore-attach-modal-dialogs = "true";
-    restore-edge-tiling = "true";
-    restore-workspaces-only-on-primary = "true";
-    selection-border-radius-top = 0;
-    selection-border-size = 0;
-    show-window-position-bar = false;
-    show-workspace-indicator = false;
-    use-default-background = true;
-    vertical-margin = 0;
-    vertical-margin-bottom = 0;
-    window-gap = 0;
-  };
   "org/gnome/shell/extensions/paperwm/keybindings" = {
     live-alt-tab = [ "" ];
     live-alt-tab-backward = [ "" ];
@@ -97,14 +82,5 @@ with lib;
     ];
     toggle-scratch = [ "<Control><Super>x" ];
     toggle-scratch-layer = [ "<Control><Super>z" ];
-  };
-  "org/gnome/shell/extensions/advanced-media-controller" = {
-    enable-lyrics = false;
-    hide-default-player = true;
-    panel-index = 15;
-    panel-label-width = 230;
-    panel-position = "left";
-    popup-width = 280;
-    show-artist = false;
   };
 }
