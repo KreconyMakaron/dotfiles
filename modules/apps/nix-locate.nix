@@ -17,5 +17,8 @@ in
 
   config = mkIf cfg.enable {
     programs.nix-index-database.comma.enable = true;
+
+    # disables the command_not_found_handler which takes a long time to execute
+    programs.nix-index.enableZshIntegration = false;
   };
 }
