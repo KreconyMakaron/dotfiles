@@ -8,29 +8,6 @@ with lib;
 let
   cfg = config.style;
 
-  # https://github.com/nix-community/stylix/blob/0ba0ffe94cbe20ae739c2aa8cae04cbf900bf56b/stylix/cursor.nix
-  cursorOpts =
-    { ... }:
-    {
-      options = {
-        name = mkOption {
-          description = "The cursor name within the package.";
-          type = types.nullOr types.str;
-          default = null;
-        };
-        package = mkOption {
-          description = "Package providing the cursor theme.";
-          type = types.nullOr types.package;
-          default = null;
-        };
-        size = mkOption {
-          description = "The cursor size.";
-          type = types.nullOr types.int;
-          default = null;
-        };
-      };
-    };
-
   themeOpts =
     { ... }:
     {
@@ -53,12 +30,19 @@ let
           };
         };
         cursor = {
-          normal = mkOption {
-            type = types.nullOr (types.submodule cursorOpts);
+          name = mkOption {
+            description = "The cursor name within the package.";
+            type = types.nullOr types.str;
             default = null;
           };
-          hypr = mkOption {
-            type = types.nullOr (types.submodule cursorOpts);
+          package = mkOption {
+            description = "Package providing the cursor theme.";
+            type = types.nullOr types.package;
+            default = null;
+          };
+          size = mkOption {
+            description = "The cursor size.";
+            type = types.nullOr types.int;
             default = null;
           };
         };
@@ -135,15 +119,11 @@ in
         image = cfg.settings.wallpaper;
         base16Scheme = cfg.settings.scheme;
 
-        inherit (cfg.settings) polarity;
-
-        cursor = cfg.settings.cursor.normal;
+        inherit (cfg.settings) polarity cursor;
 
         opacity = {
           terminal = 0.75;
         };
-
-        targets = mkTargets cfg.settings.targets.nix;
 
         homeManagerIntegration = {
           followSystem = true;
@@ -151,21 +131,8 @@ in
         };
       };
 
-      hm =
-        let
-          hyprcursor = cfg.settings.cursor.hypr;
-        in
-        {
-          stylix.targets = mkTargets cfg.settings.targets.hm;
-        }
-        // mkIf (cfg.desktopEnvironment == "hyprland") {
-          home.file.".local/share/icons/${hyprcursor.name}".source = hyprcursor.package;
-
-          wayland.windowManager.hyprland.settings.env = [
-            "HYPRCURSOR_THEME,${hyprcursor.name}"
-            "HYPRCURSOR_SIZE,${lib.toString hyprcursor.size}"
-          ];
-        };
+      stylix.targets = mkTargets cfg.settings.targets.nix;
+      hm.stylix.targets = mkTargets cfg.settings.targets.hm;
     }
   ];
 }
