@@ -23,7 +23,6 @@ in
         "neovim"
         "hyprlock"
         "hyprland"
-        "starship"
       ];
     };
   };

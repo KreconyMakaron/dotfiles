@@ -1,23 +1,9 @@
-{ colors, ... }:
+{ ... }:
 {
   programs.starship = {
     enable = true;
     settings = {
       format = "$username$hostname$directory$git_branch$git_state$git_status$nix_shell$cmd_duration$line_break$python$character";
-      palette = "style";
-      palettes.style = with colors.withHashtag; {
-        color_bg1 = base01;
-        color_bg3 = base03;
-        color_fg0 = base07;
-        color_red = base08;
-        color_yellow = base0A;
-        color_green = base0B;
-        color_cyan = base0C;
-        color_blue = base0D;
-        color_purple = base0E;
-        color_orange = base0F;
-        color_bright-black = base04;
-      };
       directory = {
         style = "fg:color_blue";
       };
