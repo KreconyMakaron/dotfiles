@@ -133,6 +133,9 @@ in
 
       stylix.targets = mkTargets cfg.settings.targets.nix;
       hm.stylix.targets = mkTargets cfg.settings.targets.hm;
+
+      # enable explicitly (otherwise we get a warning)
+      hm.home.pointerCursor.enable = mkForce true;
     }
   ];
 }
