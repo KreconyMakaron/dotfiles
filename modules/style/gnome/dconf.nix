@@ -45,4 +45,24 @@
     vertical-margin-bottom = 0;
     window-gap = 0;
   };
+  "org/gnome/shell/extensions/copyous" = {
+    clipboard-margin-bottom = 0;
+    clipboard-margin-left = 0;
+    clipboard-margin-right = 0;
+    clipboard-margin-top = 0;
+    clipboard-position-vertical = "bottom";
+    disable-hljs-dialog = true;
+  };
+  "org/gnome/shell/extensions/copyous/character-item".show-unicode = true;
+  "org/gnome/shell/extensions/copyous/text-item" = {
+    show-text-info = true;
+    text-count-mode = "words";
+  };
+  "org/gnome/shell/extensions/copyous/theme" = {
+    custom-bg-color = "rgb(255,255,255)";
+    custom-card-bg-color = "rgb(54,54,58)";
+    custom-fg-color = "rgb(71,71,76)";
+    custom-search-bg-color = "rgb(54,54,58)";
+    theme = "custom";
+  };
 }
