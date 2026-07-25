@@ -85,7 +85,7 @@
   };
 
   apps = {
-    vs-code.enable = true;
+    vscode.enable = true;
     nix-locate.enable = true;
   };
 
